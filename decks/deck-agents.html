@@ -196,6 +196,10 @@ input[type=range]{width:100%;accent-color:var(--or);cursor:pointer;margin-top:8p
 .reels-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:28px}
 .reel-card{background:var(--surface2);border:1px solid var(--border);border-radius:2px;overflow:hidden;aspect-ratio:9/16;position:relative;cursor:pointer;transition:all .3s cubic-bezier(.2,.9,.1,1.2)}
 .reel-card:hover{border-color:var(--or);transform:translateY(-6px);box-shadow:0 0 30px rgba(207,255,94,0.18)}
+/* ── REEL LIKE-HEARTS (Instagram-style hover) ── */
+.reel-heart{position:absolute;bottom:16px;z-index:6;pointer-events:none;line-height:1;color:#CFFF5E;will-change:transform,opacity;filter:drop-shadow(0 0 5px rgba(207,255,94,0.55));animation:reelFloat var(--dur,2.1s) ease-out forwards}
+@keyframes reelFloat{0%{opacity:0;transform:translateY(4px) translateX(0) scale(.3) rotate(0deg)}14%{opacity:.92;transform:translateY(-16px) translateX(calc(var(--dx,0px) * .25)) scale(1) rotate(var(--r,0deg))}70%{opacity:.55}100%{opacity:0;transform:translateY(-145px) translateX(var(--dx,0px)) scale(.8) rotate(var(--r,0deg))}}
+@media (prefers-reduced-motion: reduce){.reel-heart{display:none}}
 .reel-inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:#0c0c0c}
 .reel-inner::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.2) 0%,rgba(0,0,0,.6) 100%);pointer-events:none;z-index:0}
 .reel-thumb{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;z-index:0}
@@ -723,6 +727,28 @@ var countObs=new IntersectionObserver(function(entries){
   });
 },{threshold:0.5});
 document.querySelectorAll('.count-up').forEach(function(el){countObs.observe(el);});
+
+// ── REEL LIKE-HEARTS (Instagram-style hover) ──
+(function(){
+  var cards=document.querySelectorAll('.reel-card');
+  cards.forEach(function(card){
+    var timer=null;
+    function spawn(){
+      var h=document.createElement('span');
+      h.className='reel-heart';
+      h.textContent='♥';
+      h.style.fontSize=(12+Math.random()*12).toFixed(0)+'px';
+      h.style.left=(30+Math.random()*40)+'%';
+      h.style.setProperty('--dx',(Math.random()*60-30).toFixed(0)+'px');
+      h.style.setProperty('--r',(Math.random()*30-15).toFixed(0)+'deg');
+      h.style.setProperty('--dur',(1.7+Math.random()*0.9).toFixed(2)+'s');
+      card.appendChild(h);
+      setTimeout(function(){h.remove();},2800);
+    }
+    card.addEventListener('mouseenter',function(){ if(timer)return; spawn(); timer=setInterval(spawn,300); });
+    card.addEventListener('mouseleave',function(){ clearInterval(timer);timer=null; });
+  });
+})();
 
 // ── VIMEO MODAL ──
 function openReel(url){
