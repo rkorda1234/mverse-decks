@@ -196,8 +196,9 @@ input[type=range]{width:100%;accent-color:var(--or);cursor:pointer;margin-top:8p
 .reels-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:28px}
 .reel-card{background:var(--surface2);border:1px solid var(--border);border-radius:2px;overflow:hidden;aspect-ratio:9/16;position:relative;cursor:pointer;transition:all .3s cubic-bezier(.2,.9,.1,1.2)}
 .reel-card:hover{border-color:var(--or);transform:translateY(-6px);box-shadow:0 0 30px rgba(207,255,94,0.18)}
-.reel-inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:linear-gradient(160deg,#1e1e1e,#0c0c0c);background-size:cover;background-position:center}
-.reel-inner::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.25) 0%,rgba(0,0,0,.55) 100%);pointer-events:none}
+.reel-inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:#0c0c0c}
+.reel-inner::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.2) 0%,rgba(0,0,0,.6) 100%);pointer-events:none;z-index:0}
+.reel-thumb{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;z-index:0}
 .reel-play{position:relative;z-index:1;width:52px;height:52px;border-radius:50%;background:var(--or);display:flex;align-items:center;justify-content:center;font-size:17px;color:#0A0A0A;box-shadow:0 0 24px rgba(207,255,94,0.4);transition:transform .25s}
 .reel-card:hover .reel-play{transform:scale(1.12)}
 .reel-lbl{position:relative;z-index:1;font-size:12px;font-weight:500;color:#fff;text-align:center;padding:0 14px;line-height:1.5;text-shadow:0 1px 4px rgba(0,0,0,.8)}
@@ -515,12 +516,12 @@ input[type=range]{width:100%;accent-color:var(--or);cursor:pointer;margin-top:8p
   <div class="h2 reveal reveal-delay-1">Real content.<br><em>Real agents. Real results.</em></div>
   <p class="lead muted reveal reveal-delay-2" style="margin-bottom:12px">No stock photos. No recycled Canva templates. Every piece is original, branded, and built for your specific market and voice.</p>
   <div class="breakout"><div class="reels-grid reveal reveal-delay-1">
-    <div class="reel-card" data-vimeo-id="1201621063" onclick="openReel('https://player.vimeo.com/video/1201621063?autoplay=1')"><div class="reel-inner"><div class="reel-tag">Market Update</div><div class="reel-play">▶</div><div class="reel-lbl">Client Reel</div></div></div>
-    <div class="reel-card" data-vimeo-id="1201621102" onclick="openReel('https://player.vimeo.com/video/1201621102?autoplay=1')"><div class="reel-inner"><div class="reel-tag">Agent Brand</div><div class="reel-play">▶</div><div class="reel-lbl">Client Reel</div></div></div>
-    <div class="reel-card" data-vimeo-id="1201621066" onclick="openReel('https://player.vimeo.com/video/1201621066?autoplay=1')"><div class="reel-inner"><div class="reel-tag">Listing Reel</div><div class="reel-play">▶</div><div class="reel-lbl">Client Reel</div></div></div>
-    <div class="reel-card" data-vimeo-id="1201621064" onclick="openReel('https://player.vimeo.com/video/1201621064?autoplay=1')"><div class="reel-inner"><div class="reel-tag">Neighborhood</div><div class="reel-play">▶</div><div class="reel-lbl">Client Reel</div></div></div>
-    <div class="reel-card" data-vimeo-id="1201621121" onclick="openReel('https://player.vimeo.com/video/1201621121?autoplay=1')"><div class="reel-inner"><div class="reel-tag">Tips & Edu</div><div class="reel-play">▶</div><div class="reel-lbl">Client Reel</div></div></div>
-    <div class="reel-card" data-vimeo-id="1201621065" onclick="openReel('https://player.vimeo.com/video/1201621065?autoplay=1')"><div class="reel-inner"><div class="reel-tag">Testimonial</div><div class="reel-play">▶</div><div class="reel-lbl">Client Reel</div></div></div>
+    <div class="reel-card" data-vimeo-id="1201621063" onclick="openReel('https://player.vimeo.com/video/1201621063?autoplay=1')"><div class="reel-inner"><img class="reel-thumb" src="" alt=""><div class="reel-tag">Market Update</div><div class="reel-play">▶</div><div class="reel-lbl">Client Reel</div></div></div>
+    <div class="reel-card" data-vimeo-id="1201621102" onclick="openReel('https://player.vimeo.com/video/1201621102?autoplay=1')"><div class="reel-inner"><img class="reel-thumb" src="" alt=""><div class="reel-tag">Agent Brand</div><div class="reel-play">▶</div><div class="reel-lbl">Client Reel</div></div></div>
+    <div class="reel-card" data-vimeo-id="1201621066" onclick="openReel('https://player.vimeo.com/video/1201621066?autoplay=1')"><div class="reel-inner"><img class="reel-thumb" src="" alt=""><div class="reel-tag">Listing Reel</div><div class="reel-play">▶</div><div class="reel-lbl">Client Reel</div></div></div>
+    <div class="reel-card" data-vimeo-id="1201621064" onclick="openReel('https://player.vimeo.com/video/1201621064?autoplay=1')"><div class="reel-inner"><img class="reel-thumb" src="" alt=""><div class="reel-tag">Neighborhood</div><div class="reel-play">▶</div><div class="reel-lbl">Client Reel</div></div></div>
+    <div class="reel-card" data-vimeo-id="1201621121" onclick="openReel('https://player.vimeo.com/video/1201621121?autoplay=1')"><div class="reel-inner"><img class="reel-thumb" src="" alt=""><div class="reel-tag">Tips & Edu</div><div class="reel-play">▶</div><div class="reel-lbl">Client Reel</div></div></div>
+    <div class="reel-card" data-vimeo-id="1201621065" onclick="openReel('https://player.vimeo.com/video/1201621065?autoplay=1')"><div class="reel-inner"><img class="reel-thumb" src="" alt=""><div class="reel-tag">Testimonial</div><div class="reel-play">▶</div><div class="reel-lbl">Client Reel</div></div></div>
   </div>
 </div>
 </section>
@@ -741,11 +742,12 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')closeReel({t
 // ── VIMEO THUMBNAILS ──
 document.querySelectorAll('.reel-card[data-vimeo-id]').forEach(function(card){
   var id=card.getAttribute('data-vimeo-id');
-  fetch('https://vimeo.com/api/oembed.json?url=https://vimeo.com/'+id+'&width=400')
+  fetch('https://vimeo.com/api/oembed.json?url=https://vimeo.com/'+id+'&width=640&height=1138')
     .then(function(r){return r.json();})
     .then(function(d){
       if(d.thumbnail_url){
-        card.querySelector('.reel-inner').style.backgroundImage='url('+d.thumbnail_url+')';
+        var img=card.querySelector('.reel-thumb');
+        if(img)img.src=d.thumbnail_url;
       }
     }).catch(function(){});
 });
