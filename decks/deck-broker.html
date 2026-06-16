@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marketingverse — Broker Engine</title>
+<style>
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+/* ── BRAND FONTS ── */
+@font-face{font-family:"Uni Sans";src:url("fonts/UniSans-Heavy.otf") format("opentype");font-weight:900;font-style:normal;font-display:swap}
+@font-face{font-family:"Uni Sans";src:url("fonts/UniSans-HeavyItalic.otf") format("opentype");font-weight:900;font-style:italic;font-display:swap}
+@font-face{font-family:"Uni Sans";src:url("fonts/UniSans-Thin.otf") format("opentype");font-weight:200;font-style:normal;font-display:swap}
+@font-face{font-family:"Roboto";src:url("fonts/Roboto-Light.ttf") format("truetype");font-weight:300;font-style:normal;font-display:swap}
+@font-face{font-family:"Roboto";src:url("fonts/Roboto-LightItalic.ttf") format("truetype");font-weight:300;font-style:italic;font-display:swap}
+@font-face{font-family:"Roboto";src:url("fonts/Roboto-Bold.ttf") format("truetype");font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:"Roboto";src:url("fonts/Roboto-BoldItalic.ttf") format("truetype");font-weight:700;font-style:italic;font-display:swap}
+@font-face{font-family:"Roboto";src:url("fonts/Roboto-Black.ttf") format("truetype");font-weight:900;font-style:normal;font-display:swap}
+
+:root{
+  --or:#CFFF5E;--or2:#B8F03E;            /* lime signature accent */
+  --cream:#0A0A0A;--cream2:#121212;--cream3:#2A2A2A;  /* ink ramp */
+  --surface:#1C1C1C;--surface2:#161616;
+  --text:#FFFFFF;--muted:#A3A3A3;--dim:#6B6B6B;
+  --border:rgba(255,255,255,0.09);
+  --danger:#FF4545;--success:#6BE36B;
+  --sidebar:262px;
+  --sans:"Roboto",system-ui,sans-serif;
+  --serif:"Uni Sans","Arial Black",sans-serif;
+  --display:"Uni Sans","Arial Black",sans-serif;
+}
+html{scroll-behavior:smooth;background:var(--cream)}
+body{font-family:var(--sans);background:var(--cream);color:var(--text);display:flex;min-height:100vh;-webkit-font-smoothing:antialiased}
+::selection{background:var(--or);color:#0A0A0A}
+
+/* ── SIDEBAR ── */
+#sidebar{width:var(--sidebar);min-width:var(--sidebar);background:#000;border-right:1px solid var(--border);position:fixed;top:0;left:0;bottom:0;overflow-y:auto;z-index:100;display:flex;flex-direction:column}
+#sidebar::-webkit-scrollbar{width:3px}
+#sidebar::-webkit-scrollbar-thumb{background:var(--cream3)}
+.sb-logo{padding:26px 22px 20px;border-bottom:1px solid var(--border)}
+.sb-logo-img{height:30px;width:auto;display:block}
+.sb-sub{font-family:var(--sans);font-size:11px;color:rgba(255,255,255,0.62);margin-top:12px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase}
+.sb-nav{padding:16px 0;flex:1}
+.sb-group{font-family:var(--sans);font-size:11px;font-weight:900;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.5);padding:13px 22px 6px}
+.sb-link{display:flex;align-items:center;gap:10px;padding:10px 22px;font-size:15px;color:rgba(255,255,255,0.86);text-decoration:none;cursor:pointer;border-left:2px solid transparent;line-height:1.4;transition:color .18s,background .18s,border-color .18s;font-weight:600}
+.sb-link:hover{color:var(--text);background:rgba(255,255,255,0.04)}
+.sb-link.active{color:var(--or);border-left-color:var(--or);background:rgba(207,255,94,0.07);font-weight:700}
+.sb-footer{padding:16px 20px;border-top:1px solid var(--border)}
+.sb-prog-bar{height:3px;background:var(--cream3);border-radius:0;margin-bottom:8px;overflow:hidden}
+.sb-prog-fill{height:100%;background:var(--or);transition:width .5s cubic-bezier(.2,.9,.1,1.2);width:10%}
+.sb-prog-text{font-size:10px;color:var(--dim);margin-bottom:12px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase}
+.sb-cta-btn{width:100%;background:var(--or);color:#0A0A0A;border:none;border-radius:2px;padding:13px;font-family:var(--display);font-weight:900;font-size:12px;cursor:pointer;transition:transform .18s cubic-bezier(.2,.9,.1,1.2),box-shadow .18s;letter-spacing:0.06em;text-transform:uppercase}
+.sb-cta-btn:hover{transform:translateY(-2px);box-shadow:0 0 0 2px var(--or),0 0 28px rgba(207,255,94,0.45)}
+.sb-cta-btn:active{transform:translateY(1px)}
+
+/* ── MAIN ── */
+#main{margin-left:var(--sidebar);flex:1;min-width:0}
+.section-inner{max-width:880px;margin:0 auto;padding:104px 52px}
+.breakout{max-width:1140px;margin-left:auto;margin-right:auto;width:100%}
+.section.dark .section-inner{max-width:880px;margin:0 auto;padding:104px 52px}
+.section{padding:0;border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+.section:last-child{border-bottom:none}
+.section.dark{background:#000;color:var(--text)}
+.section.cream2{background:var(--cream2);background-image:radial-gradient(rgba(255,255,255,0.045) 1px,transparent 1px);background-size:22px 22px}
+
+/* ── SCROLL ANIMATIONS ── */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s cubic-bezier(.2,.9,.1,1.2),transform .6s cubic-bezier(.2,.9,.1,1.2)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.08s}.reveal-delay-2{transition-delay:.16s}.reveal-delay-3{transition-delay:.24s}.reveal-delay-4{transition-delay:.32s}.reveal-delay-5{transition-delay:.4s}
+
+/* ── TYPOGRAPHY ── */
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--sans);font-size:11px;font-weight:900;letter-spacing:0.2em;text-transform:uppercase;color:var(--or);margin-bottom:24px}
+.h1{font-family:var(--display);font-size:4.6rem;font-weight:900;line-height:.98;letter-spacing:-0.025em;margin-bottom:24px;text-transform:uppercase}
+.h1 em{font-family:var(--display);font-weight:900;font-style:italic;font-size:4.6rem;color:var(--or);letter-spacing:-0.025em}
+.h2{font-family:var(--display);font-size:3.3rem;font-weight:900;line-height:1.02;letter-spacing:-0.02em;margin-bottom:22px;text-transform:uppercase}
+.h2 em{font-family:var(--display);font-weight:900;font-style:italic;font-size:3.3rem;color:var(--or);letter-spacing:-0.02em}
+.h2-white{color:var(--text)}
+.h2-white em{color:var(--or)}
+.h3{font-family:var(--display);font-size:1.95rem;font-weight:900;line-height:1.08;letter-spacing:-0.01em;margin-bottom:14px;text-transform:uppercase}
+.lead{font-family:var(--sans);font-size:19px;font-weight:300;line-height:1.7;max-width:620px}
+.muted{color:var(--muted)}
+
+/* ── MYTH GRID ── */
+.myth-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin:36px 0}
+.myth-card{background:var(--surface);border:1px solid var(--border);border-radius:2px;padding:28px 24px;transition:transform .2s cubic-bezier(.2,.9,.1,1.2),box-shadow .2s,border-color .2s}
+.myth-card:hover{transform:translate(-3px,-3px);box-shadow:6px 6px 0 var(--or);border-color:var(--or)}
+.myth-num{font-family:var(--sans);font-size:10px;font-weight:900;letter-spacing:0.2em;text-transform:uppercase;color:var(--or);margin-bottom:12px}
+.myth-claim{font-family:var(--sans);font-size:17px;font-weight:700;line-height:1.4;margin-bottom:12px;color:var(--text)}
+.myth-bust{font-family:var(--display);font-style:italic;font-size:18px;font-weight:900;color:var(--or);line-height:1.25;text-transform:none}
+
+/* ── BEFORE FRAME ── */
+.before-frame{background:#0E0E0E;border:1.5px dashed var(--cream3);border-radius:2px;padding:54px 40px 36px;text-align:center;margin:36px 0;position:relative;overflow:hidden}
+.before-label{position:absolute;top:0;left:0;right:0;background:var(--surface2);border-bottom:1px solid var(--border);padding:10px 20px;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);text-align:center}
+.before-avatar-wrap{opacity:0.34;filter:grayscale(1);margin-bottom:20px}
+.before-avatar{width:90px;height:90px;border-radius:50%;background:var(--surface);border:2px dashed var(--cream3);display:flex;align-items:center;justify-content:center;font-size:36px;margin:0 auto 14px;color:var(--muted)}
+.tag-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.tag-bad{background:rgba(255,69,69,0.12);border:1px solid rgba(255,69,69,0.4);color:#FF6B6B;font-size:12px;font-weight:700;letter-spacing:0.04em;padding:6px 14px;border-radius:999px}
+.tag-gray{background:var(--surface);border:1px solid var(--border);color:var(--muted);font-size:12px;font-weight:500;padding:6px 14px;border-radius:999px}
+
+/* ── CARDS ── */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:2px;padding:24px 26px;cursor:pointer;transition:border-color .25s,box-shadow .25s,transform .25s;margin-bottom:10px}
+.card:hover{border-color:rgba(207,255,94,0.5);transform:translateY(-2px)}
+.card.open{border-color:var(--or);background:rgba(207,255,94,0.04)}
+.card-head{display:flex;justify-content:space-between;align-items:center;gap:16px;font-family:var(--sans);font-size:16px;font-weight:700;line-height:1.4;color:var(--text)}
+.chevron{font-size:18px;color:var(--muted);transition:transform .35s cubic-bezier(.2,.9,.1,1.2),color .25s;flex-shrink:0}
+.card.open .chevron{transform:rotate(180deg);color:var(--or)}
+.card-body{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.2,.9,.1,1.2)}
+.card-body-inner{padding-top:14px;font-size:15px;font-weight:300;color:var(--muted);line-height:1.75}
+.card.open .card-body{max-height:520px}
+
+/* ── GRIDS ── */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+
+/* ── STATS ── */
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:2px;padding:30px 22px;text-align:center;transition:transform .2s cubic-bezier(.2,.9,.1,1.2),box-shadow .2s,border-color .2s}
+.stat:hover{transform:translate(-3px,-3px);box-shadow:6px 6px 0 var(--or);border-color:var(--or)}
+.big-n{font-family:var(--display);font-size:3.6rem;font-weight:900;color:var(--or);line-height:1;margin-bottom:10px;letter-spacing:-0.02em}
+.stat-label{font-size:14px;font-weight:300;color:var(--muted);line-height:1.6}
+
+/* ── VS GRID ── */
+.vs-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:28px}
+.vs-col{border-radius:2px;padding:28px}
+.vs-before{background:var(--surface2);border:1px solid var(--border)}
+.vs-after{background:rgba(207,255,94,0.05);border:2px solid rgba(207,255,94,0.45)}
+.vs-head{font-family:var(--sans);font-size:12px;font-weight:900;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+.vs-item{display:flex;gap:12px;padding:9px 0;font-size:15px;font-weight:300;line-height:1.6;border-bottom:1px solid var(--border)}
+.vs-item:last-child{border-bottom:none}
+
+/* ── JOURNEY ── */
+.journey{position:relative;padding-left:44px;margin-top:32px}
+.journey::before{content:'';position:absolute;left:14px;top:10px;bottom:10px;width:2px;background:var(--cream3)}
+.j-item{position:relative;margin-bottom:28px}
+.j-dot{position:absolute;left:-36px;top:4px;width:20px;height:20px;border-radius:50%;background:var(--surface);border:2px solid var(--cream3);transition:all .5s cubic-bezier(.2,.9,.1,1.2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;color:transparent}
+.j-item.done .j-dot{background:var(--or);border-color:var(--or);color:#0A0A0A;transform:scale(1.1)}
+.j-item.current .j-dot{background:var(--or);border-color:var(--or);color:#0A0A0A;box-shadow:0 0 0 6px rgba(207,255,94,0.18);animation:pulse-dot 2s infinite}
+@keyframes pulse-dot{0%,100%{box-shadow:0 0 0 6px rgba(207,255,94,0.18)}50%{box-shadow:0 0 0 10px rgba(207,255,94,0.08)}}
+.j-item.done .j-dot::after,.j-item.current .j-dot::after{content:'✓'}
+.j-title{font-family:var(--sans);font-size:17px;font-weight:700;margin-bottom:5px;line-height:1.3;color:var(--text)}
+.j-desc{font-size:15px;font-weight:300;color:var(--muted);line-height:1.65}
+
+/* ── TRANSFORMATION ── */
+.win-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:32px}
+.win-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.12);border-radius:2px;padding:28px;transition:transform .25s cubic-bezier(.2,.9,.1,1.2),box-shadow .25s,border-color .25s;cursor:default}
+.win-card:hover{transform:translate(-3px,-3px);box-shadow:6px 6px 0 var(--or);border-color:var(--or)}
+.win-emoji{font-size:2.6rem;margin-bottom:14px;display:block}
+.win-title{font-family:var(--sans);font-size:18px;font-weight:700;color:var(--text);margin-bottom:8px}
+.win-body{font-size:14px;font-weight:300;color:rgba(255,255,255,0.62);line-height:1.7}
+.win-finale{background:rgba(207,255,94,0.1);border:1.5px solid rgba(207,255,94,0.45);border-radius:2px;padding:40px;text-align:center;margin-top:14px}
+.win-finale-serif{font-family:var(--display);font-style:italic;font-size:2.8rem;font-weight:900;color:var(--or);line-height:1.1;margin-bottom:12px;text-transform:uppercase}
+.win-finale-body{font-size:15px;font-weight:300;color:rgba(255,255,255,0.65);line-height:1.7;max-width:460px;margin:0 auto}
+
+/* ── METERS ── */
+.meter-block{margin-bottom:22px}
+.meter-top{display:flex;justify-content:space-between;font-size:15px;margin-bottom:9px;font-weight:700;color:var(--text)}
+.meter-bar{height:8px;background:var(--cream3);border-radius:0;overflow:hidden}
+.meter-fill{height:100%;border-radius:0;background:var(--or);width:0;transition:width 1.4s cubic-bezier(.2,.9,.1,1.2)}
+
+/* ── TOGGLE ── */
+.tog-wrap{display:flex;background:var(--surface2);border:1px solid var(--border);border-radius:2px;padding:4px;width:fit-content;margin-bottom:28px}
+.tog{padding:10px 24px;border-radius:0;border:none;cursor:pointer;font-family:var(--sans);font-size:13px;font-weight:700;transition:all .22s;background:transparent;color:var(--muted);text-transform:uppercase;letter-spacing:0.04em}
+.tog.active{background:var(--or);color:#0A0A0A}
+
+/* ── TIMELINE ── */
+.tl-item{display:flex;gap:18px;padding:15px 20px;border-radius:2px;background:var(--surface);border:1px solid var(--border);margin-bottom:8px;transition:all .22s}
+.tl-item:hover{transform:translateX(4px);border-color:rgba(207,255,94,0.4)}
+.tl-time{font-family:var(--sans);font-size:12px;font-weight:900;color:var(--or);min-width:44px;padding-top:3px;flex-shrink:0;letter-spacing:0.02em}
+.tl-text{font-size:15px;font-weight:300;color:var(--muted);line-height:1.65}
+.tl-item.lit{border-color:rgba(207,255,94,0.3);background:rgba(207,255,94,0.05)}
+.tl-item.lit .tl-text{color:var(--text)}
+.tl-item.hl{border-color:var(--or);border-width:2px;background:rgba(207,255,94,0.09)}
+.tl-item.hl .tl-text{color:var(--or);font-weight:700}
+
+/* ── PILLS ── */
+.pill-grid{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}
+.pill{display:inline-flex;align-items:center;background:var(--surface);border:1px solid var(--border);border-radius:999px;padding:8px 16px;font-size:13px;font-weight:500;color:var(--text);transition:all .2s;cursor:default}
+.pill:hover{border-color:var(--or);color:var(--or);background:rgba(207,255,94,0.06)}
+
+/* ── ROI ── */
+.inp-label{font-size:13px;color:var(--muted);margin-bottom:7px;display:block;font-weight:700;letter-spacing:0.02em}
+.inp{background:var(--surface2);border:1.5px solid var(--border);color:var(--text);padding:14px 18px;border-radius:6px;font-size:17px;font-family:var(--sans);font-weight:700;width:100%;transition:border-color .2s,box-shadow .2s}
+.inp:focus{outline:none;border-color:var(--or);box-shadow:0 0 0 3px rgba(207,255,94,0.18)}
+input[type=range]{width:100%;accent-color:var(--or);cursor:pointer;margin-top:8px;height:6px}
+.roi-box{background:var(--surface2);border:2px solid var(--or);border-radius:2px;padding:30px;margin-top:24px;box-shadow:0 0 0 1px rgba(207,255,94,0.2),0 0 40px rgba(207,255,94,0.12)}
+.roi-row{display:flex;justify-content:space-between;align-items:center;padding:13px 0;border-bottom:1px solid var(--cream3);font-size:16px;font-weight:300;color:var(--text)}
+.roi-row:last-child{border-bottom:none}
+.roi-val{font-family:var(--display);font-size:1.3rem;font-weight:900;color:var(--or)}
+.roi-val.green{color:var(--success)}
+.roi-total{font-size:2rem !important;letter-spacing:-0.02em}
+
+/* ── HBOX ── */
+.hbox{background:rgba(207,255,94,0.08);border:1.5px solid rgba(207,255,94,0.35);border-radius:2px;padding:20px 24px;margin-top:18px;font-size:16px;font-weight:300;line-height:1.75;color:var(--text)}
+
+/* ── REELS ── */
+.reels-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:28px}
+.reel-card{background:var(--surface2);border:1px solid var(--border);border-radius:2px;overflow:hidden;aspect-ratio:9/16;position:relative;cursor:pointer;transition:all .3s cubic-bezier(.2,.9,.1,1.2)}
+.reel-card:hover{border-color:var(--or);transform:translateY(-6px);box-shadow:0 0 30px rgba(207,255,94,0.18)}
+.reel-inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#1e1e1e,#0c0c0c);gap:12px}
+.reel-play{width:52px;height:52px;border-radius:50%;background:var(--or);display:flex;align-items:center;justify-content:center;font-size:17px;color:#0A0A0A;box-shadow:0 0 24px rgba(207,255,94,0.4);transition:transform .25s}
+.reel-card:hover .reel-play{transform:scale(1.12)}
+.reel-lbl{font-size:12px;font-weight:500;color:var(--muted);text-align:center;padding:0 14px;line-height:1.5}
+.reel-tag{position:absolute;top:12px;left:12px;background:var(--surface);border:1px solid var(--border);color:var(--text);font-size:10px;font-weight:900;letter-spacing:0.1em;text-transform:uppercase;padding:4px 10px;border-radius:999px}
+.reel-soon{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);font-size:10px;color:var(--muted);white-space:nowrap;background:rgba(10,10,10,0.92);padding:4px 10px;border-radius:999px;border:1px solid var(--border)}
+
+/* ── PLAN CARDS ── */
+.plan-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.plan-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.plan-card{background:var(--surface2);border:1.5px solid var(--border);border-radius:2px;overflow:hidden;display:flex;flex-direction:column;transition:transform .3s cubic-bezier(.2,.9,.1,1.2),box-shadow .3s}
+.plan-card:hover{transform:translateY(-4px)}
+.plan-card.featured{border-color:var(--or);box-shadow:0 0 0 1px var(--or),0 0 48px rgba(207,255,94,0.18)}
+.plan-badge{background:var(--or);color:#0A0A0A;font-family:var(--display);font-size:11px;font-weight:900;letter-spacing:0.16em;text-transform:uppercase;text-align:center;padding:11px}
+.plan-inner{padding:30px;flex:1;display:flex;flex-direction:column}
+.plan-name{font-family:var(--sans);font-size:12px;font-weight:900;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+.plan-was{font-size:15px;color:var(--dim);text-decoration:line-through;margin-bottom:4px;font-weight:400}
+.plan-price{font-family:var(--display);font-size:3.6rem;font-weight:900;color:var(--text);line-height:1;letter-spacing:-0.03em}
+.plan-price sup{font-size:1.5rem;font-weight:900;vertical-align:super;margin-right:1px;color:var(--or)}
+.plan-price sub{font-size:1rem;font-weight:400;color:var(--muted);vertical-align:baseline;font-family:var(--sans)}
+.plan-setup{font-size:13px;color:var(--muted);margin-top:8px;margin-bottom:0;font-weight:400;flex:0}
+.plan-btn-wrap{margin-top:22px;margin-bottom:0;display:flex}
+.plan-btn{display:inline-block;background:transparent;border:1.5px solid var(--or);color:var(--or);text-align:center;padding:12px 28px;border-radius:2px;font-family:var(--display);font-weight:900;font-size:13px;cursor:pointer;transition:all .22s cubic-bezier(.2,.9,.1,1.2);text-decoration:none;margin-bottom:24px;letter-spacing:0.06em;text-transform:uppercase}
+.plan-card.featured .plan-btn{background:var(--or);color:#0A0A0A}
+.plan-btn:hover{background:var(--or);color:#0A0A0A;transform:translateY(-2px);box-shadow:0 0 24px rgba(207,255,94,0.35)}
+.plan-features{list-style:none;flex:1}
+.plan-features li{display:flex;align-items:flex-start;gap:10px;padding:9px 0;font-size:14px;font-weight:300;color:var(--muted);border-bottom:1px solid var(--cream3);line-height:1.5}
+.plan-features li:last-child{border-bottom:none}
+.plan-features li::before{content:'✓';color:var(--or);font-weight:900;flex-shrink:0;margin-top:1px}
+.plan-price-bottom{padding:22px 30px;border-top:1.5px solid var(--cream3)}
+.price-big{font-family:var(--display);font-size:2.8rem;font-weight:900;color:var(--text);letter-spacing:-0.03em}
+.price-big sub{font-size:1rem;font-weight:400;color:var(--muted);vertical-align:baseline;font-family:var(--sans)}
+
+/* ── TEAM ── */
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.tc{background:var(--surface);border:1px solid var(--border);border-radius:2px;padding:18px;text-align:center;transition:transform .2s,box-shadow .2s,border-color .2s}
+.tc:hover{transform:translateY(-3px);border-color:rgba(207,255,94,0.4)}
+.tav{width:54px;height:54px;border-radius:50%;background:rgba(207,255,94,0.1);border:2px solid rgba(207,255,94,0.4);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:900;font-size:16px;color:var(--or);margin:0 auto 12px;transition:transform .25s}
+.tc:hover .tav{transform:scale(1.08)}
+.tav-photo{width:100%;aspect-ratio:1;border-radius:2px;background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--cream3);margin-bottom:14px;overflow:hidden;transition:transform .25s}
+.tav-photo svg{width:60%;height:60%}
+.tc:hover .tav-photo{transform:scale(1.02)}
+.tc-name{font-family:var(--sans);font-size:15px;font-weight:700;color:var(--text)}
+.tc-role{font-size:12px;color:var(--muted);margin-top:2px;font-weight:400}
+
+/* ── CTA BOX ── */
+.cta-box{background:#000;border:1.5px solid var(--or);border-radius:2px;padding:62px 48px;text-align:center;margin-top:28px;position:relative;overflow:hidden;box-shadow:0 0 0 1px rgba(207,255,94,0.2),0 0 60px rgba(207,255,94,0.1)}
+.cta-serif{font-family:var(--display);font-style:italic;font-weight:900;font-size:3.2rem;color:var(--or);line-height:1.05;margin-bottom:16px;text-transform:uppercase}
+.cta-lead{color:rgba(255,255,255,0.62);font-size:17px;font-weight:300;margin-bottom:32px;line-height:1.7;max-width:480px;margin-left:auto;margin-right:auto}
+.cta-btn-main{display:inline-flex;align-items:center;gap:10px;background:var(--or);color:#0A0A0A;padding:16px 38px;border-radius:2px;font-family:var(--display);font-weight:900;font-size:15px;text-decoration:none;transition:transform .22s cubic-bezier(.2,.9,.1,1.2),box-shadow .22s;letter-spacing:0.06em;text-transform:uppercase}
+.cta-btn-main:hover{transform:translateY(-3px);box-shadow:0 0 0 2px var(--or),0 0 40px rgba(207,255,94,0.5)}
+
+/* ── VS ITEM ICON ── */
+.vi{font-size:14px;font-weight:900;flex-shrink:0;min-width:16px;color:var(--or);margin-top:2px}
+.vs-before .vi{color:var(--muted)}
+
+/* ── WIN ICON ── */
+.win-icon{font-family:var(--display);font-style:italic;font-size:2.4rem;font-weight:900;color:rgba(207,255,94,0.55);line-height:1;margin-bottom:14px}
+
+/* ── STAR ── */
+.star{color:var(--or)}
+.divider-stars{text-align:center;font-size:16px;letter-spacing:14px;color:rgba(207,255,94,0.35);margin:8px 0 36px}
+.divider-stars-white{color:rgba(255,255,255,0.16)}
+
+/* ── CT TABLE ── */
+.ct-table{border-radius:2px;overflow:hidden;border:1px solid var(--border);margin-bottom:20px}
+.ct-head{display:flex;justify-content:space-between;padding:13px 22px;background:var(--surface2);font-family:var(--sans);font-size:12px;font-weight:900;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)}
+.ct-row{display:flex;justify-content:space-between;padding:12px 22px;border-bottom:1px solid var(--cream3);font-size:15px;font-weight:300;background:var(--surface);color:var(--text)}
+.ct-row:last-child{border-bottom:none}
+.ct-total{display:flex;justify-content:space-between;padding:14px 22px;background:rgba(255,69,69,0.08);border-top:2px solid rgba(255,69,69,0.25);font-size:16px;font-weight:900}
+
+/* ── SCROLL MARQUEE ── */
+.marquee-wrap{overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:16px 0;background:#000;margin:0}
+.marquee-track{display:flex;gap:48px;animation:marquee 24s linear infinite;width:max-content}
+.marquee-item{font-family:var(--display);font-size:13px;font-weight:900;color:var(--muted);white-space:nowrap;letter-spacing:0.08em;text-transform:uppercase}
+.marquee-item .dot{color:var(--or);margin-right:48px}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ── AI DEMO ── */
+.ai-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:34px}
+@media(max-width:980px){.ai-grid{grid-template-columns:1fr}}
+.ai-cap{display:flex;align-items:center;gap:9px;font-family:var(--sans);font-size:11px;font-weight:900;letter-spacing:0.16em;text-transform:uppercase;color:var(--or);margin-bottom:9px}
+.ai-cap .n{width:22px;height:22px;border:1px solid var(--or);border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:11px}
+.ai-panel-sub{font-size:14px;font-weight:300;color:var(--muted);line-height:1.55;margin-bottom:14px;min-height:40px}
+.ai-panel{display:flex;flex-direction:column;height:580px;background:var(--surface2);border:1px solid var(--border);border-radius:2px;overflow:hidden;transition:border-color .22s,box-shadow .22s}
+.ai-panel:hover{border-color:rgba(207,255,94,0.4);box-shadow:0 0 40px rgba(207,255,94,0.07)}
+.ai-head{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--border);background:#000}
+.ai-ava{width:38px;height:38px;border-radius:50%;background:var(--or);color:#0A0A0A;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:900;font-size:13px;flex-shrink:0}
+.ai-hname{font-family:var(--sans);font-weight:700;font-size:15px;color:#fff;line-height:1.2}
+.ai-hstat{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);margin-top:3px}
+.ai-dot{width:7px;height:7px;border-radius:50%;background:var(--success);box-shadow:0 0 8px var(--success)}
+.ai-feed{flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:12px}
+.ai-feed::-webkit-scrollbar{width:4px}.ai-feed::-webkit-scrollbar-thumb{background:var(--cream3)}
+.msg{display:flex;gap:9px;max-width:92%;align-items:flex-end}
+.msg.user{align-self:flex-end;flex-direction:row-reverse}
+.msg.bot{align-self:flex-start}
+.msg-ava{width:26px;height:26px;border-radius:50%;background:var(--or);color:#0A0A0A;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:900;font-size:9px;flex-shrink:0}
+.bubble{padding:11px 14px;border-radius:11px;font-size:14.5px;line-height:1.55;font-weight:300}
+.msg.bot .bubble{background:var(--surface);border:1px solid var(--border);color:#ECECEC;border-bottom-left-radius:2px}
+.msg.user .bubble{background:var(--or);color:#0A0A0A;font-weight:500;border-bottom-right-radius:2px}
+.bubble b{font-weight:700;color:#fff}
+.msg.user .bubble b{color:#0A0A0A}
+.ai-book{align-self:flex-start;max-width:94%;background:rgba(207,255,94,0.08);border:1.5px solid var(--or);border-radius:2px;padding:14px 16px}
+.ai-book-top{display:flex;align-items:center;gap:8px;font-family:var(--sans);font-size:11px;font-weight:900;letter-spacing:0.12em;text-transform:uppercase;color:var(--or);margin-bottom:10px}
+.ai-book-row{display:flex;justify-content:space-between;gap:14px;font-size:13px;padding:6px 0;border-bottom:1px solid rgba(207,255,94,0.18)}
+.ai-book-row:last-child{border-bottom:none}
+.ai-book-row .k{color:var(--muted);font-weight:300}
+.ai-book-row .v{color:#fff;font-weight:700;text-align:right}
+.ai-typing{display:flex;gap:4px;padding:13px 15px;background:var(--surface);border:1px solid var(--border);border-radius:11px;border-bottom-left-radius:2px;width:fit-content;align-self:flex-start}
+.ai-typing span{width:7px;height:7px;border-radius:50%;background:var(--muted);animation:aiblink 1.2s infinite}
+.ai-typing span:nth-child(2){animation-delay:.18s}.ai-typing span:nth-child(3){animation-delay:.36s}
+@keyframes aiblink{0%,60%,100%{opacity:.25;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
+.ai-chips{display:flex;flex-wrap:wrap;gap:7px;padding:11px 16px 5px;border-top:1px solid var(--border)}
+.ai-chip{font-family:var(--sans);font-size:12.5px;font-weight:500;color:var(--or);background:rgba(207,255,94,0.06);border:1px solid rgba(207,255,94,0.32);border-radius:999px;padding:7px 13px;cursor:pointer;transition:background .16s,color .16s,border-color .16s;line-height:1.2}
+.ai-chip:hover{background:var(--or);color:#0A0A0A;border-color:var(--or)}
+.ai-bar{display:flex;gap:8px;padding:12px 16px 14px;background:#000}
+.ai-in{flex:1;background:var(--surface2);border:1.5px solid var(--border);color:#fff;padding:11px 14px;border-radius:6px;font-family:var(--sans);font-size:14px;font-weight:300;min-width:0}
+.ai-in::placeholder{color:var(--dim)}
+.ai-in:focus{outline:none;border-color:var(--or)}
+.ai-go{background:var(--or);color:#0A0A0A;border:none;border-radius:6px;padding:0 18px;font-family:var(--display);font-weight:900;font-size:13px;letter-spacing:0.04em;text-transform:uppercase;cursor:pointer;transition:transform .14s}
+.ai-go:hover{transform:translateY(-1px)}.ai-go:active{transform:translateY(1px)}
+.ai-note{font-size:11.5px;color:var(--dim);text-align:center;margin-top:16px}
+
+</style>
+</head>
+<body>
+<nav id="sidebar">
+  <div class="sb-logo">
+    <img class="sb-logo-img" src="assets/mverse-logo-light.png" alt="Marketingverse">
+    <div class="sb-sub">Broker Engine</div>
+  </div>
+  <div class="sb-nav">
+    <div class="sb-group">The Problem</div>
+    <a class="sb-link active" href="#s1">The Fragmented Brokerage</a>
+    <a class="sb-link" href="#s2">What Chaos Costs You</a>
+    <div class="sb-group" style="margin-top:6px">The Solution</div>
+    <a class="sb-link" href="#s3">Meet Broker Engine</a>
+    <a class="sb-link" href="#s4">One System, Everything</a>
+    <a class="sb-link" href="#s5">AI That Works For You</a>
+    <a class="sb-link" href="#s5b">Try The AI Live</a>
+    <a class="sb-link" href="#s6">The Tight Brokerage</a>
+    <div class="sb-group" style="margin-top:6px">The Decision</div>
+    <a class="sb-link" href="#s7">Our Work</a>
+    <a class="sb-link" href="#s8">Your ROI</a>
+    <a class="sb-link" href="#s9">Plans & Pricing</a>
+    <a class="sb-link" href="#s10">Let's Build This</a>
+  </div>
+  <div class="sb-footer">
+    <div class="sb-prog-bar"><div class="sb-prog-fill" id="prog-fill"></div></div>
+    <div class="sb-prog-text" id="prog-text">1 of 9</div>
+    <button class="sb-cta-btn" onclick="document.getElementById('s10').scrollIntoView({behavior:'smooth'})">Book Free Demo →</button>
+  </div>
+</nav>
+<main id="main">
+
+<section class="section" id="s1">
+<div class="section-inner">
+  <div class="eyebrow reveal">★ Chapter One</div>
+  <div class="h1 reveal reveal-delay-1">You built a great team.<br><em>Your systems aren't<br>keeping up.</em></div>
+  <p class="lead muted reveal reveal-delay-2" style="margin-bottom:36px">You have the agents, the listings, the momentum. But behind the scenes? Six tools that don't talk to each other, Zapier automations that randomly break, and leads falling through gaps nobody can see. That's not a brokerage. That's a liability.</p>
+  <div class="myth-grid">
+    <div class="myth-card reveal reveal-delay-1"><div class="myth-num">Problem 01</div><div class="myth-claim">"We have a CRM — we just don't use it consistently."</div><div class="myth-bust">(A CRM nobody uses is just an expensive contact list.)</div></div>
+    <div class="myth-card reveal reveal-delay-2"><div class="myth-num">Problem 02</div><div class="myth-claim">"Our agents follow up. I think."</div><div class="myth-bust">(You shouldn't have to hope. You should be able to see it.)</div></div>
+    <div class="myth-card reveal reveal-delay-3"><div class="myth-num">Problem 03</div><div class="myth-claim">"We'll fix the systems once things slow down."</div><div class="myth-bust">(It never slows down. And every month you wait costs you deals.)</div></div>
+  </div>
+  <div class="before-frame reveal">
+    <div class="before-label">The fragmented brokerage — before Broker Engine</div>
+    <div class="before-avatar-wrap">
+      <div class="before-avatar"><svg width="40" height="40" viewBox="0 0 40 40" fill="none"><rect x="4" y="8" width="32" height="24" rx="3" fill="none" stroke="currentColor" stroke-width="2" opacity="0.4"/><path d="M4 14h32M14 8v4M26 8v4" stroke="currentColor" stroke-width="2" opacity="0.4" stroke-linecap="round"/></svg></div>
+      <div style="font-size:17px;font-weight:700">Your Brokerage</div>
+      <div style="font-size:14px;color:var(--muted);margin-top:4px">Independent Broker · Florida</div>
+    </div>
+    <div class="tag-row">
+      <span class="tag-bad">Leads falling through cracks</span>
+      <span class="tag-gray">6+ disconnected tools</span>
+      <span class="tag-bad">No pipeline visibility</span>
+      <span class="tag-gray">Manual follow-up chaos</span>
+      <span class="tag-bad">$353+/mo in fragmented tools</span>
+    </div>
+  </div>
+  <div class="g3 reveal">
+    <div class="card" onclick="togCard(this)"><div class="card-head"><span>Tools that don't talk to each other</span><span class="chevron">⌄</span></div><div class="card-body"><div class="card-body-inner">Your CRM is here. Your dialer is over there. Your email platform is somewhere else. Every one is a separate login, a separate bill, and a separate thing that breaks at the worst moment. You've become the IT department of your own brokerage.</div></div></div>
+    <div class="card" onclick="togCard(this)"><div class="card-head"><span>No visibility into agent activity</span><span class="chevron">⌄</span></div><div class="card-body"><div class="card-body-inner">You don't know which agents are following up, which leads are being neglected, or which pipeline stages are leaking. You're running a brokerage on gut feel instead of data — while deals slip out quietly.</div></div></div>
+    <div class="card" onclick="togCard(this)"><div class="card-head"><span>Leads going cold at scale</span><span class="chevron">⌄</span></div><div class="card-body"><div class="card-body-inner">With a team of agents, lead leakage multiplies. A lead that sits for 24 hours is 60% less likely to convert. Without automated follow-up, you're leaving commission on the table every single day — at scale.</div></div></div>
+  </div>
+</div>
+</section>
+
+<section class="section cream2" id="s2">
+<div class="section-inner">
+  <div class="eyebrow reveal">★ Chapter Two</div>
+  <div class="h2 reveal reveal-delay-1">Fragmented systems aren't just annoying.<br><em>They're expensive.</em></div>
+  <p class="lead muted reveal reveal-delay-2" style="margin-bottom:40px">Every tool you manage separately is a gap where leads fall through, time gets wasted, and money leaves your brokerage quietly. Let's add it up.</p>
+  <div class="g3 reveal reveal-delay-1" style="margin-bottom:40px">
+    <div class="stat"><div class="big-n">$353<span style="font-size:1.8rem">+</span></div><div class="stat-label">what the average brokerage pays monthly for fragmented tools that barely work together</div></div>
+    <div class="stat"><div class="big-n count-up" data-target="60" data-suffix="%">0%</div><div class="stat-label">of leads go cold when follow-up is manual and dependent on agent discipline</div></div>
+    <div class="stat"><div class="big-n count-up" data-target="40" data-suffix="%">0%</div><div class="stat-label">of broker time spent on admin and tool management instead of growing the business</div></div>
+  </div>
+  <div class="divider-stars reveal">★ ★ ★</div>
+  <div class="h3 reveal" style="margin-bottom:16px">The stack you're probably running right now</div>
+  <div class="ct-table reveal reveal-delay-1">
+    <div class="ct-head"><span>Tool</span><span>Monthly Cost</span></div>
+    <div class="ct-row"><span style="color:var(--muted)">CRM (Follow Up Boss, kvCORE, etc.)</span><span>$97</span></div>
+    <div class="ct-row"><span style="color:var(--muted)">Dialer / VoIP system</span><span>$79</span></div>
+    <div class="ct-row"><span style="color:var(--muted)">Email marketing platform</span><span>$49</span></div>
+    <div class="ct-row"><span style="color:var(--muted)">Scheduling / calendar tool</span><span>$29</span></div>
+    <div class="ct-row"><span style="color:var(--muted)">Website &amp; landing pages</span><span>$50</span></div>
+    <div class="ct-row"><span style="color:var(--muted)">Zapier / automation layer</span><span>$49</span></div>
+    <div class="ct-total"><span>Total fragmented chaos</span><span style="color:var(--danger)">$353+/mo</span></div>
+  </div>
+  <div class="hbox reveal"><strong class="star">And that's just the money.</strong> The real cost is hours your team wastes managing tools instead of working leads, deals lost to follow-up gaps, and broker time burned on admin instead of growth. Broker Engine replaces all of it — one login, one bill, everything connected.</div>
+</div>
+</section>
+
+<section class="section" id="s3">
+<div class="section-inner">
+  <div class="eyebrow reveal">★ Chapter Three — The Turning Point</div>
+  <div class="h2 reveal reveal-delay-1">One system.<br><em>Your entire brokerage,<br>connected.</em></div>
+  <p class="lead muted reveal reveal-delay-2" style="margin-bottom:40px">Broker Engine isn't another tool to add to the stack. It replaces the stack. CRM, VoIP, SMS, email, landing pages, automations, AI agents, reputation management — all in one platform built for how your brokerage actually runs.</p>
+  <div class="journey reveal reveal-delay-1">
+    <div class="j-item done"><div class="j-dot"></div><div class="j-title">Fragmented brokerage — tools everywhere, visibility nowhere</div><div class="j-desc">Managing 6 platforms, chasing agent activity, leads falling through gaps.</div></div>
+    <div class="j-item done"><div class="j-dot"></div><div class="j-title">You saw the real cost — in money and missed deals</div><div class="j-desc">$353+/month in tools. Hundreds of thousands in lead leakage annually.</div></div>
+    <div class="j-item current"><div class="j-dot"></div><div class="j-title" style="color:var(--or)">You find Broker Engine — right now</div><div class="j-desc">One login. Everything connected. AI running follow-up 24/7. Full pipeline visibility.</div></div>
+    <div class="j-item"><div class="j-dot"></div><div class="j-title" style="color:var(--muted)">Your operations become tight and scalable</div><div class="j-desc">Every lead tracked, every agent accountable, every touchpoint automated.</div></div>
+    <div class="j-item"><div class="j-dot"></div><div class="j-title" style="color:var(--muted)">AI works for your brokerage 24/7</div><div class="j-desc">Follow-up, nurturing, appointment booking — running overnight while your team sleeps.</div></div>
+    <div class="j-item"><div class="j-dot"></div><div class="j-title" style="color:var(--muted)">The tight brokerage that scales without chaos</div><div class="j-desc">More deals. More accountability. More time. This is the other side.</div></div>
+  </div>
+</div>
+</section>
+
+<section class="section cream2" id="s4">
+<div class="section-inner">
+  <div class="eyebrow reveal">★ Chapter Four — The Platform</div>
+  <div class="h2 reveal reveal-delay-1">Everything your brokerage needs.<br><em>Nothing it doesn't.</em></div>
+  <p class="lead muted reveal reveal-delay-2" style="margin-bottom:28px">Broker Engine is built on the most powerful all-in-one platform in the industry — customized, configured, and managed by our team so you never have to figure it out yourself.</p>
+  <div class="pill-grid reveal reveal-delay-1">
+    <span class="pill">CRM & Pipelines</span><span class="pill">AI Agents & Chatbots</span><span class="pill">SMS & WhatsApp</span><span class="pill">VoIP Dialer</span><span class="pill">Website Builder</span><span class="pill">Landing Pages</span><span class="pill">Reputation Management</span><span class="pill">Ads Manager</span><span class="pill">E-Sign & Documents</span><span class="pill">Email Marketing</span><span class="pill">Payments</span><span class="pill">Mobile App</span><span class="pill">Automations</span><span class="pill">Agent Attribution</span><span class="pill">Google & FB Ads Analytics</span>
+  </div>
+  <div class="reveal reveal-delay-2">
+    <div class="card" onclick="togCard(this)"><div class="card-head"><span>CRM Built for Brokerages</span><span class="chevron">⌄</span></div><div class="card-body"><div class="card-body-inner">Full pipeline visibility across your entire team. See every lead, every stage, every agent's activity. Smart pipelines that move automatically based on behavior. Nothing slips. You always know exactly what's happening.</div></div></div>
+    <div class="g2" style="margin-bottom:0">
+      <div class="card" onclick="togCard(this)"><div class="card-head"><span>VoIP, SMS & WhatsApp — All in One</span><span class="chevron">⌄</span></div><div class="card-body"><div class="card-body-inner">Call, text, and message leads from one place. Every conversation logged to the contact automatically. No more "I don't know if someone already called them." Full communication history on every lead card.</div></div></div>
+      <div class="card" onclick="togCard(this)"><div class="card-head"><span>Website, Landing Pages & Lead Capture</span><span class="chevron">⌄</span></div><div class="card-body"><div class="card-body-inner">Built-in website builder, custom landing pages, and lead capture forms — all funneling directly into your CRM. Every lead lands in the pipeline instantly. No more leads going into a form that maybe someone follows up on.</div></div></div>
+      <div class="card" onclick="togCard(this)"><div class="card-head"><span>Reputation Management at Scale</span><span class="chevron">⌄</span></div><div class="card-body"><div class="card-body-inner">Automated review requests after every closed deal — for every agent, every time. Auto-responses in your brand voice. Flags anything negative immediately. Your brokerage's reputation builds itself.</div></div></div>
+      <div class="card" onclick="togCard(this)"><div class="card-head"><span>E-Sign, Payments & Documents</span><span class="chevron">⌄</span></div><div class="card-body"><div class="card-body-inner">Send documents for signature, collect payments, and manage contracts — all inside the same platform. No more switching between DocuSign, Stripe, and your CRM. One place for everything.</div></div></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="section" id="s5">
+<div class="section-inner">
+  <div class="eyebrow reveal">★ Chapter Five — The AI Advantage</div>
+  <div class="h2 reveal reveal-delay-1">Your brokerage runs<br><em>even when your team doesn't.</em></div>
+  <p class="lead muted reveal reveal-delay-2" style="margin-bottom:36px">The agents who follow up within 5 minutes win the lead. The ones who follow up 3 days later get voicemail. Broker Engine makes sure your brokerage is always first — automatically.</p>
+  <div id="meters" class="reveal reveal-delay-1" style="margin-bottom:36px">
+    <div class="meter-block"><div class="meter-top"><span>Lead Response Time (minutes, not days)</span><span class="star" id="m1-val">0%</span></div><div class="meter-bar"><div class="meter-fill" id="m1" data-target="95"></div></div></div>
+    <div class="meter-block"><div class="meter-top"><span>Follow-Up Completion Rate</span><span class="star" id="m2-val">0%</span></div><div class="meter-bar"><div class="meter-fill" id="m2" data-target="100"></div></div></div>
+    <div class="meter-block"><div class="meter-top"><span>Pipeline Visibility Across Your Team</span><span class="star" id="m3-val">0%</span></div><div class="meter-bar"><div class="meter-fill" id="m3" data-target="100"></div></div></div>
+  </div>
+  <div class="reveal reveal-delay-2">
+    <div class="card" onclick="togCard(this)"><div class="card-head"><span>AI Follow-Up Agent — Responds in Under 5 Minutes, Always</span><span class="chevron">⌄</span></div><div class="card-body"><div class="card-body-inner">The moment a lead comes in from any source, your AI sends a personalized intro, qualifies the lead, and books a call with an agent. 24/7. Every lead. No exceptions. No delays. No human needed until the appointment is booked.</div></div></div>
+    <div class="card" onclick="togCard(this)"><div class="card-head"><span>Automated Nurture Sequences for Every Stage</span><span class="chevron">⌄</span></div><div class="card-body"><div class="card-body-inner">7–12 touch sequences that run automatically based on pipeline stage. Email, SMS, or both. Leads exit the moment they respond. Your agents only engage when it's time to close.</div></div></div>
+    <div class="card" onclick="togCard(this)"><div class="card-head"><span>Appointment Automation — No More No-Shows</span><span class="chevron">⌄</span></div><div class="card-body"><div class="card-body-inner">Confirmations, reminders, and reschedule management — all automated. Leads get texted 24h and 1h before. If they need to reschedule, the system handles it and rebooooks them without an agent lifting a finger.</div></div></div>
+    <div class="card" onclick="togCard(this)"><div class="card-head"><span>Win-Back Campaigns — Turn Old Leads into New Deals</span><span class="chevron">⌄</span></div><div class="card-body"><div class="card-body-inner">Leads you lost 60–180 days ago get automated check-ins. About 12% come back to life. That's free pipeline from leads you'd already written off — because the system never forgot them.</div></div></div>
+  </div>
+  <div class="hbox reveal"><strong class="star">The compounding math:</strong> 60 leads/month at 10% close = 6 deals. With AI follow-up capturing what goes cold manually, you're looking at 8–9 deals from the same lead volume. On a $12K avg commission, that's $288K–$360K more per year from leads you already had.</div>
+</div>
+</section>
+
+<section class="section cream2" id="s5b">
+<div class="section-inner">
+  <div class="eyebrow reveal">★ Try It Live — Interactive</div>
+  <div class="h2 reveal reveal-delay-1">Don't take our word for it.<br><em>Talk to the AI yourself.</em></div>
+  <p class="lead muted reveal reveal-delay-2" style="margin-bottom:8px">Two assistants, live right here. One answers everything about Broker Engine. The other is the AI your agents and leads talk to every day — ask it anything, then watch it book time with the broker.</p>
+</div>
+<div class="breakout reveal reveal-delay-1" style="padding:0 52px 8px">
+  <div class="ai-grid">
+    <div>
+      <div class="ai-cap"><span class="n">A</span> Ask Broker Engine</div>
+      <div class="ai-panel-sub">Pricing, setup, what's included, how we'd run it for your brokerage — ask away.</div>
+      <div class="ai-panel" id="panelA">
+        <div class="ai-head"><div class="ai-ava">BE</div><div><div class="ai-hname">Broker Engine Assistant</div><div class="ai-hstat"><span class="ai-dot"></span> Online · replies instantly</div></div></div>
+        <div class="ai-feed" id="feedA"></div>
+        <div class="ai-chips" id="chipsA"></div>
+        <div class="ai-bar"><input class="ai-in" id="inA" placeholder="Ask about pricing, setup, features…" autocomplete="off"><button class="ai-go" id="goA">Send</button></div>
+      </div>
+    </div>
+    <div>
+      <div class="ai-cap"><span class="n">B</span> Test The Agent Assistant</div>
+      <div class="ai-panel-sub">The AI your agents &amp; leads talk to. Ask a real estate question — then have it book the broker.</div>
+      <div class="ai-panel" id="panelB">
+        <div class="ai-head"><div class="ai-ava">AI</div><div><div class="ai-hname">Engine AI · Lead Assistant</div><div class="ai-hstat"><span class="ai-dot"></span> Online · 24/7</div></div></div>
+        <div class="ai-feed" id="feedB"></div>
+        <div class="ai-chips" id="chipsB"></div>
+        <div class="ai-bar"><input class="ai-in" id="inB" placeholder="Ask a real estate question…" autocomplete="off"><button class="ai-go" id="goB">Send</button></div>
+      </div>
+    </div>
+  </div>
+  <div class="ai-note">Live demo assistants. Responses are illustrative — your configured AI uses your brand, listings, and calendar.</div>
+</div>
+</section>
+
+<section class="section dark" id="s6">
+<div class="section-inner">
+  <div class="eyebrow reveal" style="color:rgba(255,255,255,0.45);border-color:rgba(255,255,255,0.12)">★ Chapter Six — The New Reality</div>
+  <div class="h2 h2-white reveal reveal-delay-1">Journey complete.<br><em>The tight brokerage.</em></div>
+  <p class="lead reveal reveal-delay-2" style="color:rgba(255,255,255,0.6);margin-bottom:44px">Every dot checked. One system running. Full visibility. The real win isn't just more deals — it's what operational clarity gives back to you and your team.</p>
+  <div class="journey reveal reveal-delay-1" style="margin-bottom:52px">
+    <div class="j-item done"><div class="j-dot"></div><div class="j-title" style="color:rgba(255,255,255,0.8)">Fragmented brokerage — six tools, zero visibility</div><div class="j-desc" style="color:rgba(255,255,255,0.4)">Managing platforms, chasing agents, watching leads disappear.</div></div>
+    <div class="j-item done"><div class="j-dot"></div><div class="j-title" style="color:rgba(255,255,255,0.8)">Saw the real cost in money and missed deals</div><div class="j-desc" style="color:rgba(255,255,255,0.4)">$353+/mo in tools. Hundreds of thousands in silent lead leakage.</div></div>
+    <div class="j-item done"><div class="j-dot"></div><div class="j-title" style="color:rgba(255,255,255,0.8)">Found Broker Engine</div><div class="j-desc" style="color:rgba(255,255,255,0.4)">One system. Everything connected. AI running 24/7.</div></div>
+    <div class="j-item done"><div class="j-dot"></div><div class="j-title" style="color:rgba(255,255,255,0.8)">Operations became tight and scalable</div><div class="j-desc" style="color:rgba(255,255,255,0.4)">Every lead tracked, every agent accountable, every touchpoint automated.</div></div>
+    <div class="j-item done"><div class="j-dot" style="width:24px;height:24px;left:-38px;font-size:13px;box-shadow:0 0 0 6px rgba(207,255,94,0.2),0 0 0 12px rgba(207,255,94,0.08)"></div>
+      <div class="j-title" style="color:var(--or);font-size:19px;font-weight:800">The brokerage that runs tight, scales clean, closes more</div>
+      <div class="j-desc" style="color:rgba(255,255,255,0.55)">And here's what that actually means for your life.</div>
+    </div>
+  </div>
+  <div class="divider-stars divider-stars-white reveal">★ ★ ★</div>
+  <div class="win-grid">
+    <div class="win-card reveal reveal-delay-1"><div class="win-icon">01</div><div class="win-title">You see everything. Finally.</div><div class="win-body">One dashboard. Every agent, every lead, every stage. You know exactly what's happening in your pipeline — not from gut feel, from data. In real time. From your phone.</div></div>
+    <div class="win-card reveal reveal-delay-2"><div class="win-icon">02</div><div class="win-title">Leads stop falling through. Period.</div><div class="win-body">AI follows up with every lead within 5 minutes. Nurture sequences run automatically. Nothing gets forgotten. You close more from the same lead volume — because nothing leaks anymore.</div></div>
+    <div class="win-card reveal reveal-delay-3"><div class="win-icon">03</div><div class="win-title">Your team is accountable without micromanagement</div><div class="win-body">The system tracks every touchpoint. You see who's following up and who isn't — without asking, without chasing, without the uncomfortable conversation. The data does it for you.</div></div>
+    <div class="win-card reveal reveal-delay-4"><div class="win-icon">04</div><div class="win-title">You work on the business, not in it</div><div class="win-body">Automations handle the admin. AI handles the follow-up. Your time goes toward hiring, strategy, and growth — not chasing Zapier bugs and reconciling spreadsheets at 10pm.</div></div>
+  </div>
+  <div class="win-finale reveal reveal-delay-3">
+    <div class="win-finale-serif">This is the tight brokerage.</div>
+    <div class="win-finale-body">Not more complexity. Less. One system that runs your operation while you build it.</div>
+  </div>
+</div>
+</section>
+
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">CRM & Pipelines <span class="dot">★</span></span>
+    <span class="marquee-item">AI Agents <span class="dot">★</span></span>
+    <span class="marquee-item">SMS & WhatsApp <span class="dot">★</span></span>
+    <span class="marquee-item">VoIP System <span class="dot">★</span></span>
+    <span class="marquee-item">Website Builder <span class="dot">★</span></span>
+    <span class="marquee-item">Reputation Management <span class="dot">★</span></span>
+    <span class="marquee-item">Ads Manager <span class="dot">★</span></span>
+    <span class="marquee-item">E-Sign & Documents <span class="dot">★</span></span>
+    <span class="marquee-item">Automations <span class="dot">★</span></span>
+    <span class="marquee-item">One Login. Everything Connected. <span class="dot">★</span></span>
+    <span class="marquee-item">CRM & Pipelines <span class="dot">★</span></span>
+    <span class="marquee-item">AI Agents <span class="dot">★</span></span>
+    <span class="marquee-item">SMS & WhatsApp <span class="dot">★</span></span>
+    <span class="marquee-item">VoIP System <span class="dot">★</span></span>
+    <span class="marquee-item">Website Builder <span class="dot">★</span></span>
+    <span class="marquee-item">Reputation Management <span class="dot">★</span></span>
+    <span class="marquee-item">Ads Manager <span class="dot">★</span></span>
+    <span class="marquee-item">E-Sign & Documents <span class="dot">★</span></span>
+    <span class="marquee-item">Automations <span class="dot">★</span></span>
+    <span class="marquee-item">One Login. Everything Connected. <span class="dot">★</span></span>
+  </div>
+</div>
+
+<section class="section" id="s7">
+<div class="section-inner">
+  <div class="eyebrow reveal">★ Chapter Seven — Our Work</div>
+  <div class="h2 reveal reveal-delay-1">Real setups.<br><em>Real brokerages. Real results.</em></div>
+  <p class="lead muted reveal reveal-delay-2" style="margin-bottom:12px">We don't hand you a login and a tutorial. We build the whole thing — CRM, automations, pipelines, AI sequences — and hand you the keys to a running operation.</p>
+  <div class="breakout"><div class="reels-grid reveal reveal-delay-1">
+    <div class="reel-card"><div class="reel-inner"><div class="reel-tag">CRM Setup</div><div class="reel-play">&#9654;</div><div class="reel-lbl">Platform Walkthrough<br>Coming Soon</div><div class="reel-soon">Video loading soon</div></div></div>
+    <div class="reel-card"><div class="reel-inner"><div class="reel-tag">AI Agent Demo</div><div class="reel-play">&#9654;</div><div class="reel-lbl">Live Demo<br>Coming Soon</div><div class="reel-soon">Video loading soon</div></div></div>
+    <div class="reel-card"><div class="reel-inner"><div class="reel-tag">Pipeline View</div><div class="reel-play">&#9654;</div><div class="reel-lbl">Dashboard Tour<br>Coming Soon</div><div class="reel-soon">Video loading soon</div></div></div>
+    <div class="reel-card"><div class="reel-inner"><div class="reel-tag">Automation Flow</div><div class="reel-play">&#9654;</div><div class="reel-lbl">Workflow Demo<br>Coming Soon</div><div class="reel-soon">Video loading soon</div></div></div>
+    <div class="reel-card"><div class="reel-inner"><div class="reel-tag">Client Result</div><div class="reel-play">&#9654;</div><div class="reel-lbl">Case Study<br>Coming Soon</div><div class="reel-soon">Video loading soon</div></div></div>
+    <div class="reel-card"><div class="reel-inner"><div class="reel-tag">Reporting</div><div class="reel-play">&#9654;</div><div class="reel-lbl">Analytics Demo<br>Coming Soon</div><div class="reel-soon">Video loading soon</div></div></div>
+  </div>
+</div></div>
+</section>
+
+<section class="section cream2" id="s8">
+<div class="section-inner">
+  <div class="eyebrow reveal">★ Chapter Eight — Your ROI</div>
+  <div class="h2 reveal reveal-delay-1">Let's put your brokerage<br>numbers <em>into the calculator.</em></div>
+  <p class="lead muted reveal reveal-delay-2" style="margin-bottom:36px">Plug in your real numbers. See exactly what AI follow-up and a connected pipeline are worth to your bottom line.</p>
+  <div class="g2 reveal reveal-delay-1" style="margin-bottom:16px">
+    <div><label class="inp-label">Average commission per deal ($)</label><input class="inp" type="number" id="comm" value="12000" oninput="calc()"></div>
+    <div><label class="inp-label">Leads your brokerage gets per month</label><input class="inp" type="number" id="leads" value="60" oninput="calc()"></div>
+  </div>
+  <div class="reveal reveal-delay-2">
+    <label class="inp-label">Current close rate: <span id="rlbl" style="color:var(--or);font-weight:700">10%</span></label>
+    <input type="range" id="rate" min="5" max="40" value="10" step="1" oninput="document.getElementById('rlbl').textContent=this.value+'%';calc()">
+    <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-top:4px"><span>5%</span><span>40%</span></div>
+  </div>
+  <div class="roi-box reveal reveal-delay-2">
+    <div class="roi-row"><span>Deals your brokerage closes now</span><span class="roi-val" id="r1">—</span></div>
+    <div class="roi-row"><span>With AI follow-up capturing cold leads (+20%)</span><span class="roi-val green" id="r2">—</span></div>
+    <div class="roi-row"><span>Additional deals per month</span><span class="roi-val green" id="r3">—</span></div>
+    <div class="roi-row"><span>Annual revenue from recovered leads alone</span><span class="roi-val" id="r4">—</span></div>
+    <div class="roi-row" style="padding-top:16px;border-top:2px solid rgba(207,255,94,0.15);margin-top:4px"><span style="font-weight:700;font-size:17px">Total additional annual revenue</span><span class="roi-val roi-total" id="r5">—</span></div>
+  </div>
+  <p class="reveal" style="font-family:var(--serif);font-style:italic;font-size:17px;color:var(--muted);margin-top:12px;line-height:1.7">This is conservative. It only accounts for better follow-up — not the additional deals from faster response times, better nurturing, and a pipeline your agents can actually work.</p>
+</div>
+</section>
+
+<section class="section" id="s9">
+<div class="section-inner">
+  <div class="eyebrow reveal">★ Chapter Nine — Plans & Pricing</div>
+  <div class="h2 reveal reveal-delay-1">Three tiers.<br><em>Built for how your brokerage operates.</em></div>
+  <p class="lead muted reveal reveal-delay-2" style="margin-bottom:36px">Whether you're a solo broker building your first team or a multi-agent operation that needs full AI integration — there's a plan built for exactly where you are.</p>
+  <div class="breakout" style="max-width:none;width:min(1280px,calc(100vw - 342px));margin:0 calc((100% - min(1280px,calc(100vw - 342px))) / 2)"><div class="plan-grid-3 reveal reveal-delay-1">
+    <div class="plan-card">
+      <div class="plan-badge" style="background:transparent;color:transparent;pointer-events:none">​</div>
+      <div class="plan-inner">
+        <div class="plan-name">Broker Essential</div>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:20px;line-height:1.6;font-weight:500">For solo brokers building consistent deal flow and getting off spreadsheets.</p>
+        <ul class="plan-features" style="margin-bottom:0">
+          <li>Full Platform Features</li>
+          <li>2 Custom Email Campaigns</li>
+          <li>2 Custom SMS Cold Reach</li>
+          <li>Custom Landing Page</li>
+          <li>10 Forms, 10 Custom Fields, 10 Trigger Links, 3 QR Codes</li>
+          <li>3 Calendars Setup</li>
+          <li>2 Custom Automated Workflows</li>
+          <li>Custom Monthly Newsletter</li>
+          <li>+$90/mo for Unlimited AI Agents</li>
+        </ul>
+      </div>
+      <div class="plan-price-bottom">
+        <div class="price-big">$600<sub>/mo</sub></div>
+        <div class="plan-btn-wrap" style="margin-top:14px"><a class="plan-btn" href="https://hello.the-marketingverse.com/" target="_blank">Subscribe →</a></div>
+      </div>
+    </div>
+    <div class="plan-card featured">
+      <div class="plan-badge">★ MOST POPULAR</div>
+      <div class="plan-inner">
+        <div class="plan-name">Broker Pro</div>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:20px;line-height:1.6;font-weight:500">For growing teams that need shared systems, agent attribution, and serious automation.</p>
+        <ul class="plan-features" style="margin-bottom:0">
+          <li>Add agents for $20/mo ($100 setup each)</li>
+          <li>4 Custom Landing Pages</li>
+          <li>WhatsApp Integration</li>
+          <li>Google &amp; FB Ads Analytics Setup</li>
+          <li>Bi-Weekly Custom Newsletter</li>
+          <li>3 Custom Email Campaigns</li>
+          <li>5 Custom Automation Workflows</li>
+          <li>6 Custom SMS Campaigns</li>
+          <li>5 Calendars Setup</li>
+          <li>Unlimited Forms, QR Codes &amp; Custom Fields</li>
+          <li>Ads Manager</li>
+        </ul>
+      </div>
+      <div class="plan-price-bottom">
+        <div class="price-big">$840<sub>/mo</sub></div>
+        <div class="plan-btn-wrap" style="margin-top:14px"><a class="plan-btn" href="https://hello.the-marketingverse.com/" target="_blank" style="background:var(--or)">Subscribe →</a></div>
+      </div>
+    </div>
+    <div class="plan-card">
+      <div class="plan-badge" style="background:transparent;color:transparent;pointer-events:none">​</div>
+      <div class="plan-inner">
+        <div class="plan-name">Broker Dominance</div>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:20px;line-height:1.6;font-weight:500">For multi-agent operations that want fully connected AI and dedicated support.</p>
+        <ul class="plan-features" style="margin-bottom:0">
+          <li>AI Voice &amp; Conversation Agent</li>
+          <li>Ads Manager</li>
+          <li>Weekly Newsletter</li>
+          <li>6 Custom Landing Pages</li>
+          <li>6 Custom Email Campaigns</li>
+          <li>7 Automation Workflows</li>
+          <li>6 SMS Campaigns</li>
+          <li>Broker Branded Marketing Templates</li>
+          <li>CRM Setup for up to 10 Agents ($80/ea additional)</li>
+          <li>Dedicated Success Manager</li>
+          <li>Quarterly Strategy Reviews</li>
+          <li>Social Media Management</li>
+        </ul>
+      </div>
+      <div class="plan-price-bottom">
+        <div class="price-big">$2,995<sub>/mo</sub></div>
+        <div class="plan-btn-wrap" style="margin-top:14px"><a class="plan-btn" href="https://hello.the-marketingverse.com/" target="_blank">Subscribe →</a></div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="section cream2" id="s10">
+<div class="section-inner">
+  <div class="eyebrow reveal">★ Chapter Ten — Let's Build This</div>
+  <div class="h2 reveal reveal-delay-1">Your brokerage is ready<br>for <em>a real operating system.</em></div>
+  <p class="lead muted reveal reveal-delay-2" style="margin-bottom:36px">The brokers who win in the next 3 years won't have the best agents. They'll have the best systems. Let's build yours.</p>
+  <div class="reveal reveal-delay-1" style="margin-bottom:36px">
+    <div class="card" onclick="togCard(this)"><div class="card-head"><span>How long does the setup actually take?</span><span class="chevron">⌄</span></div><div class="card-body"><div class="card-body-inner">We build everything for you — CRM structure, pipeline stages, automation workflows, AI agent sequences, landing pages. Most brokerages are fully live within 2–3 weeks. You're not handed a login and told good luck. We hand you a running system.</div></div></div>
+    <div class="card" onclick="togCard(this)"><div class="card-head"><span>What about migrating our existing database?</span><span class="chevron">⌄</span></div><div class="card-body"><div class="card-body-inner">We handle the migration. Every contact, every note, every deal history. Zero downtime. We've done this dozens of times. You don't touch a single CSV file.</div></div></div>
+    <div class="card" onclick="togCard(this)"><div class="card-head"><span>Will my agents actually use it?</span><span class="chevron">⌄</span></div><div class="card-body"><div class="card-body-inner">That's always the question — and it's a real one. We train your agents, set up their profiles, and build workflows that make using the system the path of least resistance. Adoption is usually faster than expected.</div></div></div>
+    <div class="card" onclick="togCard(this)"><div class="card-head"><span>Can we customize it for how our brokerage works?</span><span class="chevron">⌄</span></div><div class="card-body"><div class="card-body-inner">Completely. Pipeline stages, automation triggers, lead routing rules, notification logic — all customized to your workflow. We don't make you fit our template. We build your system around how you actually run.</div></div></div>
+  </div>
+  <div class="team-grid reveal reveal-delay-1" style="margin-bottom:40px">
+    <div class="tc"><div class="tav-photo"><svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="28" r="16" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 76c0-17.673 14.327-32 32-32s32 14.327 32 32" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></div><div class="tc-name">Ricky</div><div class="tc-role">Founder &amp; CEO</div></div>
+    <div class="tc"><div class="tav-photo"><svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="28" r="16" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 76c0-17.673 14.327-32 32-32s32 14.327 32 32" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></div><div class="tc-name">Mari</div><div class="tc-role">Creative Director</div></div>
+    <div class="tc"><div class="tav-photo"><svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="28" r="16" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 76c0-17.673 14.327-32 32-32s32 14.327 32 32" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></div><div class="tc-name">Nati</div><div class="tc-role">Project Manager</div></div>
+    <div class="tc"><div class="tav-photo"><svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="28" r="16" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 76c0-17.673 14.327-32 32-32s32 14.327 32 32" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></div><div class="tc-name">Vale</div><div class="tc-role">Content Creator</div></div>
+    <div class="tc"><div class="tav-photo"><svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="28" r="16" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 76c0-17.673 14.327-32 32-32s32 14.327 32 32" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></div><div class="tc-name">Leo</div><div class="tc-role">Content Creator</div></div>
+    <div class="tc"><div class="tav-photo"><svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="28" r="16" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 76c0-17.673 14.327-32 32-32s32 14.327 32 32" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></div><div class="tc-name">Adri</div><div class="tc-role">Marketing Specialist</div></div>
+  </div>
+  <div class="cta-box reveal">
+    <div class="cta-serif">Ready to run your brokerage like a real operation?</div>
+    <div class="cta-lead">No pressure. No generic demo. Let's look at your current setup and show you exactly what Broker Engine would look like for your team.</div>
+    <a class="cta-btn-main" href="https://hello.the-marketingverse.com/" target="_blank">Book Your Free Strategy Call →</a>
+  </div>
+  <p style="font-size:13px;color:var(--muted);text-align:center;margin-top:36px">© 2026 Marketingverse · Broker Engine · Florida Real Estate Operations</p>
+</div>
+</section>
+
+</main>
+<script>
+// ── SIDEBAR SCROLL TRACKER ──
+var sections=document.querySelectorAll('section[id]');
+var links=document.querySelectorAll('.sb-link');
+var mAnim=false;
+
+function updateSB(){
+  var sy=window.scrollY+180,cur=0;
+  sections.forEach(function(s,i){if(s.offsetTop<=sy)cur=i;});
+  links.forEach(function(l,i){l.classList.toggle('active',i===cur);});
+  document.getElementById('prog-fill').style.width=Math.round(((cur+1)/sections.length)*100)+'%';
+  document.getElementById('prog-text').textContent=(cur+1)+' of '+sections.length;
+  if(cur===4)animM();
+}
+window.addEventListener('scroll',updateSB,{passive:true});
+
+// ── SCROLL REVEAL (Intersection Observer) ──
+var revealEls=document.querySelectorAll('.reveal');
+var revealObs=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting){e.target.classList.add('visible');revealObs.unobserve(e.target);}
+  });
+},{threshold:0.12,rootMargin:'0px 0px -40px 0px'});
+revealEls.forEach(function(el){revealObs.observe(el);});
+
+// ── CARD ACCORDION ──
+function togCard(el){
+  var was=el.classList.contains('open');
+  el.closest('section').querySelectorAll('.card.open').forEach(function(c){c.classList.remove('open');});
+  if(!was)el.classList.add('open');
+}
+
+// ── BEFORE/AFTER TOGGLE ──
+function showTl(w,btn){
+  document.getElementById('tl-before').style.display=w==='before'?'block':'none';
+  document.getElementById('tl-after').style.display=w==='after'?'block':'none';
+  document.querySelectorAll('.tog').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+}
+
+// ── ROI CALCULATOR ──
+function calc(){
+  var c=parseFloat(document.getElementById('comm').value)||0;
+  var l=parseFloat(document.getElementById('leads').value)||0;
+  var r=parseFloat(document.getElementById('rate').value)/100;
+  var now=l*r,after=l*(r*1.2),add=after-now,yr=add*c*12,extra=yr*0.35;
+  document.getElementById('r1').textContent=now.toFixed(1)+' deals/mo';
+  document.getElementById('r2').textContent=after.toFixed(1)+' deals/mo';
+  document.getElementById('r3').textContent='+'+add.toFixed(1)+' deals/mo';
+  document.getElementById('r4').textContent='$'+Math.round(yr).toLocaleString()+'/yr';
+  document.getElementById('r5').textContent='$'+Math.round(yr+extra).toLocaleString()+'/yr';
+}
+
+// ── METER ANIMATION ──
+function animM(){
+  if(mAnim)return;mAnim=true;
+  [1,2,3].forEach(function(i){
+    var el=document.getElementById('m'+i),vl=document.getElementById('m'+i+'-val');
+    var tg=parseInt(el.getAttribute('data-target')),c=0;
+    var iv=setInterval(function(){c++;el.style.width=c+'%';vl.textContent=c+'%';if(c>=tg)clearInterval(iv);},14);
+  });
+}
+
+// ── COUNT-UP NUMBERS ──
+var countObs=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(!e.isIntersecting)return;
+    var el=e.target;
+    var target=parseInt(el.getAttribute('data-target'));
+    var suffix=el.getAttribute('data-suffix')||'';
+    var cur=0,step=Math.ceil(target/40);
+    var iv=setInterval(function(){
+      cur=Math.min(cur+step,target);
+      el.textContent=cur+suffix;
+      if(cur>=target)clearInterval(iv);
+    },30);
+    countObs.unobserve(el);
+  });
+},{threshold:0.5});
+document.querySelectorAll('.count-up').forEach(function(el){countObs.observe(el);});
+
+// ── AI DEMO CHATS ──
+(function(){
+  function hasAI(){return !!(window.claude && typeof window.claude.complete==='function');}
+  function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+  var greetA="Hey \u2014 I'm the Broker Engine assistant. Ask me anything about the platform, pricing, setup, or how we'd run it for your brokerage.";
+  var QA_A={
+    whats:{a:"One login, the whole stack: <b>CRM &amp; pipelines, AI follow-up agents, VoIP dialer, SMS &amp; WhatsApp, email, websites, landing pages, reputation management, e-sign, payments, and automations.</b> We replace your tools \u2014 not add another one."},
+    cost:{a:"Plans run <b>$840/mo</b> (Broker Growth) to <b>$2,995/mo</b> (Broker Dominance \u2014 full AI plus a dedicated success manager). Most brokers already burn $353+/mo on tools that barely talk to each other. We consolidate that and put AI on top."},
+    setup:{a:"<b>2\u20133 weeks to fully live.</b> We build it for you \u2014 pipeline stages, automations, AI sequences, landing pages, data migration. You get the keys to a running operation, not a login and a tutorial."},
+    migrate:{a:"Yes \u2014 <b>every contact, note, and deal history.</b> Zero downtime, zero CSV wrangling. We've done it dozens of times."},
+    diff:{a:"We don't hand you software \u2014 we build and run the operation. And the <b>AI follows up with every lead in under 5 minutes, 24/7.</b> One system, your brand, our team behind it."}
+  };
+  var chipsA=[['whats',"What's included?"],['cost','What does it cost?'],['setup','How long is setup?'],['migrate','Do you migrate our data?'],['diff','What makes you different?']];
+  var fallbackA="Short version: Broker Engine replaces your whole tool stack with one system and runs AI follow-up on every lead. For specifics on your brokerage, the fastest path is a 30-minute strategy call \u2014 want me to set one up?";
+  var SYS_A="You are the Broker Engine assistant for Marketingverse, an all-in-one real estate brokerage platform (CRM, AI follow-up agents, VoIP, SMS/WhatsApp, email, websites, landing pages, reputation management, e-sign, payments, automations). Plans: Broker Growth $840/mo, Broker Dominance $2,995/mo. Setup is 2-3 weeks, fully done-for-you including data migration. Voice: confident, concrete, operator-first, second person, short sentences, no fluff. Keep answers under 70 words. If the user asks to talk to a human or book, offer a 30-minute strategy call and end your reply with this exact line: [[BOOK|30-min Strategy Call|Thursday, Jun 18 \u00b7 2:30 PM EST|Ricky \u2014 Broker|Google Meet (link in invite)]]";
+
+  var greetB="Hi! I'm your brokerage's Engine AI \u2014 the assistant your agents and leads talk to 24/7. Ask me a real estate question, or tell me you want the broker, and watch what happens.";
+  var BOOK={what:'30-min Strategy Call',when:'Thursday, Jun 18 \u00b7 2:30 PM EST',who:'Ricky \u2014 Broker',where:'Google Meet (link in invite)'};
+  var QA_B={
+    brickell:{a:"Brickell's moving fast \u2014 median around <b>$625K</b>, inventory up ~8% this quarter, and 2-beds are going in under 3 weeks. I can pull active listings and start a saved search for your buyer. Want me to have an agent call them today?"},
+    value:{a:"Happy to help. Send the address and I'll generate a <b>CMA</b>, then route it to an agent for a pricing strategy. Want me to book a listing consult while we're at it?"},
+    showing:{a:"Got it. Three matching listings are open this weekend. I'll text the buyer the times, confirm one, and drop it on the agent's calendar with reminders \u2014 booked the moment they reply. No back-and-forth."},
+    broker:{a:"On it \u2014 pulling up the broker's calendar and locking in a time now.",book:BOOK,after:"Done \u2014 invite sent. You'll get a text reminder 24 hours and 1 hour before. Want me to brief Ricky on what you need first?"}
+  };
+  var chipsB=[['brickell','Buyer asking about Brickell condos'],['value','Seller wants their home value'],['showing','Schedule a showing this weekend'],['broker','Connect me with the broker']];
+  var fallbackB="Here's how I'd handle that for one of your agents: answer instantly, capture the details, and push it into the CRM with follow-up scheduled. Want me to book you 30 minutes with the broker to see it on your own pipeline?";
+  var SYS_B="You are 'Engine AI', the assistant a real estate brokerage gives its agents and leads. Answer real estate questions (buying, selling, listings, market, scheduling) briefly and confidently, then move things forward \u2014 capture details, schedule, or route to an agent. Voice: warm, sharp, professional, second person, short sentences. Keep replies under 70 words. When the user wants to talk to or book time with the broker, confirm you've booked it and end your reply with this exact line: [[BOOK|30-min Strategy Call|Thursday, Jun 18 \u00b7 2:30 PM EST|Ricky \u2014 Broker|Google Meet (link in invite)]]";
+
+  function mk(html){var d=document.createElement('div');d.innerHTML=html.trim();return d.firstChild;}
+  function sc(f){f.scrollTop=f.scrollHeight;}
+  function addMsg(p,role,html){var ava=role==='bot'?'<div class="msg-ava">'+p.ava+'</div>':'';var m=mk('<div class="msg '+role+'">'+ava+'<div class="bubble">'+html+'</div></div>');p.feed.appendChild(m);sc(p.feed);}
+  function addBook(p,b){var c=mk('<div class="ai-book"><div class="ai-book-top">\u2713 Meeting booked</div><div class="ai-book-row"><span class="k">What</span><span class="v">'+esc(b.what)+'</span></div><div class="ai-book-row"><span class="k">When</span><span class="v">'+esc(b.when)+'</span></div><div class="ai-book-row"><span class="k">With</span><span class="v">'+esc(b.who)+'</span></div><div class="ai-book-row"><span class="k">Where</span><span class="v">'+esc(b.where)+'</span></div></div>');p.feed.appendChild(c);sc(p.feed);}
+  function typing(p){var t=mk('<div class="ai-typing"><span></span><span></span><span></span></div>');p.feed.appendChild(t);sc(p.feed);return t;}
+
+  function finish(p,t,c){
+    t.remove();
+    if(typeof c==='string'){if(c)addMsg(p,'bot',c);return;}
+    if(c.a)addMsg(p,'bot',c.a);
+    if(c.book){var t2=typing(p);setTimeout(function(){t2.remove();addBook(p,c.book);if(c.after)addMsg(p,'bot',c.after);},950);}
+    else if(c.after){addMsg(p,'bot',c.after);}
+  }
+
+  function reply(p,text,key){
+    var t=typing(p);
+    var delay=520+Math.random()*460;
+    var canned=key?p.qa[key]:null;
+    if(canned){setTimeout(function(){finish(p,t,canned);},delay);return;}
+    if(hasAI()){
+      p.hist.push({role:'user',content:text});
+      window.claude.complete({system:p.sys,messages:p.hist}).then(function(out){
+        out=String(out||'');var book=null;var m=out.match(/\[\[BOOK\|([^\]]+)\]\]/);
+        if(m){var f=m[1].split('|');book={what:f[0]||BOOK.what,when:f[1]||BOOK.when,who:f[2]||BOOK.who,where:f[3]||BOOK.where};out=out.replace(m[0],'').trim();}
+        p.hist.push({role:'assistant',content:out});
+        finish(p,t,{a:esc(out).replace(/\n/g,'<br>'),book:book});
+      }).catch(function(){finish(p,t,p.fallback);});
+    }else{setTimeout(function(){finish(p,t,p.fallback);},delay);}
+  }
+
+  function build(id,opts){
+    var p={feed:document.getElementById('feed'+id),ava:opts.ava,sys:opts.sys,qa:opts.qa,fallback:opts.fallback,hist:[{role:'assistant',content:opts.greet}]};
+    addMsg(p,'bot',esc(opts.greet));
+    var chipBox=document.getElementById('chips'+id);
+    opts.chips.forEach(function(ch){var b=mk('<button class="ai-chip">'+esc(ch[1])+'</button>');b.onclick=function(){addMsg(p,'user',esc(ch[1]));reply(p,ch[1],ch[0]);};chipBox.appendChild(b);});
+    var inp=document.getElementById('in'+id),go=document.getElementById('go'+id);
+    function send(){var v=inp.value.trim();if(!v)return;inp.value='';addMsg(p,'user',esc(v));reply(p,v,null);}
+    go.onclick=send;inp.addEventListener('keydown',function(e){if(e.key==='Enter')send();});
+  }
+
+  build('A',{ava:'BE',greet:greetA,qa:QA_A,chips:chipsA,fallback:fallbackA,sys:SYS_A});
+  build('B',{ava:'AI',greet:greetB,qa:QA_B,chips:chipsB,fallback:fallbackB,sys:SYS_B});
+})();
+
+// ── INIT ──
+calc();
+updateSB();
+
+// Trigger reveal for elements already in viewport on load
+setTimeout(function(){
+  revealEls.forEach(function(el){
+    var rect=el.getBoundingClientRect();
+    if(rect.top<window.innerHeight*0.9)el.classList.add('visible');
+  });
+},100);
+</script>
+</body>
+</html>
