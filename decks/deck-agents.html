@@ -320,7 +320,7 @@ input[type=range]{width:100%;accent-color:var(--or);cursor:pointer;margin-top:8p
   <div class="sb-footer">
     <div class="sb-prog-bar"><div class="sb-prog-fill" id="prog-fill"></div></div>
     <div class="sb-prog-text" id="prog-text">1 of 9</div>
-    <button class="sb-cta-btn" onclick="document.getElementById('s9').scrollIntoView({behavior:'smooth'})">Book Free Demo →</button>
+    <button class="sb-cta-btn" onclick="openPopup('https://api.leadconnectorhq.com/widget/bookings/marketingverse-demo')">Book Free Demo →</button>
   </div>
 </nav>
 
@@ -607,7 +607,7 @@ input[type=range]{width:100%;accent-color:var(--or);cursor:pointer;margin-top:8p
         <div class="plan-was">$640/mo</div>
         <div class="plan-price"><sup>$</sup>550<sub>/mo</sub></div>
         <div class="plan-setup">One-time $70 Setup Fee · Billed Monthly</div>
-        <div class="plan-btn-wrap"><a class="plan-btn" href="https://hello.the-marketingverse.com/" target="_blank">Start Growing →</a></div>
+        <div class="plan-btn-wrap"><a class="plan-btn" href="#" onclick="openPopup('https://billing.the-marketingverse.com/subscribe/012b590903e576e21bb2f16ffd298a88a7726ba08b65d6ccad482bf477cf719e/SocialMediaGrowth');return false;">Start Growing →</a></div>
         <ul class="plan-features">
           <li>Video Shoot</li>
           <li>Brand Moodboard</li>
@@ -624,7 +624,7 @@ input[type=range]{width:100%;accent-color:var(--or);cursor:pointer;margin-top:8p
         <div class="plan-was">$820/mo</div>
         <div class="plan-price"><sup>$</sup>750<sub>/mo</sub></div>
         <div class="plan-setup">One-time $70 Setup Fee · Billed Monthly</div>
-        <div class="plan-btn-wrap"><a class="plan-btn" href="https://hello.the-marketingverse.com/" target="_blank">Start Growing →</a></div>
+        <div class="plan-btn-wrap"><a class="plan-btn" href="#" onclick="openPopup('https://billing.the-marketingverse.com/subscribe/012b590903e576e21bb2f16ffd298a88a7726ba08b65d6ccad482bf477cf719e/SocualMediaDominance');return false;">Start Growing →</a></div>
         <ul class="plan-features">
           <li>2 Video Shoots per month</li>
           <li>Brand Moodboard</li>
@@ -667,11 +667,20 @@ input[type=range]{width:100%;accent-color:var(--or);cursor:pointer;margin-top:8p
   <div class="cta-box reveal">
     <div class="cta-serif">Stop being the best-kept secret in your zip code.</div>
     <div class="cta-lead">No pressure. No jargon. Just a 30-minute conversation about your business and whether we're the right fit.</div>
-    <a class="cta-btn-main" href="https://hello.the-marketingverse.com/" target="_blank">Book Your Free Demo →</a>
+    <a class="cta-btn-main" href="#" onclick="openPopup('https://api.leadconnectorhq.com/widget/bookings/marketingverse-demo');return false;">Book Your Free Demo →</a>
   </div>
   <p style="font-size:13px;color:var(--muted);text-align:center;margin-top:36px">© 2026 Marketingverse · Florida Real Estate Marketing</p>
 </div>
 </section>
+
+
+<!-- IFRAME POPUP MODAL -->
+<div id="popup-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.82);z-index:10000;align-items:center;justify-content:center;" onclick="closePopup(event)">
+  <div style="position:relative;width:min(720px,95vw);height:min(600px,90vh);background:#fff;border-radius:8px;overflow:hidden;">
+    <button onclick="closePopup()" style="position:absolute;top:10px;right:14px;background:none;border:none;font-size:24px;cursor:pointer;color:#333;z-index:1;line-height:1;">✕</button>
+    <iframe id="popup-frame" src="" allow="payment" style="width:100%;height:100%;border:none;"></iframe>
+  </div>
+</div>
 
 </main>
 
@@ -784,6 +793,22 @@ document.querySelectorAll('.count-up').forEach(function(el){countObs.observe(el)
     card.addEventListener('mouseleave',function(){ clearInterval(timer);timer=null; });
   });
 })();
+
+
+// ── IFRAME POPUP ──
+function openPopup(url){
+  var m=document.getElementById('popup-modal');
+  document.getElementById('popup-frame').src=url;
+  m.style.display='flex';
+  document.body.style.overflow='hidden';
+}
+function closePopup(e){
+  if(e&&e.target!==document.getElementById('popup-modal')&&e.target.tagName!=='BUTTON')return;
+  document.getElementById('popup-modal').style.display='none';
+  document.getElementById('popup-frame').src='';
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closePopup({target:document.getElementById('popup-modal')});});
 
 // ── VIMEO MODAL ──
 function openReel(url){
