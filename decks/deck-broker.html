@@ -347,7 +347,7 @@ input[type=range]{width:100%;accent-color:var(--or);cursor:pointer;margin-top:8p
   <div class="sb-footer">
     <div class="sb-prog-bar"><div class="sb-prog-fill" id="prog-fill"></div></div>
     <div class="sb-prog-text" id="prog-text">1 of 9</div>
-    <button class="sb-cta-btn" onclick="document.getElementById('s10').scrollIntoView({behavior:'smooth'})">Book Free Demo →</button>
+    <button class="sb-cta-btn" onclick="openPopup('https://api.leadconnectorhq.com/widget/bookings/marketingverse-demo')">Book Free Demo →</button>
   </div>
 </nav>
 <main id="main">
@@ -698,11 +698,20 @@ input[type=range]{width:100%;accent-color:var(--or);cursor:pointer;margin-top:8p
   <div class="cta-box reveal">
     <div class="cta-serif">Ready to run your brokerage like a real operation?</div>
     <div class="cta-lead">No pressure. No generic demo. Let's look at your current setup and show you exactly what Broker Engine would look like for your team.</div>
-    <a class="cta-btn-main" href="https://hello.the-marketingverse.com/" target="_blank">Book Your Free Strategy Call →</a>
+    <a class="cta-btn-main" href="#" onclick="openPopup('https://api.leadconnectorhq.com/widget/bookings/marketingverse-demo');return false;">Book Your Free Strategy Call →</a>
   </div>
   <p style="font-size:13px;color:var(--muted);text-align:center;margin-top:36px">© 2026 Marketingverse · Broker Engine · Florida Real Estate Operations</p>
 </div>
 </section>
+
+
+<!-- IFRAME POPUP MODAL -->
+<div id="popup-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.82);z-index:10000;align-items:center;justify-content:center;" onclick="closePopup(event)">
+  <div style="position:relative;width:min(720px,95vw);height:min(600px,90vh);background:#fff;border-radius:8px;overflow:hidden;">
+    <button onclick="closePopup()" style="position:absolute;top:10px;right:14px;background:none;border:none;font-size:24px;cursor:pointer;color:#333;z-index:1;line-height:1;">✕</button>
+    <iframe id="popup-frame" src="" allow="payment" style="width:100%;height:100%;border:none;"></iframe>
+  </div>
+</div>
 
 </main>
 <script>
@@ -858,6 +867,22 @@ document.querySelectorAll('.count-up').forEach(function(el){countObs.observe(el)
   build('A',{ava:'BE',greet:greetA,qa:QA_A,chips:chipsA,fallback:fallbackA,sys:SYS_A});
   build('B',{ava:'AI',greet:greetB,qa:QA_B,chips:chipsB,fallback:fallbackB,sys:SYS_B});
 })();
+
+
+// ── IFRAME POPUP ──
+function openPopup(url){
+  var m=document.getElementById('popup-modal');
+  document.getElementById('popup-frame').src=url;
+  m.style.display='flex';
+  document.body.style.overflow='hidden';
+}
+function closePopup(e){
+  if(e&&e.target!==document.getElementById('popup-modal')&&e.target.tagName!=='BUTTON')return;
+  document.getElementById('popup-modal').style.display='none';
+  document.getElementById('popup-frame').src='';
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closePopup({target:document.getElementById('popup-modal')});});
 
 // ── INIT ──
 calc();
