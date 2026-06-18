@@ -215,6 +215,15 @@ input[type=range]{width:100%;accent-color:var(--or);cursor:pointer;margin-top:8p
 .sc-thumb.active{border-color:var(--or);opacity:1}
 .sc-thumb:hover{opacity:1}
 
+/* ── CRM TOOLS GRID ── */
+.crm-tools-wrap{margin-top:52px;padding:36px;background:var(--surface);border:1px solid var(--border);border-radius:12px}
+.crm-tools-heading{font-family:var(--serif);font-size:18px;font-weight:900;color:var(--text);margin-bottom:28px;line-height:1.4;letter-spacing:.01em}
+.crm-tools-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.crm-tool{display:flex;align-items:center;gap:10px;background:var(--cream2);border:1px solid var(--border);border-radius:8px;padding:12px 14px;font-size:13px;font-weight:600;color:var(--text);transition:border-color .2s,background .2s}
+.crm-tool:hover{border-color:var(--or);background:rgba(207,255,94,0.05)}
+.crm-tool-icon{font-size:18px;flex-shrink:0}
+@media(max-width:768px){.crm-tools-grid{grid-template-columns:repeat(2,1fr)}}
+
 /* ── PLAN CARDS ── */
 .plan-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 .plan-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
@@ -575,28 +584,28 @@ input[type=range]{width:100%;accent-color:var(--or);cursor:pointer;margin-top:8p
       <div class="sc-stage">
         <div class="sc-track" id="scTrack">
     <div class="sc-slide">
-      <div class="sc-tag">CRM Setup</div>
-      <div class="sc-slide-ph"><div class="sc-slide-ph-lbl">Platform Walkthrough<br>Screenshot coming soon</div></div>
-    </div>
-    <div class="sc-slide">
-      <div class="sc-tag">AI Agent Demo</div>
-      <div class="sc-slide-ph"><div class="sc-slide-ph-lbl">Live Demo<br>Screenshot coming soon</div></div>
-    </div>
-    <div class="sc-slide">
       <div class="sc-tag">Pipeline View</div>
-      <div class="sc-slide-ph"><div class="sc-slide-ph-lbl">Dashboard Tour<br>Screenshot coming soon</div></div>
+      <img src="assets/screenshots/screenshot-pipeline.png" alt="Pipeline View">
     </div>
     <div class="sc-slide">
-      <div class="sc-tag">Automation Flow</div>
-      <div class="sc-slide-ph"><div class="sc-slide-ph-lbl">Workflow Demo<br>Screenshot coming soon</div></div>
+      <div class="sc-tag">Email Marketing</div>
+      <img src="assets/screenshots/screenshot-email.png" alt="Email Marketing">
     </div>
     <div class="sc-slide">
-      <div class="sc-tag">Client Result</div>
-      <div class="sc-slide-ph"><div class="sc-slide-ph-lbl">Case Study<br>Screenshot coming soon</div></div>
+      <div class="sc-tag">Dashboard</div>
+      <img src="assets/screenshots/screenshot-dashboard.png" alt="Dashboard">
     </div>
     <div class="sc-slide">
-      <div class="sc-tag">Reporting</div>
-      <div class="sc-slide-ph"><div class="sc-slide-ph-lbl">Analytics Demo<br>Screenshot coming soon</div></div>
+      <div class="sc-tag">Conversations</div>
+      <img src="assets/screenshots/screenshot-conversations.png" alt="Conversations">
+    </div>
+    <div class="sc-slide">
+      <div class="sc-tag">Automations</div>
+      <img src="assets/screenshots/screenshot-automation.png" alt="Automations">
+    </div>
+    <div class="sc-slide">
+      <div class="sc-tag">Contacts & CRM</div>
+      <img src="assets/screenshots/screenshot-contacts.png" alt="Contacts & CRM">
     </div>
         </div>
         <button class="sc-btn sc-prev" onclick="scStep(-1)">&#8249;</button>
@@ -611,15 +620,40 @@ input[type=range]{width:100%;accent-color:var(--or);cursor:pointer;margin-top:8p
     <button class="sc-dot" onclick="scGo(5)"></button>
       </div>
       <div class="sc-thumbs">
-    <div class="sc-thumb active" onclick="scGo(0)"><div class="sc-thumb-ph">CRM Setup</div></div>
-    <div class="sc-thumb" onclick="scGo(1)"><div class="sc-thumb-ph">AI Agent Demo</div></div>
-    <div class="sc-thumb" onclick="scGo(2)"><div class="sc-thumb-ph">Pipeline View</div></div>
-    <div class="sc-thumb" onclick="scGo(3)"><div class="sc-thumb-ph">Automation Flow</div></div>
-    <div class="sc-thumb" onclick="scGo(4)"><div class="sc-thumb-ph">Client Result</div></div>
-    <div class="sc-thumb" onclick="scGo(5)"><div class="sc-thumb-ph">Reporting</div></div>
+    <div class="sc-thumb active" onclick="scGo(0)"><img src="assets/screenshots/screenshot-pipeline.png" alt="Pipeline View"></div>
+    <div class="sc-thumb" onclick="scGo(1)"><img src="assets/screenshots/screenshot-email.png" alt="Email Marketing"></div>
+    <div class="sc-thumb" onclick="scGo(2)"><img src="assets/screenshots/screenshot-dashboard.png" alt="Dashboard"></div>
+    <div class="sc-thumb" onclick="scGo(3)"><img src="assets/screenshots/screenshot-conversations.png" alt="Conversations"></div>
+    <div class="sc-thumb" onclick="scGo(4)"><img src="assets/screenshots/screenshot-automation.png" alt="Automations"></div>
+    <div class="sc-thumb" onclick="scGo(5)"><img src="assets/screenshots/screenshot-contacts.png" alt="Contacts & CRM"></div>
       </div>
     </div>
   </div>
+
+  <!-- CRM Tools Grid -->
+  <div class="crm-tools-wrap reveal reveal-delay-2">
+    <div class="crm-tools-heading">Everything is built in. One platform. Every tool your brokerage needs.</div>
+    <div class="crm-tools-grid">
+      <div class="crm-tool"><span class="crm-tool-icon">📊</span><span>Agent Dashboards</span></div>
+      <div class="crm-tool"><span class="crm-tool-icon">📱</span><span>Mobile App</span></div>
+      <div class="crm-tool"><span class="crm-tool-icon">📅</span><span>Social Planner</span></div>
+      <div class="crm-tool"><span class="crm-tool-icon">✉️</span><span>Email Marketing</span></div>
+      <div class="crm-tool"><span class="crm-tool-icon">🎯</span><span>Ads Launcher</span></div>
+      <div class="crm-tool"><span class="crm-tool-icon">💬</span><span>SMS &amp; WhatsApp</span></div>
+      <div class="crm-tool"><span class="crm-tool-icon">🌐</span><span>Website Builder</span></div>
+      <div class="crm-tool"><span class="crm-tool-icon">🗓️</span><span>Smart Calendars</span></div>
+      <div class="crm-tool"><span class="crm-tool-icon">⚡</span><span>Automations</span></div>
+      <div class="crm-tool"><span class="crm-tool-icon">🤖</span><span>AI Agents</span></div>
+      <div class="crm-tool"><span class="crm-tool-icon">⭐</span><span>Reputation Mgmt</span></div>
+      <div class="crm-tool"><span class="crm-tool-icon">💳</span><span>Payments</span></div>
+      <div class="crm-tool"><span class="crm-tool-icon">📞</span><span>Phone Lines</span></div>
+      <div class="crm-tool"><span class="crm-tool-icon">📋</span><span>Forms &amp; Surveys</span></div>
+      <div class="crm-tool"><span class="crm-tool-icon">🗂️</span><span>CRM</span></div>
+      <div class="crm-tool"><span class="crm-tool-icon">📄</span><span>Contracts</span></div>
+    </div>
+  </div>
+
+</div>
 </section>
 
 <section class="section cream2" id="s8">
