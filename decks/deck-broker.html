@@ -208,11 +208,14 @@ input[type=range]{width:100%;accent-color:var(--or);cursor:pointer;margin-top:8p
 .sc-dots{display:flex;justify-content:center;gap:8px;margin-top:16px}
 .sc-dot{width:8px;height:8px;border-radius:50%;background:var(--cream3);border:none;cursor:pointer;padding:0;transition:background .2s,transform .2s}
 .sc-dot.active{background:var(--or);transform:scale(1.3)}
-.sc-thumbs{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:14px}
-.sc-thumb{border-radius:3px;overflow:hidden;border:1.5px solid transparent;cursor:pointer;aspect-ratio:16/10;background:#111;transition:border-color .2s,opacity .2s;opacity:.5}
-.sc-thumb img{width:100%;height:100%;object-fit:cover;display:block}
-.sc-thumb-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--dim);font-weight:700;letter-spacing:.06em;text-transform:uppercase;text-align:center;padding:4px}
+.sc-thumbs{display:flex;gap:8px;margin-top:14px;overflow-x:auto;padding-bottom:6px;scroll-snap-type:x mandatory}
+.sc-thumbs::-webkit-scrollbar{height:3px}.sc-thumbs::-webkit-scrollbar-thumb{background:var(--cream3);border-radius:2px}
+.sc-thumb{flex:0 0 auto;width:120px;border-radius:3px;overflow:hidden;border:1.5px solid transparent;cursor:pointer;background:#111;transition:border-color .2s,opacity .2s;opacity:.5;scroll-snap-align:start}
+.sc-thumb img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block}
+.sc-thumb-lbl{font-size:9px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);text-align:center;padding:4px 4px 5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:#111}
+.sc-thumb-ph{width:100%;aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--dim);font-weight:700;letter-spacing:.06em;text-transform:uppercase;text-align:center;padding:4px}
 .sc-thumb.active{border-color:var(--or);opacity:1}
+.sc-thumb.active .sc-thumb-lbl{color:var(--or)}
 .sc-thumb:hover{opacity:1}
 
 /* ── CRM TOOLS GRID ── */
@@ -579,34 +582,32 @@ input[type=range]{width:100%;accent-color:var(--or);cursor:pointer;margin-top:8p
   <div class="eyebrow reveal">★ Chapter Seven — Our Work</div>
   <div class="h2 reveal reveal-delay-1">Real setups.<br><em>Real brokerages. Real results.</em></div>
   <p class="lead muted reveal reveal-delay-2" style="margin-bottom:12px">We don't hand you a login and a tutorial. We build the whole thing — CRM, automations, pipelines, AI sequences — and hand you the keys to a running operation.</p>
-  <div class="breakout reveal reveal-delay-1">
+  <div class="breakout reveal reveal-delay-1" style="max-width:none;width:min(1400px,calc(100vw - var(--sidebar) - 80px));margin:0 calc((100% - min(1400px,calc(100vw - var(--sidebar) - 80px))) / 2)">
     <div class="sc-wrap">
       <div class="sc-stage">
         <div class="sc-track" id="scTrack">
-    <div class="sc-slide">
-      <div class="sc-tag">Pipeline View</div>
-      <img src="assets/screenshots/screenshot-pipeline.png" alt="Pipeline View">
-    </div>
-    <div class="sc-slide">
-      <div class="sc-tag">Email Marketing</div>
-      <img src="assets/screenshots/screenshot-email.png" alt="Email Marketing">
-    </div>
-    <div class="sc-slide">
-      <div class="sc-tag">Dashboard</div>
-      <img src="assets/screenshots/screenshot-dashboard.png" alt="Dashboard">
-    </div>
-    <div class="sc-slide">
-      <div class="sc-tag">Conversations</div>
-      <img src="assets/screenshots/screenshot-conversations.png" alt="Conversations">
-    </div>
-    <div class="sc-slide">
-      <div class="sc-tag">Automations</div>
-      <img src="assets/screenshots/screenshot-automation.png" alt="Automations">
-    </div>
-    <div class="sc-slide">
-      <div class="sc-tag">Contacts & CRM</div>
-      <img src="assets/screenshots/screenshot-contacts.png" alt="Contacts & CRM">
-    </div>
+    <div class="sc-slide"><div class="sc-tag">Opportunities Pipelines</div><img src="assets/screenshots/opportunities-pipelines.png" alt="Opportunities Pipelines"></div>
+    <div class="sc-slide"><div class="sc-tag">Email Marketing</div><img src="assets/screenshots/email-marketing.png" alt="Email Marketing"></div>
+    <div class="sc-slide"><div class="sc-tag">AI Agent Templates</div><img src="assets/screenshots/ai-agent-templates.png" alt="AI Agent Templates"></div>
+    <div class="sc-slide"><div class="sc-tag">Website Builder</div><img src="assets/screenshots/website-builder.png" alt="Website Builder"></div>
+    <div class="sc-slide"><div class="sc-tag">Email Builder</div><img src="assets/screenshots/email-builder.png" alt="Email Builder"></div>
+    <div class="sc-slide"><div class="sc-tag">Ads Manager</div><img src="assets/screenshots/ads-manager.png" alt="Ads Manager"></div>
+    <div class="sc-slide"><div class="sc-tag">Automation Workflows</div><img src="assets/screenshots/automation-workflows.png" alt="Automation Workflows"></div>
+    <div class="sc-slide"><div class="sc-tag">Automation Workflows 2</div><img src="assets/screenshots/automation-workflows-2.png" alt="Automation Workflows 2"></div>
+    <div class="sc-slide"><div class="sc-tag">AI Agents</div><img src="assets/screenshots/ai-agents.png" alt="AI Agents"></div>
+    <div class="sc-slide"><div class="sc-tag">AI Agent Analytics</div><img src="assets/screenshots/ai-agent-analytics.png" alt="AI Agent Analytics"></div>
+    <div class="sc-slide"><div class="sc-tag">Multi-channel Conversations</div><img src="assets/screenshots/multi-channel-conversations.png" alt="Multi-channel Conversations"></div>
+    <div class="sc-slide"><div class="sc-tag">Smart Dashboard</div><img src="assets/screenshots/smart-dashboard.png" alt="Smart Dashboard"></div>
+    <div class="sc-slide"><div class="sc-tag">Documents &amp; Contracts</div><img src="assets/screenshots/documents-contracts.png" alt="Documents & Contracts"></div>
+    <div class="sc-slide"><div class="sc-tag">Reputation Management</div><img src="assets/screenshots/reputation-management.png" alt="Reputation Management"></div>
+    <div class="sc-slide"><div class="sc-tag">Payment Console</div><img src="assets/screenshots/payment-console.png" alt="Payment Console"></div>
+    <div class="sc-slide"><div class="sc-tag">App Integrations</div><img src="assets/screenshots/app-integrations.png" alt="App Integrations"></div>
+    <div class="sc-slide"><div class="sc-tag">Dynamic Forms</div><img src="assets/screenshots/dynamic-forms.png" alt="Dynamic Forms"></div>
+    <div class="sc-slide"><div class="sc-tag">Dashboard</div><img src="assets/screenshots/dashboard.png" alt="Dashboard"></div>
+    <div class="sc-slide"><div class="sc-tag">Competitor Analysis</div><img src="assets/screenshots/competitor-analysis.png" alt="Competitor Analysis"></div>
+    <div class="sc-slide"><div class="sc-tag">Google My Business</div><img src="assets/screenshots/google-my-business.png" alt="Google My Business"></div>
+    <div class="sc-slide"><div class="sc-tag">Course Creation</div><img src="assets/screenshots/course-creation.png" alt="Course Creation"></div>
+    <div class="sc-slide"><div class="sc-tag">Chat Widget</div><img src="assets/screenshots/chat-widget.png" alt="Chat Widget"></div>
         </div>
         <button class="sc-btn sc-prev" onclick="scStep(-1)">&#8249;</button>
         <button class="sc-btn sc-next" onclick="scStep(1)">&#8250;</button>
@@ -618,14 +619,46 @@ input[type=range]{width:100%;accent-color:var(--or);cursor:pointer;margin-top:8p
     <button class="sc-dot" onclick="scGo(3)"></button>
     <button class="sc-dot" onclick="scGo(4)"></button>
     <button class="sc-dot" onclick="scGo(5)"></button>
+    <button class="sc-dot" onclick="scGo(6)"></button>
+    <button class="sc-dot" onclick="scGo(7)"></button>
+    <button class="sc-dot" onclick="scGo(8)"></button>
+    <button class="sc-dot" onclick="scGo(9)"></button>
+    <button class="sc-dot" onclick="scGo(10)"></button>
+    <button class="sc-dot" onclick="scGo(11)"></button>
+    <button class="sc-dot" onclick="scGo(12)"></button>
+    <button class="sc-dot" onclick="scGo(13)"></button>
+    <button class="sc-dot" onclick="scGo(14)"></button>
+    <button class="sc-dot" onclick="scGo(15)"></button>
+    <button class="sc-dot" onclick="scGo(16)"></button>
+    <button class="sc-dot" onclick="scGo(17)"></button>
+    <button class="sc-dot" onclick="scGo(18)"></button>
+    <button class="sc-dot" onclick="scGo(19)"></button>
+    <button class="sc-dot" onclick="scGo(20)"></button>
+    <button class="sc-dot" onclick="scGo(21)"></button>
       </div>
       <div class="sc-thumbs">
-    <div class="sc-thumb active" onclick="scGo(0)"><img src="assets/screenshots/screenshot-pipeline.png" alt="Pipeline View"></div>
-    <div class="sc-thumb" onclick="scGo(1)"><img src="assets/screenshots/screenshot-email.png" alt="Email Marketing"></div>
-    <div class="sc-thumb" onclick="scGo(2)"><img src="assets/screenshots/screenshot-dashboard.png" alt="Dashboard"></div>
-    <div class="sc-thumb" onclick="scGo(3)"><img src="assets/screenshots/screenshot-conversations.png" alt="Conversations"></div>
-    <div class="sc-thumb" onclick="scGo(4)"><img src="assets/screenshots/screenshot-automation.png" alt="Automations"></div>
-    <div class="sc-thumb" onclick="scGo(5)"><img src="assets/screenshots/screenshot-contacts.png" alt="Contacts & CRM"></div>
+    <div class="sc-thumb active" onclick="scGo(0)"><img src="assets/screenshots/opportunities-pipelines.png" alt="Opportunities Pipelines"><div class="sc-thumb-lbl">Pipelines</div></div>
+    <div class="sc-thumb" onclick="scGo(1)"><img src="assets/screenshots/email-marketing.png" alt="Email Marketing"><div class="sc-thumb-lbl">Email Mktg</div></div>
+    <div class="sc-thumb" onclick="scGo(2)"><img src="assets/screenshots/ai-agent-templates.png" alt="AI Agent Templates"><div class="sc-thumb-lbl">AI Templates</div></div>
+    <div class="sc-thumb" onclick="scGo(3)"><img src="assets/screenshots/website-builder.png" alt="Website Builder"><div class="sc-thumb-lbl">Web Builder</div></div>
+    <div class="sc-thumb" onclick="scGo(4)"><img src="assets/screenshots/email-builder.png" alt="Email Builder"><div class="sc-thumb-lbl">Email Builder</div></div>
+    <div class="sc-thumb" onclick="scGo(5)"><img src="assets/screenshots/ads-manager.png" alt="Ads Manager"><div class="sc-thumb-lbl">Ads Mgr</div></div>
+    <div class="sc-thumb" onclick="scGo(6)"><img src="assets/screenshots/automation-workflows.png" alt="Automation Workflows"><div class="sc-thumb-lbl">Automations</div></div>
+    <div class="sc-thumb" onclick="scGo(7)"><img src="assets/screenshots/automation-workflows-2.png" alt="Automation Workflows 2"><div class="sc-thumb-lbl">Automations 2</div></div>
+    <div class="sc-thumb" onclick="scGo(8)"><img src="assets/screenshots/ai-agents.png" alt="AI Agents"><div class="sc-thumb-lbl">AI Agents</div></div>
+    <div class="sc-thumb" onclick="scGo(9)"><img src="assets/screenshots/ai-agent-analytics.png" alt="AI Agent Analytics"><div class="sc-thumb-lbl">AI Analytics</div></div>
+    <div class="sc-thumb" onclick="scGo(10)"><img src="assets/screenshots/multi-channel-conversations.png" alt="Multi-channel Conversations"><div class="sc-thumb-lbl">Conversations</div></div>
+    <div class="sc-thumb" onclick="scGo(11)"><img src="assets/screenshots/smart-dashboard.png" alt="Smart Dashboard"><div class="sc-thumb-lbl">Dashboard</div></div>
+    <div class="sc-thumb" onclick="scGo(12)"><img src="assets/screenshots/documents-contracts.png" alt="Documents & Contracts"><div class="sc-thumb-lbl">Docs & Contracts</div></div>
+    <div class="sc-thumb" onclick="scGo(13)"><img src="assets/screenshots/reputation-management.png" alt="Reputation Management"><div class="sc-thumb-lbl">Reputation</div></div>
+    <div class="sc-thumb" onclick="scGo(14)"><img src="assets/screenshots/payment-console.png" alt="Payment Console"><div class="sc-thumb-lbl">Payments</div></div>
+    <div class="sc-thumb" onclick="scGo(15)"><img src="assets/screenshots/app-integrations.png" alt="App Integrations"><div class="sc-thumb-lbl">Integrations</div></div>
+    <div class="sc-thumb" onclick="scGo(16)"><img src="assets/screenshots/dynamic-forms.png" alt="Dynamic Forms"><div class="sc-thumb-lbl">Forms</div></div>
+    <div class="sc-thumb" onclick="scGo(17)"><img src="assets/screenshots/dashboard.png" alt="Dashboard"><div class="sc-thumb-lbl">Dashboard</div></div>
+    <div class="sc-thumb" onclick="scGo(18)"><img src="assets/screenshots/competitor-analysis.png" alt="Competitor Analysis"><div class="sc-thumb-lbl">Competitor</div></div>
+    <div class="sc-thumb" onclick="scGo(19)"><img src="assets/screenshots/google-my-business.png" alt="Google My Business"><div class="sc-thumb-lbl">Google Biz</div></div>
+    <div class="sc-thumb" onclick="scGo(20)"><img src="assets/screenshots/course-creation.png" alt="Course Creation"><div class="sc-thumb-lbl">Courses</div></div>
+    <div class="sc-thumb" onclick="scGo(21)"><img src="assets/screenshots/chat-widget.png" alt="Chat Widget"><div class="sc-thumb-lbl">Chat Widget</div></div>
       </div>
     </div>
   </div>
@@ -958,10 +991,12 @@ document.querySelectorAll('.count-up').forEach(function(el){countObs.observe(el)
 
 // ── SCREENSHOT CAROUSEL ──
 (function(){
-  var cur=0, total=6;
+  var cur=0, total=22;
   function scUpdate(){
     document.getElementById('scTrack').style.transform='translateX(-'+cur*100+'%)';
     document.querySelectorAll('.sc-dot,.sc-thumb').forEach(function(el,i){el.classList.toggle('active',i%total===cur);});
+    var activeThumb=document.querySelector('.sc-thumb.active');
+    if(activeThumb){activeThumb.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});}
   }
   window.scGo=function(n){cur=((n%total)+total)%total;scUpdate();};
   window.scStep=function(d){scGo(cur+d);};
