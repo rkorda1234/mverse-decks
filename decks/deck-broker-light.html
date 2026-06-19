@@ -347,6 +347,30 @@ input[type=range]{width:100%;accent-color:var(--or);cursor:pointer;margin-top:8p
 .ai-note{font-size:11.5px;color:var(--dim);text-align:center;margin-top:16px}
 
 
+/* ── 6-MONTH TIMELINE ── */
+.impl-scroll{overflow-x:auto;margin-top:32px;border-radius:10px;border:1px solid var(--border)}
+.impl-scroll::-webkit-scrollbar{height:4px}.impl-scroll::-webkit-scrollbar-thumb{background:var(--cream3);border-radius:2px}
+.impl-table{width:100%;min-width:760px;border-collapse:collapse}
+.impl-table th,.impl-table td{padding:0;border:1px solid var(--border)}
+.impl-table thead th{background:var(--cream2);padding:10px 14px;font-family:var(--sans);font-size:11px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);text-align:center;white-space:nowrap}
+.impl-table thead th.row-head{text-align:left;color:var(--dim);width:160px}
+.impl-table tbody td{background:var(--cream2);height:52px;vertical-align:middle;text-align:center}
+.impl-table tbody td.row-head{background:var(--cream);padding:0 16px;text-align:left}
+.impl-row-label{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:700;color:var(--text);white-space:nowrap}
+.impl-row-label span{font-size:17px}
+.impl-cell{display:inline-flex;align-items:center;justify-content:center;width:calc(100% - 12px);height:36px;border-radius:5px;font-family:var(--display);font-size:10px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:#fff}
+.impl-cell.audit   {background:#3B5BDB}
+.impl-cell.migrate {background:#E8602C}
+.impl-cell.build   {background:#7048E8}
+.impl-cell.train   {background:#E8A020}
+.impl-cell.live    {background:#2EA84A}
+.impl-cell.coach   {background:#1AAECC}
+.impl-cell.optim   {background:#E8205C}
+.impl-legend{display:flex;flex-wrap:wrap;gap:10px 20px;margin-top:20px}
+.impl-legend-item{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:600;color:var(--muted)}
+.impl-legend-dot{width:12px;height:12px;border-radius:3px;flex-shrink:0}
+.impl-scroll-hint{display:inline-flex;align-items:center;gap:7px;background:var(--or);color:#FFFFFF;font-family:var(--display);font-size:10px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;padding:6px 14px;border-radius:999px;margin-left:16px;vertical-align:middle;cursor:default}
+
 /* ── MOBILE RESPONSIVE ── */
 #mob-toggle{display:none}
 @media(max-width:768px){
@@ -392,6 +416,7 @@ input[type=range]{width:100%;accent-color:var(--or);cursor:pointer;margin-top:8p
     <a class="sb-link" href="#s6">The Tight Brokerage</a>
     <div class="sb-group" style="margin-top:6px">The Decision</div>
     <a class="sb-link" href="#s7">Our Work</a>
+    <a class="sb-link" href="#s7b">6-Month Plan</a>
     <a class="sb-link" href="#s8">Your ROI</a>
     <a class="sb-link" href="#s9">Plans & Pricing</a>
     <a class="sb-link" href="#s10">Let's Build This</a>
@@ -716,6 +741,92 @@ input[type=range]{width:100%;accent-color:var(--or);cursor:pointer;margin-top:8p
     </div>
   </div>
 
+</div>
+</section>
+
+<section class="section" id="s7b">
+<div class="section-inner">
+  <div class="eyebrow reveal">★ Chapter Seven B — Implementation</div>
+  <div class="h2 reveal reveal-delay-1">6-Month Implementation<br><em>Program.</em> <span class="impl-scroll-hint">Scroll the timeline →</span></div>
+  <p class="lead muted reveal reveal-delay-2" style="margin-bottom:4px">No Leads Left Behind is a <strong>6-month program</strong> — not a software install. Month 1 is a structured onboarding sprint (4 meetings, two lanes: Sales Coaches + CRM Team). Months 2–6 are hands-on coaching, training, optimization, and customization until the system is running itself.</p>
+
+  <div class="impl-legend reveal reveal-delay-2">
+    <div class="impl-legend-item"><div class="impl-legend-dot" style="background:#3B5BDB"></div>Setup &amp; Audit</div>
+    <div class="impl-legend-item"><div class="impl-legend-dot" style="background:#E8602C"></div>Data Migration</div>
+    <div class="impl-legend-item"><div class="impl-legend-dot" style="background:#7048E8"></div>CRM Build</div>
+    <div class="impl-legend-item"><div class="impl-legend-dot" style="background:#E8A020"></div>Training</div>
+    <div class="impl-legend-item"><div class="impl-legend-dot" style="background:#2EA84A"></div>Go-Live</div>
+    <div class="impl-legend-item"><div class="impl-legend-dot" style="background:#1AAECC"></div>Coaching</div>
+    <div class="impl-legend-item"><div class="impl-legend-dot" style="background:#E8205C"></div>Optimization</div>
+  </div>
+
+  <div class="breakout reveal reveal-delay-2">
+    <div class="impl-scroll">
+      <table class="impl-table">
+        <thead>
+          <tr>
+            <th class="row-head">Workstream</th>
+            <th>Month 1</th>
+            <th>Month 2</th>
+            <th>Month 3</th>
+            <th>Month 4</th>
+            <th>Month 5</th>
+            <th>Month 6</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="row-head"><div class="impl-row-label"><span>🔍</span>Discovery &amp; Audit</div></td>
+            <td><div class="impl-cell audit">Audit + Setup</div></td>
+            <td></td><td></td><td></td><td></td><td></td>
+          </tr>
+          <tr>
+            <td class="row-head"><div class="impl-row-label"><span>💾</span>Data Migration</div></td>
+            <td><div class="impl-cell migrate">Extract + Clean</div></td>
+            <td><div class="impl-cell migrate">Import + Verify</div></td>
+            <td></td><td></td><td></td><td></td>
+          </tr>
+          <tr>
+            <td class="row-head"><div class="impl-row-label"><span>🛠️</span>CRM Build</div></td>
+            <td><div class="impl-cell build">Pipeline + Tags</div></td>
+            <td><div class="impl-cell build">Campaigns + Automation</div></td>
+            <td><div class="impl-cell build">AI Agents</div></td>
+            <td></td><td></td><td></td>
+          </tr>
+          <tr>
+            <td class="row-head"><div class="impl-row-label"><span>🎓</span>Training</div></td>
+            <td><div class="impl-cell train">Role Playbooks</div></td>
+            <td><div class="impl-cell train">Team Training</div></td>
+            <td><div class="impl-cell train">Advanced</div></td>
+            <td></td><td></td><td></td>
+          </tr>
+          <tr>
+            <td class="row-head"><div class="impl-row-label"><span>🚀</span>Go-Live</div></td>
+            <td></td>
+            <td><div class="impl-cell live">Launch</div></td>
+            <td></td><td></td><td></td><td></td>
+          </tr>
+          <tr>
+            <td class="row-head"><div class="impl-row-label"><span>🤝</span>Sales Coaching</div></td>
+            <td></td>
+            <td><div class="impl-cell coach">Weekly Coaching</div></td>
+            <td><div class="impl-cell coach">Weekly Coaching</div></td>
+            <td><div class="impl-cell coach">Weekly Coaching</div></td>
+            <td><div class="impl-cell coach">Bi-Weekly</div></td>
+            <td><div class="impl-cell coach">Bi-Weekly</div></td>
+          </tr>
+          <tr>
+            <td class="row-head"><div class="impl-row-label"><span>⚙️</span>Optimization</div></td>
+            <td></td><td></td>
+            <td><div class="impl-cell optim">Tune Campaigns</div></td>
+            <td><div class="impl-cell optim">Customization</div></td>
+            <td><div class="impl-cell optim">A/B Testing</div></td>
+            <td><div class="impl-cell optim">Handoff + Docs</div></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
 </section>
 
