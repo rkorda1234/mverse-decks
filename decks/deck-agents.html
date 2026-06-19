@@ -54,6 +54,9 @@ body{font-family:var(--sans);background:var(--cream);color:var(--text);display:f
 .sb-cta-btn{width:100%;background:var(--or);color:#0A0A0A;border:none;border-radius:2px;padding:13px;font-family:var(--display);font-weight:900;font-size:12px;cursor:pointer;transition:transform .18s cubic-bezier(.2,.9,.1,1.2),box-shadow .18s;letter-spacing:0.06em;text-transform:uppercase}
 .sb-cta-btn:hover{transform:translateY(-2px);box-shadow:0 0 0 2px var(--or),0 0 28px rgba(207,255,94,0.45)}
 .sb-cta-btn:active{transform:translateY(1px)}
+.sb-back{display:flex;align-items:center;gap:7px;text-decoration:none;color:rgba(255,255,255,0.45);font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:10px 0 14px;transition:color .18s}
+.sb-back:hover{color:var(--or)}
+.sb-back svg{flex-shrink:0;opacity:.7}
 
 /* ── MAIN ── */
 #main{margin-left:var(--sidebar);flex:1;min-width:0}
@@ -321,6 +324,7 @@ input[type=range]{width:100%;accent-color:var(--or);cursor:pointer;margin-top:8p
   <div class="sb-footer">
     <div class="sb-prog-bar"><div class="sb-prog-fill" id="prog-fill"></div></div>
     <div class="sb-prog-text" id="prog-text">1 of 9</div>
+    <a class="sb-back" href="../index.html"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>All Decks</a>
     <button class="sb-cta-btn" onclick="openPopup('https://api.leadconnectorhq.com/widget/bookings/marketingverse-demo')">Book Free Demo →</button>
   </div>
 </nav>
