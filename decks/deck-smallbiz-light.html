@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="https://assets.cdn.filesafe.space/CFAAUO2gnPooyim4LdoM/media/6a35b094c50697c4118de259.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marketingverse — Small Business & Personal Brands — Light</title>
+<style>
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+/* ── BRAND FONTS ── */
+@font-face{font-family:"Uni Sans";src:url("fonts/UniSans-Heavy.otf") format("opentype");font-weight:900;font-style:normal;font-display:swap}
+@font-face{font-family:"Uni Sans";src:url("fonts/UniSans-HeavyItalic.otf") format("opentype");font-weight:900;font-style:italic;font-display:swap}
+@font-face{font-family:"Uni Sans";src:url("fonts/UniSans-Thin.otf") format("opentype");font-weight:200;font-style:normal;font-display:swap}
+@font-face{font-family:"Roboto";src:url("fonts/Roboto-Light.ttf") format("truetype");font-weight:300;font-style:normal;font-display:swap}
+@font-face{font-family:"Roboto";src:url("fonts/Roboto-LightItalic.ttf") format("truetype");font-weight:300;font-style:italic;font-display:swap}
+@font-face{font-family:"Roboto";src:url("fonts/Roboto-Bold.ttf") format("truetype");font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:"Roboto";src:url("fonts/Roboto-BoldItalic.ttf") format("truetype");font-weight:700;font-style:italic;font-display:swap}
+@font-face{font-family:"Roboto";src:url("fonts/Roboto-Black.ttf") format("truetype");font-weight:900;font-style:normal;font-display:swap}
+
+:root{
+  --or:#FF6240;--or2:#E8552E;            /* lime signature accent */
+  --cream:#FAFAF8;--cream2:#F2F0EC;--cream3:#D8D5CF;  /* ink ramp */
+  --surface:#FFFFFF;--surface2:#F5F3EF;
+  --text:#0A0A0A;--muted:#555555;--dim:#888888;
+  --border:rgba(0,0,0,0.1);
+  --danger:#FF4545;--success:#6BE36B;
+  --sidebar:262px;
+  --sans:"Roboto",system-ui,sans-serif;
+  --serif:"Uni Sans","Arial Black",sans-serif;
+  --display:"Uni Sans","Arial Black",sans-serif;
+}
+html{scroll-behavior:smooth;background:var(--cream)}
+body{font-family:var(--sans);background:var(--cream);color:var(--text);display:flex;min-height:100vh;-webkit-font-smoothing:antialiased}
+::selection{background:var(--or);color:#FFFFFF}
+
+/* ── SIDEBAR ── */
+#sidebar{width:var(--sidebar);min-width:var(--sidebar);background:#FFFFFF;border-right:1px solid var(--border);position:fixed;top:0;left:0;bottom:0;overflow-y:auto;z-index:100;display:flex;flex-direction:column}
+#sidebar::-webkit-scrollbar{width:3px}
+#sidebar::-webkit-scrollbar-thumb{background:var(--cream3)}
+.sb-logo{padding:26px 22px 20px;border-bottom:1px solid var(--border);display:flex;justify-content:center;align-items:center}
+.sb-logo-img{height:60px;width:auto;display:block}
+.sb-sub{font-family:var(--sans);font-size:11px;color:rgba(0,0,0,0.62);margin-top:12px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase}
+.sb-nav{padding:16px 0;flex:1}
+.sb-group{font-family:var(--sans);font-size:11px;font-weight:900;letter-spacing:0.16em;text-transform:uppercase;color:rgba(0,0,0,0.5);padding:13px 22px 6px}
+.sb-link{display:flex;align-items:center;gap:10px;padding:10px 22px;font-size:15px;color:rgba(0,0,0,0.86);text-decoration:none;cursor:pointer;border-left:2px solid transparent;line-height:1.4;transition:color .18s,background .18s,border-color .18s;font-weight:600}
+.sb-link:hover{color:var(--text);background:rgba(0,0,0,0.04)}
+.sb-link.active{color:var(--or);border-left-color:var(--or);background:rgba(255,98,64,0.07);font-weight:700}
+.sb-footer{padding:16px 20px;border-top:1px solid var(--border)}
+.sb-prog-bar{height:3px;background:var(--cream3);border-radius:0;margin-bottom:8px;overflow:hidden}
+.sb-prog-fill{height:100%;background:var(--or);transition:width .5s cubic-bezier(.2,.9,.1,1.2);width:10%}
+.sb-prog-text{font-size:10px;color:var(--dim);margin-bottom:12px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase}
+.sb-cta-btn{width:100%;background:var(--or);color:#FFFFFF;border:none;border-radius:2px;padding:13px;font-family:var(--display);font-weight:900;font-size:12px;cursor:pointer;transition:transform .18s cubic-bezier(.2,.9,.1,1.2),box-shadow .18s;letter-spacing:0.06em;text-transform:uppercase}
+.sb-cta-btn:hover{transform:translateY(-2px);box-shadow:0 0 0 2px var(--or),0 0 28px rgba(255,98,64,0.45)}
+.sb-cta-btn:active{transform:translateY(1px)}
+.sb-back{display:flex;align-items:center;gap:7px;text-decoration:none;color:rgba(0,0,0,0.45);font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:10px 0 14px;transition:color .18s}
+.sb-back:hover{color:var(--or)}
+.sb-back svg{flex-shrink:0;opacity:.7}
+
+/* ── MAIN ── */
+#main{margin-left:var(--sidebar);flex:1;min-width:0}
+.section-inner{max-width:880px;margin:0 auto;padding:104px 52px}
+.breakout{max-width:1140px;margin-left:auto;margin-right:auto;width:100%}
+.section.dark .section-inner{max-width:880px;margin:0 auto;padding:104px 52px}
+.section{padding:0;border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+.section:last-child{border-bottom:none}
+.section.dark{background:#F0EDEA;color:var(--text)}
+.section.cream2{background:var(--cream2);background-image:radial-gradient(rgba(0,0,0,0.05) 1px,transparent 1px);background-size:22px 22px}
+
+/* ── SCROLL ANIMATIONS ── */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s cubic-bezier(.2,.9,.1,1.2),transform .6s cubic-bezier(.2,.9,.1,1.2)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.08s}.reveal-delay-2{transition-delay:.16s}.reveal-delay-3{transition-delay:.24s}.reveal-delay-4{transition-delay:.32s}.reveal-delay-5{transition-delay:.4s}
+
+/* ── TYPOGRAPHY ── */
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--sans);font-size:11px;font-weight:900;letter-spacing:0.2em;text-transform:uppercase;color:var(--or);margin-bottom:24px}
+.h1{font-family:var(--display);font-size:4.6rem;font-weight:900;line-height:.98;letter-spacing:-0.025em;margin-bottom:24px;text-transform:uppercase}
+.h1 em{font-family:var(--display);font-weight:900;font-style:italic;font-size:4.6rem;color:var(--or);letter-spacing:-0.025em}
+.h2{font-family:var(--display);font-size:3.3rem;font-weight:900;line-height:1.02;letter-spacing:-0.02em;margin-bottom:22px;text-transform:uppercase}
+.h2 em{font-family:var(--display);font-weight:900;font-style:italic;font-size:3.3rem;color:var(--or);letter-spacing:-0.02em}
+.h2-white{color:var(--text)}
+.h2-white em{color:var(--or)}
+.h3{font-family:var(--display);font-size:1.95rem;font-weight:900;line-height:1.08;letter-spacing:-0.01em;margin-bottom:14px;text-transform:uppercase}
+.lead{font-family:var(--sans);font-size:19px;font-weight:300;line-height:1.7;max-width:620px}
+.muted{color:var(--muted)}
+
+/* ── MYTH GRID ── */
+.myth-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin:36px 0}
+.myth-card{background:var(--surface);border:1px solid var(--border);border-radius:2px;padding:28px 24px;transition:transform .2s cubic-bezier(.2,.9,.1,1.2),box-shadow .2s,border-color .2s}
+.myth-card:hover{transform:translate(-3px,-3px);box-shadow:6px 6px 0 var(--or);border-color:var(--or)}
+.myth-num{font-family:var(--sans);font-size:10px;font-weight:900;letter-spacing:0.2em;text-transform:uppercase;color:var(--or);margin-bottom:12px}
+.myth-claim{font-family:var(--sans);font-size:17px;font-weight:700;line-height:1.4;margin-bottom:12px;color:var(--text)}
+.myth-bust{font-family:var(--display);font-style:italic;font-size:18px;font-weight:900;color:var(--or);line-height:1.25;text-transform:none}
+
+/* ── BEFORE FRAME ── */
+.before-frame{background:#EEECEA;border:1.5px dashed var(--cream3);border-radius:2px;padding:54px 40px 36px;text-align:center;margin:36px 0;position:relative;overflow:hidden}
+.before-label{position:absolute;top:0;left:0;right:0;background:var(--surface2);border-bottom:1px solid var(--border);padding:10px 20px;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);text-align:center}
+.before-avatar-wrap{opacity:0.34;filter:grayscale(1);margin-bottom:20px}
+.before-avatar{width:90px;height:90px;border-radius:50%;background:var(--surface);border:2px dashed var(--cream3);display:flex;align-items:center;justify-content:center;font-size:36px;margin:0 auto 14px;color:var(--muted)}
+.tag-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.tag-bad{background:rgba(255,69,69,0.12);border:1px solid rgba(255,69,69,0.4);color:#FF6B6B;font-size:12px;font-weight:700;letter-spacing:0.04em;padding:6px 14px;border-radius:999px}
+.tag-gray{background:var(--surface);border:1px solid var(--border);color:var(--muted);font-size:12px;font-weight:500;padding:6px 14px;border-radius:999px}
+
+/* ── CARDS ── */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:2px;padding:24px 26px;cursor:pointer;transition:border-color .25s,box-shadow .25s,transform .25s;margin-bottom:10px}
+.card:hover{border-color:rgba(255,98,64,0.5);transform:translateY(-2px)}
+.card.open{border-color:var(--or);background:rgba(255,98,64,0.04)}
+.card-head{display:flex;justify-content:space-between;align-items:center;gap:16px;font-family:var(--sans);font-size:16px;font-weight:700;line-height:1.4;color:var(--text)}
+.chevron{font-size:18px;color:var(--muted);transition:transform .35s cubic-bezier(.2,.9,.1,1.2),color .25s;flex-shrink:0}
+.card.open .chevron{transform:rotate(180deg);color:var(--or)}
+.card-body{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.2,.9,.1,1.2)}
+.card-body-inner{padding-top:14px;font-size:15px;font-weight:300;color:var(--muted);line-height:1.75}
+.card.open .card-body{max-height:520px}
+
+/* ── GRIDS ── */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+
+/* ── STATS ── */
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:2px;padding:30px 22px;text-align:center;transition:transform .2s cubic-bezier(.2,.9,.1,1.2),box-shadow .2s,border-color .2s}
+.stat:hover{transform:translate(-3px,-3px);box-shadow:6px 6px 0 var(--or);border-color:var(--or)}
+.big-n{font-family:var(--display);font-size:3.6rem;font-weight:900;color:var(--or);line-height:1;margin-bottom:10px;letter-spacing:-0.02em}
+.stat-label{font-size:14px;font-weight:300;color:var(--muted);line-height:1.6}
+
+/* ── VS GRID ── */
+.vs-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:28px}
+.vs-col{border-radius:2px;padding:28px}
+.vs-before{background:var(--surface2);border:1px solid var(--border)}
+.vs-after{background:rgba(255,98,64,0.05);border:2px solid rgba(255,98,64,0.45)}
+.vs-head{font-family:var(--sans);font-size:12px;font-weight:900;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+.vs-item{display:flex;gap:12px;padding:9px 0;font-size:15px;font-weight:300;line-height:1.6;border-bottom:1px solid var(--border)}
+.vs-item:last-child{border-bottom:none}
+
+/* ── JOURNEY ── */
+.journey{position:relative;padding-left:44px;margin-top:32px}
+.journey::before{content:'';position:absolute;left:14px;top:10px;bottom:10px;width:2px;background:var(--cream3)}
+.j-item{position:relative;margin-bottom:28px}
+.j-dot{position:absolute;left:-36px;top:4px;width:20px;height:20px;border-radius:50%;background:var(--surface);border:2px solid var(--cream3);transition:all .5s cubic-bezier(.2,.9,.1,1.2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;color:transparent}
+.j-item.done .j-dot{background:var(--or);border-color:var(--or);color:#FFFFFF;transform:scale(1.1)}
+.j-item.current .j-dot{background:var(--or);border-color:var(--or);color:#FFFFFF;box-shadow:0 0 0 6px rgba(255,98,64,0.18);animation:pulse-dot 2s infinite}
+@keyframes pulse-dot{0%,100%{box-shadow:0 0 0 6px rgba(255,98,64,0.18)}50%{box-shadow:0 0 0 10px rgba(255,98,64,0.08)}}
+.j-item.done .j-dot::after,.j-item.current .j-dot::after{content:'✓'}
+.j-title{font-family:var(--sans);font-size:17px;font-weight:700;margin-bottom:5px;line-height:1.3;color:var(--text)}
+.j-desc{font-size:15px;font-weight:300;color:var(--muted);line-height:1.65}
+
+/* ── TRANSFORMATION ── */
+.win-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:32px}
+.win-card{background:rgba(0,0,0,0.04);border:1px solid rgba(255,255,255,0.12);border-radius:2px;padding:28px;transition:transform .25s cubic-bezier(.2,.9,.1,1.2),box-shadow .25s,border-color .25s;cursor:default}
+.win-card:hover{transform:translate(-3px,-3px);box-shadow:6px 6px 0 var(--or);border-color:var(--or)}
+.win-emoji{font-size:2.6rem;margin-bottom:14px;display:block}
+.win-title{font-family:var(--sans);font-size:18px;font-weight:700;color:var(--text);margin-bottom:8px}
+.win-body{font-size:14px;font-weight:300;color:rgba(0,0,0,0.62);line-height:1.7}
+.win-finale{background:rgba(255,98,64,0.1);border:1.5px solid rgba(255,98,64,0.45);border-radius:2px;padding:40px;text-align:center;margin-top:14px}
+.win-finale-serif{font-family:var(--display);font-style:italic;font-size:2.8rem;font-weight:900;color:var(--or);line-height:1.1;margin-bottom:12px;text-transform:uppercase}
+.win-finale-body{font-size:15px;font-weight:300;color:rgba(0,0,0,0.65);line-height:1.7;max-width:460px;margin:0 auto}
+
+/* ── METERS ── */
+.meter-block{margin-bottom:22px}
+.meter-top{display:flex;justify-content:space-between;font-size:15px;margin-bottom:9px;font-weight:700;color:var(--text)}
+.meter-bar{height:8px;background:var(--cream3);border-radius:0;overflow:hidden}
+.meter-fill{height:100%;border-radius:0;background:var(--or);width:0;transition:width 1.4s cubic-bezier(.2,.9,.1,1.2)}
+
+/* ── TOGGLE ── */
+.tog-wrap{display:flex;background:var(--surface2);border:1px solid var(--border);border-radius:2px;padding:4px;width:fit-content;margin-bottom:28px}
+.tog{padding:10px 24px;border-radius:0;border:none;cursor:pointer;font-family:var(--sans);font-size:13px;font-weight:700;transition:all .22s;background:transparent;color:var(--muted);text-transform:uppercase;letter-spacing:0.04em}
+.tog.active{background:var(--or);color:#FFFFFF}
+
+/* ── TIMELINE ── */
+.tl-item{display:flex;gap:18px;padding:15px 20px;border-radius:2px;background:var(--surface);border:1px solid var(--border);margin-bottom:8px;transition:all .22s}
+.tl-item:hover{transform:translateX(4px);border-color:rgba(255,98,64,0.4)}
+.tl-time{font-family:var(--sans);font-size:12px;font-weight:900;color:var(--or);min-width:44px;padding-top:3px;flex-shrink:0;letter-spacing:0.02em}
+.tl-text{font-size:15px;font-weight:300;color:var(--muted);line-height:1.65}
+.tl-item.lit{border-color:rgba(255,98,64,0.3);background:rgba(255,98,64,0.05)}
+.tl-item.lit .tl-text{color:var(--text)}
+.tl-item.hl{border-color:var(--or);border-width:2px;background:rgba(255,98,64,0.09)}
+.tl-item.hl .tl-text{color:var(--or);font-weight:700}
+
+/* ── PILLS ── */
+.pill-grid{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}
+.pill{display:inline-flex;align-items:center;background:var(--surface);border:1px solid var(--border);border-radius:999px;padding:8px 16px;font-size:13px;font-weight:500;color:var(--text);transition:all .2s;cursor:default}
+.pill:hover{border-color:var(--or);color:var(--or);background:rgba(255,98,64,0.06)}
+
+/* ── ROI ── */
+.inp-label{font-size:13px;color:var(--muted);margin-bottom:7px;display:block;font-weight:700;letter-spacing:0.02em}
+.inp{background:var(--surface2);border:1.5px solid var(--border);color:var(--text);padding:14px 18px;border-radius:6px;font-size:17px;font-family:var(--sans);font-weight:700;width:100%;transition:border-color .2s,box-shadow .2s}
+.inp:focus{outline:none;border-color:var(--or);box-shadow:0 0 0 3px rgba(255,98,64,0.18)}
+input[type=range]{width:100%;accent-color:var(--or);cursor:pointer;margin-top:8px;height:6px}
+.roi-box{background:var(--surface2);border:2px solid var(--or);border-radius:2px;padding:30px;margin-top:24px;box-shadow:0 0 0 1px rgba(255,98,64,0.2),0 0 40px rgba(255,98,64,0.12)}
+.roi-row{display:flex;justify-content:space-between;align-items:center;padding:13px 0;border-bottom:1px solid var(--cream3);font-size:16px;font-weight:300;color:var(--text)}
+.roi-row:last-child{border-bottom:none}
+.roi-val{font-family:var(--display);font-size:1.3rem;font-weight:900;color:var(--or)}
+.roi-val.green{color:var(--success)}
+.roi-total{font-size:2rem !important;letter-spacing:-0.02em}
+
+/* ── HBOX ── */
+.hbox{background:rgba(255,98,64,0.08);border:1.5px solid rgba(255,98,64,0.35);border-radius:2px;padding:20px 24px;margin-top:18px;font-size:16px;font-weight:300;line-height:1.75;color:var(--text)}
+
+/* ── REELS ── */
+.reels-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:28px}
+.reel-card{background:var(--surface2);border:1px solid var(--border);border-radius:2px;overflow:hidden;aspect-ratio:9/16;position:relative;cursor:pointer;transition:all .3s cubic-bezier(.2,.9,.1,1.2)}
+.reel-card:hover{border-color:var(--or);transform:translateY(-6px);box-shadow:0 0 30px rgba(255,98,64,0.18)}
+/* ── REEL LIKE-HEARTS (Instagram-style hover) ── */
+.reel-heart{position:absolute;bottom:16px;z-index:6;pointer-events:none;line-height:1;color:#FF6240;will-change:transform,opacity;filter:drop-shadow(0 0 5px rgba(255,98,64,0.55));animation:reelFloat var(--dur,2.1s) ease-out forwards}
+@keyframes reelFloat{0%{opacity:0;transform:translateY(4px) translateX(0) scale(.3) rotate(0deg)}14%{opacity:.92;transform:translateY(-16px) translateX(calc(var(--dx,0px) * .25)) scale(1) rotate(var(--r,0deg))}70%{opacity:.55}100%{opacity:0;transform:translateY(-145px) translateX(var(--dx,0px)) scale(.8) rotate(var(--r,0deg))}}
+@media (prefers-reduced-motion: reduce){.reel-heart{display:none}}
+/* ── ADS PLAYBOOK ── */
+.ads-flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:stretch;gap:14px;margin-bottom:20px}
+.ads-step{background:var(--surface);border:1px solid var(--border);border-radius:2px;padding:28px 24px;transition:transform .2s cubic-bezier(.2,.9,.1,1.2),box-shadow .2s,border-color .2s;display:flex;flex-direction:column;gap:10px}
+.ads-step:hover{transform:translate(-3px,-3px);box-shadow:6px 6px 0 var(--or);border-color:var(--or)}
+.ads-num{font-family:var(--display);font-size:2.6rem;font-weight:900;color:var(--or);line-height:1;letter-spacing:-0.02em}
+.ads-step-title{font-family:var(--display);font-size:1.15rem;font-weight:900;text-transform:uppercase;letter-spacing:-0.01em;color:var(--text)}
+.ads-step-body{font-size:14px;font-weight:300;color:var(--muted);line-height:1.65}
+.ads-arrow{display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:1.8rem;font-weight:900;color:var(--or)}
+.ads-result{background:#F5F3EF;border:1.5px solid var(--or);border-radius:2px;padding:32px 36px;box-shadow:0 0 0 1px rgba(255,98,64,0.2),0 0 50px rgba(255,98,64,0.08)}
+.ads-result-k{font-family:var(--sans);font-size:11px;font-weight:900;letter-spacing:0.18em;text-transform:uppercase;color:var(--or);margin-bottom:12px}
+.ads-result-h{font-family:var(--display);font-size:2rem;font-weight:900;font-style:italic;text-transform:uppercase;color:var(--text);line-height:1.05;margin-bottom:12px;letter-spacing:-0.01em}
+.ads-result-b{font-size:15px;font-weight:300;color:rgba(0,0,0,0.66);line-height:1.7;max-width:620px;margin:0}
+@media(max-width:860px){.ads-flow{grid-template-columns:1fr}.ads-arrow{transform:rotate(90deg);padding:2px 0}}
+.reel-inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#EEECEA,#E8E5DF);gap:12px}
+.reel-play{width:52px;height:52px;border-radius:50%;background:var(--or);display:flex;align-items:center;justify-content:center;font-size:17px;color:#FFFFFF;box-shadow:0 0 24px rgba(255,98,64,0.4);transition:transform .25s}
+.reel-card:hover .reel-play{transform:scale(1.12)}
+.reel-lbl{font-size:12px;font-weight:500;color:var(--muted);text-align:center;padding:0 14px;line-height:1.5}
+.reel-tag{position:absolute;top:12px;left:12px;background:var(--surface);border:1px solid var(--border);color:var(--text);font-size:10px;font-weight:900;letter-spacing:0.1em;text-transform:uppercase;padding:4px 10px;border-radius:999px}
+.reel-soon{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);font-size:10px;color:var(--muted);white-space:nowrap;background:rgba(10,10,10,0.92);padding:4px 10px;border-radius:999px;border:1px solid var(--border)}
+
+/* ── PLAN CARDS ── */
+.plan-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.plan-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.plan-card{background:var(--surface2);border:1.5px solid var(--border);border-radius:2px;overflow:hidden;display:flex;flex-direction:column;transition:transform .3s cubic-bezier(.2,.9,.1,1.2),box-shadow .3s}
+.plan-card:hover{transform:translateY(-4px)}
+.plan-card.featured{border-color:var(--or);box-shadow:0 0 0 1px var(--or),0 0 48px rgba(255,98,64,0.18)}
+.plan-badge{background:var(--or);color:#FFFFFF;font-family:var(--display);font-size:11px;font-weight:900;letter-spacing:0.16em;text-transform:uppercase;text-align:center;padding:11px}
+.plan-inner{padding:30px;flex:1;display:flex;flex-direction:column}
+.plan-name{font-family:var(--sans);font-size:12px;font-weight:900;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+.plan-was{font-size:15px;color:var(--dim);text-decoration:line-through;margin-bottom:4px;font-weight:400}
+.plan-price{font-family:var(--display);font-size:3.6rem;font-weight:900;color:var(--text);line-height:1;letter-spacing:-0.03em}
+.plan-price sup{font-size:1.5rem;font-weight:900;vertical-align:super;margin-right:1px;color:var(--or)}
+.plan-price sub{font-size:1rem;font-weight:400;color:var(--muted);vertical-align:baseline;font-family:var(--sans)}
+.plan-setup{font-size:13px;color:var(--muted);margin-top:8px;margin-bottom:0;font-weight:400;flex:0}
+.plan-btn-wrap{margin-top:22px;margin-bottom:0;display:flex}
+.plan-btn{display:inline-block;background:transparent;border:1.5px solid var(--or);color:var(--or);text-align:center;padding:12px 28px;border-radius:2px;font-family:var(--display);font-weight:900;font-size:13px;cursor:pointer;transition:all .22s cubic-bezier(.2,.9,.1,1.2);text-decoration:none;margin-bottom:24px;letter-spacing:0.06em;text-transform:uppercase}
+.plan-card.featured .plan-btn{background:var(--or);color:#FFFFFF}
+.plan-btn:hover{background:var(--or);color:#FFFFFF;transform:translateY(-2px);box-shadow:0 0 24px rgba(255,98,64,0.35)}
+.plan-features{list-style:none;flex:1}
+.plan-features li{display:flex;align-items:flex-start;gap:10px;padding:9px 0;font-size:14px;font-weight:300;color:var(--muted);border-bottom:1px solid var(--cream3);line-height:1.5}
+.plan-features li:last-child{border-bottom:none}
+.plan-features li::before{content:'✓';color:var(--or);font-weight:900;flex-shrink:0;margin-top:1px}
+.plan-price-bottom{padding:22px 30px;border-top:1.5px solid var(--cream3)}
+.price-big{font-family:var(--display);font-size:2.8rem;font-weight:900;color:var(--text);letter-spacing:-0.03em}
+.price-big sub{font-size:1rem;font-weight:400;color:var(--muted);vertical-align:baseline;font-family:var(--sans)}
+
+/* ── TEAM ── */
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.tc{background:var(--surface);border:1px solid var(--border);border-radius:2px;padding:18px;text-align:center;transition:transform .2s,box-shadow .2s,border-color .2s}
+.tc:hover{transform:translateY(-3px);border-color:rgba(255,98,64,0.4)}
+.tav{width:54px;height:54px;border-radius:50%;background:rgba(255,98,64,0.1);border:2px solid rgba(255,98,64,0.4);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:900;font-size:16px;color:var(--or);margin:0 auto 12px;transition:transform .25s}
+.tc:hover .tav{transform:scale(1.08)}
+.tav-photo{width:100%;aspect-ratio:1;border-radius:2px;background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--cream3);margin-bottom:14px;overflow:hidden;transition:transform .25s}
+.tav-photo svg{width:60%;height:60%}.tav-photo img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+.tc:hover .tav-photo{transform:scale(1.02)}
+.tc-name{font-family:var(--sans);font-size:15px;font-weight:700;color:var(--text)}
+.tc-role{font-size:12px;color:var(--muted);margin-top:2px;font-weight:400}
+
+/* ── CTA BOX ── */
+.cta-box{background:#F5F3EF;border:1.5px solid var(--or);border-radius:2px;padding:62px 48px;text-align:center;margin-top:28px;position:relative;overflow:hidden;box-shadow:0 0 0 1px rgba(255,98,64,0.2),0 0 60px rgba(255,98,64,0.1)}
+.cta-serif{font-family:var(--display);font-style:italic;font-weight:900;font-size:3.2rem;color:var(--or);line-height:1.05;margin-bottom:16px;text-transform:uppercase}
+.cta-lead{color:rgba(0,0,0,0.62);font-size:17px;font-weight:300;margin-bottom:32px;line-height:1.7;max-width:480px;margin-left:auto;margin-right:auto}
+.cta-btn-main{display:inline-flex;align-items:center;gap:10px;background:var(--or);color:#FFFFFF;padding:16px 38px;border-radius:2px;font-family:var(--display);font-weight:900;font-size:15px;text-decoration:none;transition:transform .22s cubic-bezier(.2,.9,.1,1.2),box-shadow .22s;letter-spacing:0.06em;text-transform:uppercase}
+.cta-btn-main:hover{transform:translateY(-3px);box-shadow:0 0 0 2px var(--or),0 0 40px rgba(255,98,64,0.5)}
+
+/* ── VS ITEM ICON ── */
+.vi{font-size:14px;font-weight:900;flex-shrink:0;min-width:16px;color:var(--or);margin-top:2px}
+.vs-before .vi{color:var(--muted)}
+
+/* ── WIN ICON ── */
+.win-icon{font-family:var(--display);font-style:italic;font-size:2.4rem;font-weight:900;color:rgba(255,98,64,0.55);line-height:1;margin-bottom:14px}
+
+/* ── STAR ── */
+.star{color:var(--or)}
+.divider-stars{text-align:center;font-size:16px;letter-spacing:14px;color:rgba(255,98,64,0.35);margin:8px 0 36px}
+.divider-stars-white{color:rgba(0,0,0,0.16)}
+
+/* ── CT TABLE ── */
+.ct-table{border-radius:2px;overflow:hidden;border:1px solid var(--border);margin-bottom:20px}
+.ct-head{display:flex;justify-content:space-between;padding:13px 22px;background:var(--surface2);font-family:var(--sans);font-size:12px;font-weight:900;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)}
+.ct-row{display:flex;justify-content:space-between;padding:12px 22px;border-bottom:1px solid var(--cream3);font-size:15px;font-weight:300;background:var(--surface);color:var(--text)}
+.ct-row:last-child{border-bottom:none}
+.ct-total{display:flex;justify-content:space-between;padding:14px 22px;background:rgba(255,69,69,0.08);border-top:2px solid rgba(255,69,69,0.25);font-size:16px;font-weight:900}
+
+/* ── SCROLL MARQUEE ── */
+.marquee-wrap{overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:16px 0;background:#E8E5DF;margin:0}
+.marquee-track{display:flex;gap:48px;animation:marquee 24s linear infinite;width:max-content}
+.marquee-item{font-family:var(--display);font-size:13px;font-weight:900;color:var(--muted);white-space:nowrap;letter-spacing:0.08em;text-transform:uppercase}
+.marquee-item .dot{color:var(--or);margin-right:48px}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+
+/* ── MOBILE RESPONSIVE ── */
+#mob-toggle{display:none}
+@media(max-width:768px){
+  #mob-toggle{display:flex;align-items:center;justify-content:center;position:fixed;top:14px;left:14px;z-index:300;width:40px;height:40px;border-radius:8px;background:#FFFFFF;border:1px solid rgba(0,0,0,0.15);cursor:pointer;color:#0A0A0A;font-size:20px;line-height:1}
+  #sidebar{transform:translateX(-100%);transition:transform .28s cubic-bezier(.4,0,.2,1);z-index:200;width:280px;min-width:280px}
+  #sidebar.open{transform:translateX(0)}
+  #sb-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:150;backdrop-filter:blur(2px)}
+  #sb-overlay.open{display:block}
+  #main{margin-left:0!important}
+  .section-inner{padding:72px 20px!important}
+  .section.dark .section-inner{padding:72px 20px!important}
+  .h1,.h1-xl{font-size:clamp(2rem,10vw,3.5rem)!important}
+  .h2{font-size:clamp(1.6rem,8vw,2.8rem)!important}
+  .g2,.g3{grid-template-columns:1fr!important}
+  .breakout{width:100%!important;margin-left:0!important;margin-right:0!important}
+  .reel-grid{grid-template-columns:1fr 1fr!important}
+  .team-grid{grid-template-columns:1fr 1fr!important}
+  .plan-grid,.plan-grid-3{grid-template-columns:1fr!important}
+  .ai-grid{grid-template-columns:1fr!important}
+  .crm-tools-grid{grid-template-columns:1fr 1fr!important}
+  .sc-thumbs{display:none!important}
+  .sc-stage{aspect-ratio:4/3!important}
+}
+</style>
+</head>
+<body>
+<button id="mob-toggle" aria-label="Open menu" onclick="document.getElementById('sidebar').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('open')">&#9776;</button>
+<div id="sb-overlay" onclick="document.getElementById('sidebar').classList.remove('open');document.getElementById('sb-overlay').classList.remove('open')"></div>
+<nav id="sidebar">
+  <div class="sb-logo">
+    <img class="sb-logo-img" src="assets/mverse-logo-light.png" alt="Marketingverse">
+    <div class="sb-sub">For Small Biz & Personal Brands</div>
+  </div>
+  <div class="sb-nav">
+    <div class="sb-group">The Problem</div>
+    <a class="sb-link active" href="#s1">The Invisible Brand</a>
+    <a class="sb-link" href="#s2">What Silence Costs You</a>
+    <div class="sb-group" style="margin-top:6px">The Transformation</div>
+    <a class="sb-link" href="#s3">Meet Marketingverse</a>
+    <a class="sb-link" href="#s4">Your Brand, Every Day</a>
+    <a class="sb-link" href="#s5">The Recognized Brand</a>
+    <div class="sb-group" style="margin-top:6px">The Decision</div>
+    <a class="sb-link" href="#s6">Our Work</a>
+    <a class="sb-link" href="#s6b">Paid Ads, Done Right</a>
+    <a class="sb-link" href="#s8">Plans & Pricing</a>
+    <a class="sb-link" href="#s9">Let's Go</a>
+  </div>
+  <div class="sb-footer">
+    <div class="sb-prog-bar"><div class="sb-prog-fill" id="prog-fill"></div></div>
+    <div class="sb-prog-text" id="prog-text">1 of 9</div>
+    <a class="sb-back" href="../index.html"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>All Decks</a>
+    <button class="sb-cta-btn" onclick="openPopup('https://api.leadconnectorhq.com/widget/bookings/marketingverse-demo')">Book Free Demo →</button>
+  </div>
+</nav>
+<main id="main">
+
+<section class="section" id="s1">
+<div class="section-inner">
+  <div class="eyebrow reveal">★ Chapter One</div>
+  <div class="h1 reveal reveal-delay-1">You built something great.<br><em>Nobody outside your circle<br>knows it.</em></div>
+  <p class="lead muted reveal reveal-delay-2" style="margin-bottom:36px">You have the skill, the story, the product. But your social media is quiet, inconsistent, or just not there. In 2026, if you're not showing up online — you don't exist to the people who need you most.</p>
+  <div class="myth-grid">
+    <div class="myth-card reveal reveal-delay-1"><div class="myth-num">Myth 01</div><div class="myth-claim">"Word of mouth is enough for my business."</div><div class="myth-bust">(Until it isn't. And by then your competitor is everywhere.)</div></div>
+    <div class="myth-card reveal reveal-delay-2"><div class="myth-num">Myth 02</div><div class="myth-claim">"I post when I have something to say."</div><div class="myth-bust">(The algorithm rewards consistency, not inspiration.)</div></div>
+    <div class="myth-card reveal reveal-delay-3"><div class="myth-num">Myth 03</div><div class="myth-claim">"I just need better content ideas."</div><div class="myth-bust">(You need a system. Ideas aren't your problem. Execution is.)</div></div>
+  </div>
+  <div class="before-frame reveal">
+    <div class="before-label">What a potential client sees when they look you up right now</div>
+    <div class="before-avatar-wrap">
+      <div class="before-avatar"><svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="14" r="8" fill="none" stroke="currentColor" stroke-width="2" opacity="0.4"/><path d="M4 38c0-8.837 7.163-16 16-16s16 7.163 16 16" fill="none" stroke="currentColor" stroke-width="2" opacity="0.4"/></svg></div>
+      <div style="font-size:17px;font-weight:700">Your Brand Name</div>
+      <div style="font-size:14px;color:var(--muted);margin-top:4px">Coach · Consultant · Business Owner</div>
+      <div style="font-size:13px;color:var(--muted);margin-top:3px">Last post: 3 weeks ago</div>
+    </div>
+    <div class="tag-row">
+      <span class="tag-bad">0 new followers this month</span>
+      <span class="tag-gray">Inconsistent posting</span>
+      <span class="tag-bad">0 inquiries from social</span>
+      <span class="tag-gray">Growth stalled</span>
+      <span class="tag-bad">Competitor is posting daily</span>
+    </div>
+  </div>
+  <div class="g3 reveal">
+    <div class="card" onclick="togCard(this)"><div class="card-head"><span>No consistent presence</span><span class="chevron">⌄</span></div><div class="card-body"><div class="card-body-inner">You post when you remember, which means your audience never knows when to expect you. Inconsistency kills trust — and trust is the only thing that makes people buy from a personal brand or small business.</div></div></div>
+    <div class="card" onclick="togCard(this)"><div class="card-head"><span>Generic-looking content</span><span class="chevron">⌄</span></div><div class="card-body"><div class="card-body-inner">You're using the same Canva templates as everyone else. Your content looks like content. It doesn't look like you. In a feed full of noise, looking like everyone else means getting scrolled past like everyone else.</div></div></div>
+    <div class="card" onclick="togCard(this)"><div class="card-head"><span>No time to do it right</span><span class="chevron">⌄</span></div><div class="card-body"><div class="card-body-inner">You're running a business, serving clients, doing everything. Content keeps falling to the bottom of the list — and every week it stays there, your competitors move up in your customers' feeds.</div></div></div>
+  </div>
+</div>
+</section>
+
+<section class="section cream2" id="s2">
+<div class="section-inner">
+  <div class="eyebrow reveal">★ Chapter Two</div>
+  <div class="h2 reveal reveal-delay-1">Every week you're quiet<br>is a week your competitor <em>is being heard.</em></div>
+  <p class="lead muted reveal reveal-delay-2" style="margin-bottom:40px">Social media isn't optional anymore. It's where trust is built, where decisions are made, and where your next client is deciding whether to reach out to you or someone else.</p>
+  <div class="g3 reveal reveal-delay-1" style="margin-bottom:40px">
+    <div class="stat"><div class="big-n count-up" data-target="73" data-suffix="%">0%</div><div class="stat-label">of consumers say social media influences their purchasing decisions</div></div>
+    <div class="stat"><div class="big-n">5–7x</div><div class="stat-label">impressions needed before someone feels comfortable enough to reach out</div></div>
+    <div class="stat"><div class="big-n count-up" data-target="3" data-suffix="x">0</div><div class="stat-label">more leads generated by brands that post consistently vs. those that don't</div></div>
+  </div>
+  <div class="divider-stars reveal">★ ★ ★</div>
+  <div class="h3 reveal" style="margin-bottom:20px">Today, while you're in this meeting...</div>
+  <div class="vs-grid reveal reveal-delay-1">
+    <div class="vs-col vs-before">
+      <div class="vs-head" style="color:var(--muted)">Your competitor today</div>
+      <div class="vs-item"><span class="vi">—</span><span>Posted a behind-the-scenes reel — 2,000 views, 40 saves</span></div>
+      <div class="vs-item"><span class="vi">—</span><span>Replied to every comment and built real audience trust</span></div>
+      <div class="vs-item"><span class="vi">—</span><span>Ran a targeted story that drove 15 DMs from ideal clients</span></div>
+      <div class="vs-item"><span class="vi">—</span><span>Shared a client win — 3 referral inquiries came in</span></div>
+      <div class="vs-item"><span class="vi">—</span><span>Gained 100 new followers this week, all in their niche</span></div>
+    </div>
+    <div class="vs-col vs-after">
+      <div class="vs-head" style="color:var(--or)">You, without a system</div>
+      <div class="vs-item"><span class="vi">×</span><span>Last post was 2 weeks ago. Followers wondering if you're still active.</span></div>
+      <div class="vs-item"><span class="vi">×</span><span>Engagement dropping because the algorithm punishes inconsistency</span></div>
+      <div class="vs-item"><span class="vi">×</span><span>Spent 3 hours last Sunday making one post that got 8 likes</span></div>
+      <div class="vs-item"><span class="vi">×</span><span>Bought a Canva template pack. Used it once. Looked like everyone else.</span></div>
+      <div class="vs-item"><span class="vi">×</span><span>Potential client found you, saw an inactive profile, went with someone else</span></div>
+    </div>
+  </div>
+  <div class="hbox reveal"><strong class="star">The real cost:</strong> It's not just missed sales. It's the brand equity you're not building. Every day your competitor shows up and you don't, they compound. Brands that win on social aren't more talented — they're more consistent.</div>
+</div>
+</section>
+
+<section class="section" id="s3">
+<div class="section-inner">
+  <div class="eyebrow reveal">★ Chapter Three — The Turning Point</div>
+  <div class="h2 reveal reveal-delay-1">You don't need to become<br>a content creator. You need <em>a content team.</em></div>
+  <p class="lead muted reveal reveal-delay-2" style="margin-bottom:40px">Marketingverse is your done-for-you social media department. We handle the content, strategy, scheduling, design — so you can focus on running your business and serving your clients.</p>
+  <div class="journey reveal reveal-delay-1">
+    <div class="j-item done"><div class="j-dot"></div><div class="j-title">Invisible brand — where this started</div><div class="j-desc">Inconsistent, generic, or silent. Growing by word of mouth with no amplification.</div></div>
+    <div class="j-item done"><div class="j-dot"></div><div class="j-title">You saw what silence is costing you</div><div class="j-desc">Not just sales — the trust, authority, and visibility your competitors are compounding daily.</div></div>
+    <div class="j-item current"><div class="j-dot"></div><div class="j-title" style="color:var(--or)">You find Marketingverse — right now</div><div class="j-desc">Done-for-you content that sounds like you, looks premium, and shows up every single day.</div></div>
+    <div class="j-item"><div class="j-dot"></div><div class="j-title" style="color:var(--muted)">Your brand becomes unmissable</div><div class="j-desc">Consistent, branded, original content that builds real trust with your audience.</div></div>
+    <div class="j-item"><div class="j-dot"></div><div class="j-title" style="color:var(--muted)">You become the recognized name in your niche</div><div class="j-desc">Inbound inquiries. Dream client DMs. Authority that compounds month over month.</div></div>
+  </div>
+</div>
+</section>
+
+<section class="section cream2" id="s4">
+<div class="section-inner">
+  <div class="eyebrow reveal">★ Chapter Four — What We Deliver</div>
+  <div class="h2 reveal reveal-delay-1">Your story, told beautifully,<br><em>every single day.</em></div>
+  <p class="lead muted reveal reveal-delay-2" style="margin-bottom:36px">We're not a scheduling tool. We're not a template library. We're a creative team that learns your brand, your voice, your audience — and shows up for you consistently.</p>
+  <div id="meters" class="reveal reveal-delay-1" style="margin-bottom:36px">
+    <div class="meter-block"><div class="meter-top"><span>Brand Consistency Score</span><span class="star" id="m1-val">0%</span></div><div class="meter-bar"><div class="meter-fill" id="m1" data-target="100"></div></div></div>
+    <div class="meter-block"><div class="meter-top"><span>Audience Trust & Engagement Growth</span><span class="star" id="m2-val">0%</span></div><div class="meter-bar"><div class="meter-fill" id="m2" data-target="72"></div></div></div>
+    <div class="meter-block"><div class="meter-top"><span>Inbound Inquiry Rate (avg by month 4)</span><span class="star" id="m3-val">0%</span></div><div class="meter-bar"><div class="meter-fill" id="m3" data-target="58"></div></div></div>
+  </div>
+  <div class="reveal reveal-delay-2">
+    <div class="card" onclick="togCard(this)"><div class="card-head"><span>Original Content — Your Voice, Our Craft</span><span class="chevron">⌄</span></div><div class="card-body"><div class="card-body-inner">We don't recycle content or use generic templates. Every caption is written to sound like you on your best, most articulate day. Every graphic is designed to look like YOUR brand — not a Canva marketplace pack.</div></div></div>
+    <div class="card" onclick="togCard(this)"><div class="card-head"><span>Premium Visual Identity & Brand Design</span><span class="chevron">⌄</span></div><div class="card-body"><div class="card-body-inner">We build your visual system — colors, fonts, graphic style, photography direction. Every post is unmistakably yours. Scroll past a dozen accounts, see yours, and know instantly: that's them.</div></div></div>
+    <div class="card" onclick="togCard(this)"><div class="card-head"><span>Full Content Calendar — Planned, Approved, Done</span><span class="chevron">⌄</span></div><div class="card-body"><div class="card-body-inner">See your entire month in one view. Approve, edit, or swap anything. Instagram, Facebook, LinkedIn — scheduled and live. No more Sunday night panic about what to post Monday morning.</div></div></div>
+    <div class="card" onclick="togCard(this)"><div class="card-head"><span>Monthly Strategy — We Track, Adjust, and Grow</span><span class="chevron">⌄</span></div><div class="card-body"><div class="card-body-inner">Every month we review what's working, what your audience is responding to, and where the opportunities are. Your strategy evolves as your brand grows.</div></div></div>
+  </div>
+  <div class="hbox reveal"><strong class="star">The consistency advantage:</strong> Brands that show up daily build 3x more trust and generate 3x more inbound inquiries than brands that post sporadically. Consistency isn't just a nice-to-have. It's the whole game.</div>
+</div>
+</section>
+
+<section class="section dark" id="s5">
+<div class="section-inner">
+  <div class="eyebrow reveal" style="color:rgba(0,0,0,0.45);border-color:rgba(255,255,255,0.12)">★ Chapter Five — The New Reality</div>
+  <div class="h2 h2-white reveal reveal-delay-1">Journey complete.<br><em>This is the other side.</em></div>
+  <p class="lead reveal reveal-delay-2" style="color:rgba(0,0,0,0.6);margin-bottom:44px">Every dot checked. System running. Brand growing. The real win isn't just more clients — it's what that growth gives you back.</p>
+  <div class="journey reveal reveal-delay-1" style="margin-bottom:52px">
+    <div class="j-item done"><div class="j-dot"></div><div class="j-title" style="color:rgba(0,0,0,0.8)">Invisible brand — where it started</div><div class="j-desc" style="color:rgba(0,0,0,0.4)">Inconsistent, generic content. No system, no traction.</div></div>
+    <div class="j-item done"><div class="j-dot"></div><div class="j-title" style="color:rgba(0,0,0,0.8)">Saw what silence was costing</div><div class="j-desc" style="color:rgba(0,0,0,0.4)">Not just sales — the compounding visibility going to someone else every day.</div></div>
+    <div class="j-item done"><div class="j-dot"></div><div class="j-title" style="color:rgba(0,0,0,0.8)">Found Marketingverse</div><div class="j-desc" style="color:rgba(0,0,0,0.4)">Done-for-you content and strategy that shows up every day.</div></div>
+    <div class="j-item done"><div class="j-dot"></div><div class="j-title" style="color:rgba(0,0,0,0.8)">Brand became unmissable</div><div class="j-desc" style="color:rgba(0,0,0,0.4)">Consistent, premium, original. Audience started recognizing and trusting.</div></div>
+    <div class="j-item done"><div class="j-dot" style="width:24px;height:24px;left:-38px;font-size:13px;box-shadow:0 0 0 6px rgba(255,98,64,0.2),0 0 0 12px rgba(255,98,64,0.08)"></div>
+      <div class="j-title" style="color:var(--or);font-size:19px;font-weight:800">You became the recognized name in your niche</div>
+      <div class="j-desc" style="color:rgba(0,0,0,0.55)">And here's what that actually looks like for your life.</div>
+    </div>
+  </div>
+  <div class="divider-stars divider-stars-white reveal">★ ★ ★</div>
+  <div class="win-grid">
+    <div class="win-card reveal reveal-delay-1"><div class="win-icon">01</div><div class="win-title">Clients find you. You stopped chasing.</div><div class="win-body">Inbound DMs from people who've been following you for months. They already trust you before they send the first message. Closing is easier because you're not starting from zero.</div></div>
+    <div class="win-card reveal reveal-delay-2"><div class="win-icon">02</div><div class="win-title">Weekends are yours again</div><div class="win-body">No more Sunday night content panic. No more 3-hour Canva sessions for one post. Your team handles it. You review and approve in minutes — and spend the rest of the weekend actually living.</div></div>
+    <div class="win-card reveal reveal-delay-3"><div class="win-icon">03</div><div class="win-title">You charge more. They say yes.</div><div class="win-body">A strong brand justifies premium pricing. When people have been watching you online for months, they arrive pre-sold. Price resistance drops when trust is already there.</div></div>
+    <div class="win-card reveal reveal-delay-4"><div class="win-icon">04</div><div class="win-title">The brand works even when you don't</div><div class="win-body">Take a vacation. Go on a speaking trip. Your content keeps posting. Your audience keeps growing. You come back to more followers, more inquiries, more momentum than when you left.</div></div>
+  </div>
+  <div class="win-finale reveal reveal-delay-3">
+    <div class="win-finale-serif">This is the recognized brand life.</div>
+    <div class="win-finale-body">Not more hustle. A better system. One that builds your brand while you build your business.</div>
+  </div>
+</div>
+</section>
+
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">Done-For-You Content <span class="dot">★</span></span>
+    <span class="marquee-item">Brand Identity <span class="dot">★</span></span>
+    <span class="marquee-item">IG/FB Posts <span class="dot">★</span></span>
+    <span class="marquee-item">Monthly Strategy <span class="dot">★</span></span>
+    <span class="marquee-item">Video Shoots <span class="dot">★</span></span>
+    <span class="marquee-item">LinkedIn Coverage <span class="dot">★</span></span>
+    <span class="marquee-item">IG Boosts <span class="dot">★</span></span>
+    <span class="marquee-item">Stories <span class="dot">★</span></span>
+    <span class="marquee-item">Real Humans Behind Your Brand <span class="dot">★</span></span>
+    <span class="marquee-item">Done-For-You Content <span class="dot">★</span></span>
+    <span class="marquee-item">Brand Identity <span class="dot">★</span></span>
+    <span class="marquee-item">IG/FB Posts <span class="dot">★</span></span>
+    <span class="marquee-item">Monthly Strategy <span class="dot">★</span></span>
+    <span class="marquee-item">Video Shoots <span class="dot">★</span></span>
+    <span class="marquee-item">LinkedIn Coverage <span class="dot">★</span></span>
+    <span class="marquee-item">IG Boosts <span class="dot">★</span></span>
+    <span class="marquee-item">Stories <span class="dot">★</span></span>
+    <span class="marquee-item">Real Humans Behind Your Brand <span class="dot">★</span></span>
+  </div>
+</div>
+
+<section class="section" id="s6">
+<div class="section-inner">
+  <div class="eyebrow reveal">★ Chapter Six — Our Work</div>
+  <div class="h2 reveal reveal-delay-1">Real content.<br><em>Real brands. Real results.</em></div>
+  <p class="lead muted reveal reveal-delay-2" style="margin-bottom:12px">Not stock photos. Not recycled Canva templates. Every piece is original, branded, and built for your specific audience and voice.</p>
+  <div class="breakout"><div class="reels-grid reveal reveal-delay-1">
+    <div class="reel-card"><div class="reel-inner"><div class="reel-tag">Brand Story</div><div class="reel-play">&#9654;</div><div class="reel-lbl">Client Reel<br>Coming Soon</div><div class="reel-soon">Video loading soon</div></div></div>
+    <div class="reel-card"><div class="reel-inner"><div class="reel-tag">Personal Brand</div><div class="reel-play">&#9654;</div><div class="reel-lbl">Client Reel<br>Coming Soon</div><div class="reel-soon">Video loading soon</div></div></div>
+    <div class="reel-card"><div class="reel-inner"><div class="reel-tag">Product/Service</div><div class="reel-play">&#9654;</div><div class="reel-lbl">Client Reel<br>Coming Soon</div><div class="reel-soon">Video loading soon</div></div></div>
+    <div class="reel-card"><div class="reel-inner"><div class="reel-tag">Behind the Scenes</div><div class="reel-play">&#9654;</div><div class="reel-lbl">Client Reel<br>Coming Soon</div><div class="reel-soon">Video loading soon</div></div></div>
+    <div class="reel-card"><div class="reel-inner"><div class="reel-tag">Client Win</div><div class="reel-play">&#9654;</div><div class="reel-lbl">Client Reel<br>Coming Soon</div><div class="reel-soon">Video loading soon</div></div></div>
+    <div class="reel-card"><div class="reel-inner"><div class="reel-tag">Authority Content</div><div class="reel-play">&#9654;</div><div class="reel-lbl">Client Reel<br>Coming Soon</div><div class="reel-soon">Video loading soon</div></div></div>
+  </div>
+</div></div>
+</section>
+
+<!-- S6b: ADS PLAYBOOK -->
+<section class="section cream2" id="s6b">
+<div class="section-inner">
+  <div class="eyebrow reveal">★ The Playbook — Paid Ads, Done Right</div>
+  <div class="h2 reveal reveal-delay-1">We don't just run ads.<br><em>We train the algorithm first.</em></div>
+  <p class="lead muted reveal reveal-delay-2" style="margin-bottom:40px">Most personal brands burn money boosting to strangers. We warm the algorithm up first — teach it exactly who your people are — then spend. Same budget, far better return.</p>
+  <div class="ads-flow reveal reveal-delay-1">
+    <div class="ads-step"><div class="ads-num">01</div><div class="ads-step-title">Warm It Up</div><div class="ads-step-body">We post consistently and engage your real audience, so the platform learns who actually responds to you — not a guess, a trained profile.</div></div>
+    <div class="ads-arrow">→</div>
+    <div class="ads-step"><div class="ads-num">02</div><div class="ads-step-title">Boost The Winners</div><div class="ads-step-body">We put small boosts behind the posts that already perform. Every dollar sharpens the algorithm's picture of your ideal customer.</div></div>
+    <div class="ads-arrow">→</div>
+    <div class="ads-step"><div class="ads-num">03</div><div class="ads-step-title">Then Go Paid</div><div class="ads-step-body">Now we scale with paid ads. The platform already knows your audience — so your spend lands in front of the right people from day one.</div></div>
+  </div>
+  <div class="ads-result reveal reveal-delay-2">
+    <div class="ads-result-k">The Payoff</div>
+    <div class="ads-result-h">Cold ads guess. Trained ads convert.</div>
+    <p class="ads-result-b">By the time we scale your spend, the algorithm is already working for you — not against your budget. That's how the same ad dollars come back with a better return.</p>
+  </div>
+</div>
+</section>
+
+<section class="section cream2" id="s7">
+<div class="section-inner">
+  <div class="eyebrow reveal">★ Chapter Seven — Your ROI</div>
+  <div class="h2 reveal reveal-delay-1">Let's put real numbers<br>on <em>what this is worth.</em></div>
+  <p class="lead muted reveal reveal-delay-2" style="margin-bottom:36px">Plug in your average client value. See what consistent content marketing adds to your business over the next 12 months.</p>
+  <div class="g2 reveal reveal-delay-1" style="margin-bottom:16px">
+    <div><label class="inp-label">Average client value ($)</label><input class="inp" type="number" id="comm" value="3000" oninput="calc()"></div>
+    <div><label class="inp-label">New clients per month currently</label><input class="inp" type="number" id="leads" value="5" oninput="calc()"></div>
+  </div>
+  <div class="reveal reveal-delay-2">
+    <label class="inp-label">How much comes from referrals/word of mouth: <span id="rlbl" style="color:var(--or);font-weight:700">60%</span></label>
+    <input type="range" id="rate" min="10" max="100" value="60" step="5" oninput="document.getElementById('rlbl').textContent=this.value+'%';calc()">
+    <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-top:4px"><span>10%</span><span>100%</span></div>
+  </div>
+  <div class="roi-box reveal reveal-delay-2">
+    <div class="roi-row"><span>Revenue you're generating now</span><span class="roi-val" id="r1">—</span></div>
+    <div class="roi-row"><span>With consistent social (+3x inbound over 6 months)</span><span class="roi-val green" id="r2">—</span></div>
+    <div class="roi-row"><span>Additional clients per month by month 6</span><span class="roi-val green" id="r3">—</span></div>
+    <div class="roi-row" style="padding-top:16px;border-top:2px solid rgba(255,98,64,0.15);margin-top:4px"><span style="font-weight:700;font-size:17px">Additional annual revenue from content</span><span class="roi-val roi-total" id="r4">—</span></div>
+  </div>
+  <p class="reveal" style="font-family:var(--serif);font-style:italic;font-size:17px;color:var(--muted);margin-top:12px;line-height:1.7">Content doesn't deliver overnight. But it compounds every single month. By month 6, the brands that stuck with it can't imagine going back.</p>
+</div>
+</section>
+
+<section class="section" id="s8">
+<div class="section-inner">
+  <div class="eyebrow reveal">★ Chapter Eight — Plans & Pricing</div>
+  <div class="h2 reveal reveal-delay-1">Two plans.<br><em>Both built to make you unmissable.</em></div>
+  <p class="lead muted reveal reveal-delay-2" style="margin-bottom:36px">Pick the pace that matches your growth goals. Both include a real creative team — not software, not templates, not a VA who posts for you.</p>
+  <div class="breakout"><div class="plan-grid-2 reveal reveal-delay-1">
+    <div class="plan-card featured">
+      <div class="plan-badge">★ MOST POPULAR</div>
+      <div class="plan-inner">
+        <div class="plan-name">Social Media Growth</div>
+        <div class="plan-was">$640/mo</div>
+        <div class="plan-price"><sup>$</sup>550<sub>/mo</sub></div>
+        <div class="plan-setup">One-time $70 Setup Fee · Billed Monthly</div>
+        <div class="plan-btn-wrap"><a class="plan-btn" href="#" onclick="openPopup('https://billing.the-marketingverse.com/subscribe/012b590903e576e21bb2f16ffd298a88a7726ba08b65d6ccad482bf477cf719e/SocialMediaGrowth');return false;">Start Growing →</a></div>
+        <ul class="plan-features">
+          <li>Video Shoot</li>
+          <li>Brand Moodboard</li>
+          <li>8 IG/FB Posts per month</li>
+          <li>12 IG/FB Stories per month</li>
+          <li>Coaching &amp; Strategy Sessions</li>
+        </ul>
+      </div>
+    </div>
+    <div class="plan-card">
+      <div class="plan-badge" style="background:transparent;color:transparent;pointer-events:none">​</div>
+      <div class="plan-inner">
+        <div class="plan-name">Social Media Dominance</div>
+        <div class="plan-was">$820/mo</div>
+        <div class="plan-price"><sup>$</sup>750<sub>/mo</sub></div>
+        <div class="plan-setup">One-time $70 Setup Fee · Billed Monthly</div>
+        <div class="plan-btn-wrap"><a class="plan-btn" href="#" onclick="openPopup('https://billing.the-marketingverse.com/subscribe/012b590903e576e21bb2f16ffd298a88a7726ba08b65d6ccad482bf477cf719e/SocualMediaDominance');return false;">Start Growing →</a></div>
+        <ul class="plan-features">
+          <li>2 Video Shoots per month</li>
+          <li>Brand Moodboard</li>
+          <li>12 IG/FB Posts per month</li>
+          <li>4 LinkedIn Posts per month</li>
+          <li>20 IG/FB Stories per month</li>
+          <li>Coaching &amp; Strategy Sessions</li>
+          <li>4 IG Boosts per month</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="section cream2" id="s9">
+<div class="section-inner">
+  <div class="eyebrow reveal">★ Chapter Nine — Your Move</div>
+  <div class="h2 reveal reveal-delay-1">Your audience is online right now.<br><em>Are you?</em></div>
+  <p class="lead muted reveal reveal-delay-2" style="margin-bottom:36px">Every day you wait is another day your competitor compounds their audience while yours stays flat. Let's fix that — starting with one conversation.</p>
+  <div class="reveal reveal-delay-1" style="margin-bottom:36px">
+    <div class="card" onclick="togCard(this)"><div class="card-head"><span>Will this actually sound like my brand?</span><span class="chevron">⌄</span></div><div class="card-body"><div class="card-body-inner">100% yes. We start with a brand discovery session: your voice, your values, your audience, your goals. Everything we write goes through that filter. It won't sound like us. It'll sound like the best version of you.</div></div></div>
+    <div class="card" onclick="togCard(this)"><div class="card-head"><span>How involved do I have to be?</span><span class="chevron">⌄</span></div><div class="card-body"><div class="card-body-inner">As little or as much as you want. Minimum: approve content once a month. Most clients find a rhythm where they see their content, love it, and hit approve in 5 minutes. That's the goal.</div></div></div>
+    <div class="card" onclick="togCard(this)"><div class="card-head"><span>How long until I see results?</span><span class="chevron">⌄</span></div><div class="card-body"><div class="card-body-inner">First month: foundation is set, brand is refined, content starts going live. Months 2–3: engagement grows, audience starts recognizing you. Month 4–6: inbound inquiries start showing up. The brands that stick are the ones that win.</div></div></div>
+    <div class="card" onclick="togCard(this)"><div class="card-head"><span>What if I want to cancel?</span><span class="chevron">⌄</span></div><div class="card-body"><div class="card-body-inner">No long-term contracts. We want clients who stay because the results are real, not because we trapped them. If it's not working, we'll be the first to say so — and figure out what needs to change.</div></div></div>
+  </div>
+  <div class="team-grid reveal reveal-delay-1" style="margin-bottom:40px">
+    <div class="tc"><div class="tav-photo"><img src="assets/team/Ricky.png" alt="Ricky" style="width:100%;height:100%;object-fit:cover;object-position:top center;"></div><div class="tc-name">Ricky</div><div class="tc-role">Founder &amp; CEO</div></div>
+    <div class="tc"><div class="tav-photo"><img src="assets/team/Mari.png" alt="Mari" style="width:100%;height:100%;object-fit:cover;object-position:top center;"></div><div class="tc-name">Mari</div><div class="tc-role">Creative Director</div></div>
+    <div class="tc"><div class="tav-photo"><img src="assets/team/Nati.png" alt="Nati" style="width:100%;height:100%;object-fit:cover;object-position:top center;"></div><div class="tc-name">Nati</div><div class="tc-role">Project Manager</div></div>
+    <div class="tc"><div class="tav-photo"><img src="assets/team/Vale.png" alt="Vale" style="width:100%;height:100%;object-fit:cover;object-position:top center;"></div><div class="tc-name">Vale</div><div class="tc-role">Content Creator</div></div>
+    <div class="tc"><div class="tav-photo"><img src="assets/team/Leo.png" alt="Leo" style="width:100%;height:100%;object-fit:cover;object-position:bottom center;transform:scale(1.3);transform-origin:top center;"></div><div class="tc-name">Leo</div><div class="tc-role">Content Creator</div></div>
+    <div class="tc"><div class="tav-photo"><img src="assets/team/Adri.png" alt="Adri" style="width:100%;height:100%;object-fit:cover;object-position:top center;"></div><div class="tc-name">Adri</div><div class="tc-role">Marketing Specialist</div></div>
+  </div>
+  <div class="cta-box reveal">
+    <div class="cta-serif">Your brand deserves to be seen.</div>
+    <div class="cta-lead">No pressure. No jargon. Just a 30-minute conversation about where your brand is and where you want it to go.</div>
+    <a class="cta-btn-main" href="#" onclick="openPopup('https://api.leadconnectorhq.com/widget/bookings/marketingverse-demo');return false;">Book Your Free Strategy Call →</a>
+  </div>
+  <p style="font-size:13px;color:var(--muted);text-align:center;margin-top:36px">© 2026 Marketingverse · Social Media for Small Business &amp; Personal Brands</p>
+</div>
+</section>
+
+
+<!-- IFRAME POPUP MODAL -->
+<div id="popup-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.82);z-index:10000;align-items:center;justify-content:center;" onclick="closePopup(event)">
+  <div style="position:relative;width:min(720px,95vw);height:min(600px,90vh);background:#fff;border-radius:8px;overflow:hidden;">
+    <button onclick="closePopup()" style="position:absolute;top:10px;right:14px;background:none;border:none;font-size:24px;cursor:pointer;color:#333;z-index:1;line-height:1;">✕</button>
+    <iframe id="popup-frame" src="" allow="payment" style="width:100%;height:100%;border:none;"></iframe>
+  </div>
+</div>
+
+</main>
+<script>
+// ── SIDEBAR SCROLL TRACKER ──
+var sections=document.querySelectorAll('section[id]');
+var links=document.querySelectorAll('.sb-link');
+var mAnim=false;
+
+function updateSB(){
+  var sy=window.scrollY+180,cur=0;
+  sections.forEach(function(s,i){if(s.offsetTop<=sy)cur=i;});
+  links.forEach(function(l,i){l.classList.toggle('active',i===cur);});
+  document.getElementById('prog-fill').style.width=Math.round(((cur+1)/sections.length)*100)+'%';
+  document.getElementById('prog-text').textContent=(cur+1)+' of '+sections.length;
+  if(cur===3)animM();
+}
+window.addEventListener('scroll',updateSB,{passive:true});
+
+// ── SCROLL REVEAL (Intersection Observer) ──
+var revealEls=document.querySelectorAll('.reveal');
+var revealObs=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting){e.target.classList.add('visible');revealObs.unobserve(e.target);}
+  });
+},{threshold:0.12,rootMargin:'0px 0px -40px 0px'});
+revealEls.forEach(function(el){revealObs.observe(el);});
+
+// ── CARD ACCORDION ──
+function togCard(el){
+  var was=el.classList.contains('open');
+  el.closest('section').querySelectorAll('.card.open').forEach(function(c){c.classList.remove('open');});
+  if(!was)el.classList.add('open');
+}
+
+// ── BEFORE/AFTER TOGGLE ──
+function showTl(w,btn){
+  document.getElementById('tl-before').style.display=w==='before'?'block':'none';
+  document.getElementById('tl-after').style.display=w==='after'?'block':'none';
+  document.querySelectorAll('.tog').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+}
+
+// ── ROI CALCULATOR ──
+function calc(){
+  var c=parseFloat(document.getElementById('comm').value)||0;
+  var l=parseFloat(document.getElementById('leads').value)||0;
+  var r=parseFloat(document.getElementById('rate').value)/100;
+  var nowRev=l*c,addC=l*0.6,addYr=addC*c*12;
+  document.getElementById('r1').textContent='$'+Math.round(nowRev).toLocaleString()+'/mo';
+  document.getElementById('r2').textContent='$'+Math.round((l+addC)*c).toLocaleString()+'/mo';
+  document.getElementById('r3').textContent='+ '+addC.toFixed(1)+' clients/mo';
+  document.getElementById('r4').textContent='$'+Math.round(addYr).toLocaleString()+'/yr';
+}
+
+// ── METER ANIMATION ──
+function animM(){
+  if(mAnim)return;mAnim=true;
+  [1,2,3].forEach(function(i){
+    var el=document.getElementById('m'+i),vl=document.getElementById('m'+i+'-val');
+    var tg=parseInt(el.getAttribute('data-target')),c=0;
+    var iv=setInterval(function(){c++;el.style.width=c+'%';vl.textContent=c+'%';if(c>=tg)clearInterval(iv);},14);
+  });
+}
+
+// ── COUNT-UP NUMBERS ──
+var countObs=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(!e.isIntersecting)return;
+    var el=e.target;
+    var target=parseInt(el.getAttribute('data-target'));
+    var suffix=el.getAttribute('data-suffix')||'';
+    var cur=0,step=Math.ceil(target/40);
+    var iv=setInterval(function(){
+      cur=Math.min(cur+step,target);
+      el.textContent=cur+suffix;
+      if(cur>=target)clearInterval(iv);
+    },30);
+    countObs.unobserve(el);
+  });
+},{threshold:0.5});
+document.querySelectorAll('.count-up').forEach(function(el){countObs.observe(el);});
+
+// ── REEL LIKE-HEARTS (Instagram-style hover) ──
+(function(){
+  var cards=document.querySelectorAll('.reel-card');
+  cards.forEach(function(card){
+    var timer=null;
+    function spawn(){
+      var h=document.createElement('span');
+      h.className='reel-heart';
+      h.textContent='♥';
+      h.style.fontSize=(12+Math.random()*12).toFixed(0)+'px';
+      h.style.left=(30+Math.random()*40)+'%';
+      h.style.setProperty('--dx',(Math.random()*60-30).toFixed(0)+'px');
+      h.style.setProperty('--r',(Math.random()*30-15).toFixed(0)+'deg');
+      h.style.setProperty('--dur',(1.7+Math.random()*0.9).toFixed(2)+'s');
+      card.appendChild(h);
+      setTimeout(function(){h.remove();},2800);
+    }
+    card.addEventListener('mouseenter',function(){ if(timer)return; spawn(); timer=setInterval(spawn,300); });
+    card.addEventListener('mouseleave',function(){ clearInterval(timer);timer=null; });
+  });
+})();
+
+// ── INIT ──
+calc();
+updateSB();
+
+// Trigger reveal for elements already in viewport on load
+setTimeout(function(){
+  revealEls.forEach(function(el){
+    var rect=el.getBoundingClientRect();
+    if(rect.top<window.innerHeight*0.9)el.classList.add('visible');
+  });
+},100);
+</script>
+</body>
+</html>

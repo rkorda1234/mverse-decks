@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="https://assets.cdn.filesafe.space/CFAAUO2gnPooyim4LdoM/media/6a35b094c50697c4118de259.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marketingverse — For Real Estate Agents — Light</title>
+<style>
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+/* ── BRAND FONTS ── */
+@font-face{font-family:"Uni Sans";src:url("fonts/UniSans-Heavy.otf") format("opentype");font-weight:900;font-style:normal;font-display:swap}
+@font-face{font-family:"Uni Sans";src:url("fonts/UniSans-HeavyItalic.otf") format("opentype");font-weight:900;font-style:italic;font-display:swap}
+@font-face{font-family:"Uni Sans";src:url("fonts/UniSans-Thin.otf") format("opentype");font-weight:200;font-style:normal;font-display:swap}
+@font-face{font-family:"Roboto";src:url("fonts/Roboto-Light.ttf") format("truetype");font-weight:300;font-style:normal;font-display:swap}
+@font-face{font-family:"Roboto";src:url("fonts/Roboto-LightItalic.ttf") format("truetype");font-weight:300;font-style:italic;font-display:swap}
+@font-face{font-family:"Roboto";src:url("fonts/Roboto-Bold.ttf") format("truetype");font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:"Roboto";src:url("fonts/Roboto-BoldItalic.ttf") format("truetype");font-weight:700;font-style:italic;font-display:swap}
+@font-face{font-family:"Roboto";src:url("fonts/Roboto-Black.ttf") format("truetype");font-weight:900;font-style:normal;font-display:swap}
+
+:root{
+  --or:#FF6240;--or2:#E8552E;            /* lime signature accent */
+  --cream:#FAFAF8;--cream2:#F2F0EC;--cream3:#D8D5CF;  /* ink ramp */
+  --surface:#FFFFFF;--surface2:#F5F3EF;
+  --text:#0A0A0A;--muted:#555555;--dim:#888888;
+  --border:rgba(0,0,0,0.1);
+  --danger:#FF4545;--success:#6BE36B;
+  --sidebar:262px;
+  --sans:"Roboto",system-ui,sans-serif;
+  --serif:"Uni Sans","Arial Black",sans-serif;
+  --display:"Uni Sans","Arial Black",sans-serif;
+}
+html{scroll-behavior:smooth;background:var(--cream)}
+body{font-family:var(--sans);background:var(--cream);color:var(--text);display:flex;min-height:100vh;-webkit-font-smoothing:antialiased}
+::selection{background:var(--or);color:#FFFFFF}
+
+/* ── SIDEBAR ── */
+#sidebar{width:var(--sidebar);min-width:var(--sidebar);background:#FFFFFF;border-right:1px solid var(--border);position:fixed;top:0;left:0;bottom:0;overflow-y:auto;z-index:100;display:flex;flex-direction:column}
+#sidebar::-webkit-scrollbar{width:3px}
+#sidebar::-webkit-scrollbar-thumb{background:var(--cream3)}
+.sb-logo{padding:26px 22px 20px;border-bottom:1px solid var(--border);display:flex;justify-content:center;align-items:center}
+.sb-logo-img{height:60px;width:auto;display:block}
+.sb-sub{font-family:var(--sans);font-size:11px;color:rgba(0,0,0,0.62);margin-top:12px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase}
+.sb-nav{padding:16px 0;flex:1}
+.sb-group{font-family:var(--sans);font-size:11px;font-weight:900;letter-spacing:0.16em;text-transform:uppercase;color:rgba(0,0,0,0.5);padding:13px 22px 6px}
+.sb-link{display:flex;align-items:center;gap:10px;padding:10px 22px;font-size:15px;color:rgba(0,0,0,0.86);text-decoration:none;cursor:pointer;border-left:2px solid transparent;line-height:1.4;transition:color .18s,background .18s,border-color .18s;font-weight:600}
+.sb-link:hover{color:var(--text);background:rgba(0,0,0,0.04)}
+.sb-link.active{color:var(--or);border-left-color:var(--or);background:rgba(255,98,64,0.07);font-weight:700}
+.sb-footer{padding:16px 20px;border-top:1px solid var(--border)}
+.sb-prog-bar{height:3px;background:var(--cream3);border-radius:0;margin-bottom:8px;overflow:hidden}
+.sb-prog-fill{height:100%;background:var(--or);transition:width .5s cubic-bezier(.2,.9,.1,1.2);width:10%}
+.sb-prog-text{font-size:10px;color:var(--dim);margin-bottom:12px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase}
+.sb-cta-btn{width:100%;background:var(--or);color:#FFFFFF;border:none;border-radius:2px;padding:13px;font-family:var(--display);font-weight:900;font-size:12px;cursor:pointer;transition:transform .18s cubic-bezier(.2,.9,.1,1.2),box-shadow .18s;letter-spacing:0.06em;text-transform:uppercase}
+.sb-cta-btn:hover{transform:translateY(-2px);box-shadow:0 0 0 2px var(--or),0 0 28px rgba(255,98,64,0.45)}
+.sb-cta-btn:active{transform:translateY(1px)}
+.sb-back{display:flex;align-items:center;gap:7px;text-decoration:none;color:rgba(0,0,0,0.45);font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:10px 0 14px;transition:color .18s}
+.sb-back:hover{color:var(--or)}
+.sb-back svg{flex-shrink:0;opacity:.7}
+
+/* ── MAIN ── */
+#main{margin-left:var(--sidebar);flex:1;min-width:0}
+.section-inner{max-width:880px;margin:0 auto;padding:104px 52px}
+.breakout{max-width:1140px;margin-left:auto;margin-right:auto;width:100%}
+.section.dark .section-inner{max-width:880px;margin:0 auto;padding:104px 52px}
+.section{padding:0;border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+.section:last-child{border-bottom:none}
+.section.dark{background:#F0EDEA;color:var(--text)}
+.section.cream2{background:var(--cream2);background-image:radial-gradient(rgba(0,0,0,0.05) 1px,transparent 1px);background-size:22px 22px}
+
+/* ── SCROLL ANIMATIONS ── */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s cubic-bezier(.2,.9,.1,1.2),transform .6s cubic-bezier(.2,.9,.1,1.2)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.08s}.reveal-delay-2{transition-delay:.16s}.reveal-delay-3{transition-delay:.24s}.reveal-delay-4{transition-delay:.32s}.reveal-delay-5{transition-delay:.4s}
+
+/* ── TYPOGRAPHY ── */
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--sans);font-size:11px;font-weight:900;letter-spacing:0.2em;text-transform:uppercase;color:var(--or);margin-bottom:24px}
+.h1{font-family:var(--display);font-size:4.6rem;font-weight:900;line-height:.98;letter-spacing:-0.025em;margin-bottom:24px;text-transform:uppercase}
+.h1 em{font-family:var(--display);font-weight:900;font-style:italic;font-size:4.6rem;color:var(--or);letter-spacing:-0.025em}
+.h2{font-family:var(--display);font-size:3.3rem;font-weight:900;line-height:1.02;letter-spacing:-0.02em;margin-bottom:22px;text-transform:uppercase}
+.h2 em{font-family:var(--display);font-weight:900;font-style:italic;font-size:3.3rem;color:var(--or);letter-spacing:-0.02em}
+.h2-white{color:var(--text)}
+.h2-white em{color:var(--or)}
+.h3{font-family:var(--display);font-size:1.95rem;font-weight:900;line-height:1.08;letter-spacing:-0.01em;margin-bottom:14px;text-transform:uppercase}
+.lead{font-family:var(--sans);font-size:19px;font-weight:300;line-height:1.7;max-width:620px}
+.muted{color:var(--muted)}
+
+/* ── MYTH GRID ── */
+.myth-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin:36px 0}
+.myth-card{background:var(--surface);border:1px solid var(--border);border-radius:2px;padding:28px 24px;transition:transform .2s cubic-bezier(.2,.9,.1,1.2),box-shadow .2s,border-color .2s}
+.myth-card:hover{transform:translate(-3px,-3px);box-shadow:6px 6px 0 var(--or);border-color:var(--or)}
+.myth-num{font-family:var(--sans);font-size:10px;font-weight:900;letter-spacing:0.2em;text-transform:uppercase;color:var(--or);margin-bottom:12px}
+.myth-claim{font-family:var(--sans);font-size:17px;font-weight:700;line-height:1.4;margin-bottom:12px;color:var(--text)}
+.myth-bust{font-family:var(--display);font-style:italic;font-size:18px;font-weight:900;color:var(--or);line-height:1.25;text-transform:none}
+
+/* ── BEFORE FRAME ── */
+.before-frame{background:#EEECEA;border:1.5px dashed var(--cream3);border-radius:2px;padding:54px 40px 36px;text-align:center;margin:36px 0;position:relative;overflow:hidden}
+.before-label{position:absolute;top:0;left:0;right:0;background:var(--surface2);border-bottom:1px solid var(--border);padding:10px 20px;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);text-align:center}
+.before-avatar-wrap{opacity:0.34;filter:grayscale(1);margin-bottom:20px}
+.before-avatar{width:90px;height:90px;border-radius:50%;background:var(--surface);border:2px dashed var(--cream3);display:flex;align-items:center;justify-content:center;font-size:36px;margin:0 auto 14px;color:var(--muted)}
+.tag-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.tag-bad{background:rgba(255,69,69,0.12);border:1px solid rgba(255,69,69,0.4);color:#FF6B6B;font-size:12px;font-weight:700;letter-spacing:0.04em;padding:6px 14px;border-radius:999px}
+.tag-gray{background:var(--surface);border:1px solid var(--border);color:var(--muted);font-size:12px;font-weight:500;padding:6px 14px;border-radius:999px}
+
+/* ── CARDS ── */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:2px;padding:24px 26px;cursor:pointer;transition:border-color .25s,box-shadow .25s,transform .25s;margin-bottom:10px}
+.card:hover{border-color:rgba(255,98,64,0.5);transform:translateY(-2px)}
+.card.open{border-color:var(--or);background:rgba(255,98,64,0.04)}
+.card-head{display:flex;justify-content:space-between;align-items:center;gap:16px;font-family:var(--sans);font-size:16px;font-weight:700;line-height:1.4;color:var(--text)}
+.chevron{font-size:18px;color:var(--muted);transition:transform .35s cubic-bezier(.2,.9,.1,1.2),color .25s;flex-shrink:0}
+.card.open .chevron{transform:rotate(180deg);color:var(--or)}
+.card-body{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.2,.9,.1,1.2)}
+.card-body-inner{padding-top:14px;font-size:15px;font-weight:300;color:var(--muted);line-height:1.75}
+.card.open .card-body{max-height:520px}
+
+/* ── GRIDS ── */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+
+/* ── STATS ── */
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:2px;padding:30px 22px;text-align:center;transition:transform .2s cubic-bezier(.2,.9,.1,1.2),box-shadow .2s,border-color .2s}
+.stat:hover{transform:translate(-3px,-3px);box-shadow:6px 6px 0 var(--or);border-color:var(--or)}
+.big-n{font-family:var(--display);font-size:3.6rem;font-weight:900;color:var(--or);line-height:1;margin-bottom:10px;letter-spacing:-0.02em}
+.stat-label{font-size:14px;font-weight:300;color:var(--muted);line-height:1.6}
+
+/* ── VS GRID ── */
+.vs-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:28px}
+.vs-col{border-radius:2px;padding:28px}
+.vs-before{background:var(--surface2);border:1px solid var(--border)}
+.vs-after{background:rgba(255,98,64,0.05);border:2px solid rgba(255,98,64,0.45)}
+.vs-head{font-family:var(--sans);font-size:12px;font-weight:900;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+.vs-item{display:flex;gap:12px;padding:9px 0;font-size:15px;font-weight:300;line-height:1.6;border-bottom:1px solid var(--border)}
+.vs-item:last-child{border-bottom:none}
+
+/* ── JOURNEY ── */
+.journey{position:relative;padding-left:44px;margin-top:32px}
+.journey::before{content:'';position:absolute;left:14px;top:10px;bottom:10px;width:2px;background:var(--cream3)}
+.j-item{position:relative;margin-bottom:28px}
+.j-dot{position:absolute;left:-36px;top:4px;width:20px;height:20px;border-radius:50%;background:var(--surface);border:2px solid var(--cream3);transition:all .5s cubic-bezier(.2,.9,.1,1.2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;color:transparent}
+.j-item.done .j-dot{background:var(--or);border-color:var(--or);color:#FFFFFF;transform:scale(1.1)}
+.j-item.current .j-dot{background:var(--or);border-color:var(--or);color:#FFFFFF;box-shadow:0 0 0 6px rgba(255,98,64,0.18);animation:pulse-dot 2s infinite}
+@keyframes pulse-dot{0%,100%{box-shadow:0 0 0 6px rgba(255,98,64,0.18)}50%{box-shadow:0 0 0 10px rgba(255,98,64,0.08)}}
+.j-item.done .j-dot::after,.j-item.current .j-dot::after{content:'✓'}
+.j-title{font-family:var(--sans);font-size:17px;font-weight:700;margin-bottom:5px;line-height:1.3;color:var(--text)}
+.j-desc{font-size:15px;font-weight:300;color:var(--muted);line-height:1.65}
+
+/* ── TRANSFORMATION ── */
+.win-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:32px}
+.win-card{background:rgba(0,0,0,0.04);border:1px solid rgba(255,255,255,0.12);border-radius:2px;padding:28px;transition:transform .25s cubic-bezier(.2,.9,.1,1.2),box-shadow .25s,border-color .25s;cursor:default}
+.win-card:hover{transform:translate(-3px,-3px);box-shadow:6px 6px 0 var(--or);border-color:var(--or)}
+.win-emoji{font-size:2.6rem;margin-bottom:14px;display:block}
+.win-title{font-family:var(--sans);font-size:18px;font-weight:700;color:var(--text);margin-bottom:8px}
+.win-body{font-size:14px;font-weight:300;color:rgba(0,0,0,0.62);line-height:1.7}
+.win-finale{background:rgba(255,98,64,0.1);border:1.5px solid rgba(255,98,64,0.45);border-radius:2px;padding:40px;text-align:center;margin-top:14px}
+.win-finale-serif{font-family:var(--display);font-style:italic;font-size:2.8rem;font-weight:900;color:var(--or);line-height:1.1;margin-bottom:12px;text-transform:uppercase}
+.win-finale-body{font-size:15px;font-weight:300;color:rgba(0,0,0,0.65);line-height:1.7;max-width:460px;margin:0 auto}
+
+/* ── METERS ── */
+.meter-block{margin-bottom:22px}
+.meter-top{display:flex;justify-content:space-between;font-size:15px;margin-bottom:9px;font-weight:700;color:var(--text)}
+.meter-bar{height:8px;background:var(--cream3);border-radius:0;overflow:hidden}
+.meter-fill{height:100%;border-radius:0;background:var(--or);width:0;transition:width 1.4s cubic-bezier(.2,.9,.1,1.2)}
+
+/* ── TOGGLE ── */
+.tog-wrap{display:flex;background:var(--surface2);border:1px solid var(--border);border-radius:2px;padding:4px;width:fit-content;margin-bottom:28px}
+.tog{padding:10px 24px;border-radius:0;border:none;cursor:pointer;font-family:var(--sans);font-size:13px;font-weight:700;transition:all .22s;background:transparent;color:var(--muted);text-transform:uppercase;letter-spacing:0.04em}
+.tog.active{background:var(--or);color:#FFFFFF}
+
+/* ── TIMELINE ── */
+.tl-item{display:flex;gap:18px;padding:15px 20px;border-radius:2px;background:var(--surface);border:1px solid var(--border);margin-bottom:8px;transition:all .22s}
+.tl-item:hover{transform:translateX(4px);border-color:rgba(255,98,64,0.4)}
+.tl-time{font-family:var(--sans);font-size:12px;font-weight:900;color:var(--or);min-width:44px;padding-top:3px;flex-shrink:0;letter-spacing:0.02em}
+.tl-text{font-size:15px;font-weight:300;color:var(--muted);line-height:1.65}
+.tl-item.lit{border-color:rgba(255,98,64,0.3);background:rgba(255,98,64,0.05)}
+.tl-item.lit .tl-text{color:var(--text)}
+.tl-item.hl{border-color:var(--or);border-width:2px;background:rgba(255,98,64,0.09)}
+.tl-item.hl .tl-text{color:var(--or);font-weight:700}
+
+/* ── PILLS ── */
+.pill-grid{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}
+.pill{display:inline-flex;align-items:center;background:var(--surface);border:1px solid var(--border);border-radius:999px;padding:8px 16px;font-size:13px;font-weight:500;color:var(--text);transition:all .2s;cursor:default}
+.pill:hover{border-color:var(--or);color:var(--or);background:rgba(255,98,64,0.06)}
+
+/* ── ROI ── */
+.inp-label{font-size:13px;color:var(--muted);margin-bottom:7px;display:block;font-weight:700;letter-spacing:0.02em}
+.inp{background:var(--surface2);border:1.5px solid var(--border);color:var(--text);padding:14px 18px;border-radius:6px;font-size:17px;font-family:var(--sans);font-weight:700;width:100%;transition:border-color .2s,box-shadow .2s}
+.inp:focus{outline:none;border-color:var(--or);box-shadow:0 0 0 3px rgba(255,98,64,0.18)}
+input[type=range]{width:100%;accent-color:var(--or);cursor:pointer;margin-top:8px;height:6px}
+.roi-box{background:var(--surface2);border:2px solid var(--or);border-radius:2px;padding:30px;margin-top:24px;box-shadow:0 0 0 1px rgba(255,98,64,0.2),0 0 40px rgba(255,98,64,0.12)}
+.roi-row{display:flex;justify-content:space-between;align-items:center;padding:13px 0;border-bottom:1px solid var(--cream3);font-size:16px;font-weight:300;color:var(--text)}
+.roi-row:last-child{border-bottom:none}
+.roi-val{font-family:var(--display);font-size:1.3rem;font-weight:900;color:var(--or)}
+.roi-val.green{color:var(--success)}
+.roi-total{font-size:2rem !important;letter-spacing:-0.02em}
+
+/* ── HBOX ── */
+.hbox{background:rgba(255,98,64,0.08);border:1.5px solid rgba(255,98,64,0.35);border-radius:2px;padding:20px 24px;margin-top:18px;font-size:16px;font-weight:300;line-height:1.75;color:var(--text)}
+
+/* ── REELS ── */
+.reels-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:28px}
+.reel-card{background:var(--surface2);border:1px solid var(--border);border-radius:2px;overflow:hidden;aspect-ratio:9/16;position:relative;cursor:pointer;transition:all .3s cubic-bezier(.2,.9,.1,1.2)}
+.reel-card:hover{border-color:var(--or);transform:translateY(-6px);box-shadow:0 0 30px rgba(255,98,64,0.18)}
+/* ── REEL LIKE-HEARTS (Instagram-style hover) ── */
+.reel-heart{position:absolute;bottom:16px;z-index:6;pointer-events:none;line-height:1;color:#FF6240;will-change:transform,opacity;filter:drop-shadow(0 0 5px rgba(255,98,64,0.55));animation:reelFloat var(--dur,2.1s) ease-out forwards}
+@keyframes reelFloat{0%{opacity:0;transform:translateY(4px) translateX(0) scale(.3) rotate(0deg)}14%{opacity:.92;transform:translateY(-16px) translateX(calc(var(--dx,0px) * .25)) scale(1) rotate(var(--r,0deg))}70%{opacity:.55}100%{opacity:0;transform:translateY(-145px) translateX(var(--dx,0px)) scale(.8) rotate(var(--r,0deg))}}
+@media (prefers-reduced-motion: reduce){.reel-heart{display:none}}
+/* ── ADS PLAYBOOK ── */
+.ads-flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:stretch;gap:14px;margin-bottom:20px}
+.ads-step{background:var(--surface);border:1px solid var(--border);border-radius:2px;padding:28px 24px;transition:transform .2s cubic-bezier(.2,.9,.1,1.2),box-shadow .2s,border-color .2s;display:flex;flex-direction:column;gap:10px}
+.ads-step:hover{transform:translate(-3px,-3px);box-shadow:6px 6px 0 var(--or);border-color:var(--or)}
+.ads-num{font-family:var(--display);font-size:2.6rem;font-weight:900;color:var(--or);line-height:1;letter-spacing:-0.02em}
+.ads-step-title{font-family:var(--display);font-size:1.15rem;font-weight:900;text-transform:uppercase;letter-spacing:-0.01em;color:var(--text)}
+.ads-step-body{font-size:14px;font-weight:300;color:var(--muted);line-height:1.65}
+.ads-arrow{display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:1.8rem;font-weight:900;color:var(--or)}
+.ads-result{background:#F5F3EF;border:1.5px solid var(--or);border-radius:2px;padding:32px 36px;box-shadow:0 0 0 1px rgba(255,98,64,0.2),0 0 50px rgba(255,98,64,0.08)}
+.ads-result-k{font-family:var(--sans);font-size:11px;font-weight:900;letter-spacing:0.18em;text-transform:uppercase;color:var(--or);margin-bottom:12px}
+.ads-result-h{font-family:var(--display);font-size:2rem;font-weight:900;font-style:italic;text-transform:uppercase;color:var(--text);line-height:1.05;margin-bottom:12px;letter-spacing:-0.01em}
+.ads-result-b{font-size:15px;font-weight:300;color:rgba(0,0,0,0.66);line-height:1.7;max-width:620px;margin:0}
+@media(max-width:860px){.ads-flow{grid-template-columns:1fr}.ads-arrow{transform:rotate(90deg);padding:2px 0}}
+.reel-inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:#E8E5DF}
+.reel-inner::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.2) 0%,rgba(0,0,0,.6) 100%);pointer-events:none;z-index:0}
+.reel-thumb{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;z-index:0}
+.reel-play{position:relative;z-index:1;width:52px;height:52px;border-radius:50%;background:var(--or);display:flex;align-items:center;justify-content:center;font-size:17px;color:#FFFFFF;box-shadow:0 0 24px rgba(255,98,64,0.4);transition:transform .25s}
+.reel-card:hover .reel-play{transform:scale(1.12)}
+.reel-lbl{position:relative;z-index:1;font-size:12px;font-weight:500;color:#fff;text-align:center;padding:0 14px;line-height:1.5;text-shadow:0 1px 4px rgba(0,0,0,.8)}
+.reel-tag{position:absolute;top:12px;left:12px;z-index:1;background:rgba(10,10,10,0.75);border:1px solid var(--border);color:var(--text);font-size:10px;font-weight:900;letter-spacing:0.1em;text-transform:uppercase;padding:4px 10px;border-radius:999px;backdrop-filter:blur(4px)}
+.reel-soon{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);font-size:10px;color:var(--muted);white-space:nowrap;background:rgba(10,10,10,0.92);padding:4px 10px;border-radius:999px;border:1px solid var(--border)}
+
+/* ── PLAN CARDS ── */
+.plan-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.plan-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.plan-card{background:var(--surface2);border:1.5px solid var(--border);border-radius:2px;overflow:hidden;display:flex;flex-direction:column;transition:transform .3s cubic-bezier(.2,.9,.1,1.2),box-shadow .3s}
+.plan-card:hover{transform:translateY(-4px)}
+.plan-card.featured{border-color:var(--or);box-shadow:0 0 0 1px var(--or),0 0 48px rgba(255,98,64,0.18)}
+.plan-badge{background:var(--or);color:#FFFFFF;font-family:var(--display);font-size:11px;font-weight:900;letter-spacing:0.16em;text-transform:uppercase;text-align:center;padding:11px}
+.plan-inner{padding:30px;flex:1;display:flex;flex-direction:column}
+.plan-name{font-family:var(--sans);font-size:12px;font-weight:900;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+.plan-was{font-size:15px;color:var(--dim);text-decoration:line-through;margin-bottom:4px;font-weight:400}
+.plan-price{font-family:var(--display);font-size:3.6rem;font-weight:900;color:var(--text);line-height:1;letter-spacing:-0.03em}
+.plan-price sup{font-size:1.5rem;font-weight:900;vertical-align:super;margin-right:1px;color:var(--or)}
+.plan-price sub{font-size:1rem;font-weight:400;color:var(--muted);vertical-align:baseline;font-family:var(--sans)}
+.plan-setup{font-size:13px;color:var(--muted);margin-top:8px;margin-bottom:0;font-weight:400;flex:0}
+.plan-btn-wrap{margin-top:22px;margin-bottom:0;display:flex}
+.plan-btn{display:inline-block;background:transparent;border:1.5px solid var(--or);color:var(--or);text-align:center;padding:12px 28px;border-radius:2px;font-family:var(--display);font-weight:900;font-size:13px;cursor:pointer;transition:all .22s cubic-bezier(.2,.9,.1,1.2);text-decoration:none;margin-bottom:24px;letter-spacing:0.06em;text-transform:uppercase}
+.plan-card.featured .plan-btn{background:var(--or);color:#FFFFFF}
+.plan-btn:hover{background:var(--or);color:#FFFFFF;transform:translateY(-2px);box-shadow:0 0 24px rgba(255,98,64,0.35)}
+.plan-features{list-style:none;flex:1}
+.plan-features li{display:flex;align-items:flex-start;gap:10px;padding:9px 0;font-size:14px;font-weight:300;color:var(--muted);border-bottom:1px solid var(--cream3);line-height:1.5}
+.plan-features li:last-child{border-bottom:none}
+.plan-features li::before{content:'✓';color:var(--or);font-weight:900;flex-shrink:0;margin-top:1px}
+.plan-price-bottom{padding:22px 30px;border-top:1.5px solid var(--cream3)}
+.price-big{font-family:var(--display);font-size:2.8rem;font-weight:900;color:var(--text);letter-spacing:-0.03em}
+.price-big sub{font-size:1rem;font-weight:400;color:var(--muted);vertical-align:baseline;font-family:var(--sans)}
+
+/* ── TEAM ── */
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.tc{background:var(--surface);border:1px solid var(--border);border-radius:2px;padding:18px;text-align:center;transition:transform .2s,box-shadow .2s,border-color .2s}
+.tc:hover{transform:translateY(-3px);border-color:rgba(255,98,64,0.4)}
+.tav{width:54px;height:54px;border-radius:50%;background:rgba(255,98,64,0.1);border:2px solid rgba(255,98,64,0.4);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:900;font-size:16px;color:var(--or);margin:0 auto 12px;transition:transform .25s}
+.tc:hover .tav{transform:scale(1.08)}
+.tav-photo{width:100%;aspect-ratio:1;border-radius:2px;background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--cream3);margin-bottom:14px;overflow:hidden;transition:transform .25s}
+.tav-photo svg{width:60%;height:60%}.tav-photo img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+.tc:hover .tav-photo{transform:scale(1.02)}
+.tc-name{font-family:var(--sans);font-size:15px;font-weight:700;color:var(--text)}
+.tc-role{font-size:12px;color:var(--muted);margin-top:2px;font-weight:400}
+
+/* ── CTA BOX ── */
+.cta-box{background:#F5F3EF;border:1.5px solid var(--or);border-radius:2px;padding:62px 48px;text-align:center;margin-top:28px;position:relative;overflow:hidden;box-shadow:0 0 0 1px rgba(255,98,64,0.2),0 0 60px rgba(255,98,64,0.1)}
+.cta-serif{font-family:var(--display);font-style:italic;font-weight:900;font-size:3.2rem;color:var(--or);line-height:1.05;margin-bottom:16px;text-transform:uppercase}
+.cta-lead{color:rgba(0,0,0,0.62);font-size:17px;font-weight:300;margin-bottom:32px;line-height:1.7;max-width:480px;margin-left:auto;margin-right:auto}
+.cta-btn-main{display:inline-flex;align-items:center;gap:10px;background:var(--or);color:#FFFFFF;padding:16px 38px;border-radius:2px;font-family:var(--display);font-weight:900;font-size:15px;text-decoration:none;transition:transform .22s cubic-bezier(.2,.9,.1,1.2),box-shadow .22s;letter-spacing:0.06em;text-transform:uppercase}
+.cta-btn-main:hover{transform:translateY(-3px);box-shadow:0 0 0 2px var(--or),0 0 40px rgba(255,98,64,0.5)}
+
+/* ── VS ITEM ICON ── */
+.vi{font-size:14px;font-weight:900;flex-shrink:0;min-width:16px;color:var(--or);margin-top:2px}
+.vs-before .vi{color:var(--muted)}
+
+/* ── WIN ICON ── */
+.win-icon{font-family:var(--display);font-style:italic;font-size:2.4rem;font-weight:900;color:rgba(255,98,64,0.55);line-height:1;margin-bottom:14px}
+
+/* ── STAR ── */
+.star{color:var(--or)}
+.divider-stars{text-align:center;font-size:16px;letter-spacing:14px;color:rgba(255,98,64,0.35);margin:8px 0 36px}
+.divider-stars-white{color:rgba(0,0,0,0.16)}
+
+/* ── CT TABLE ── */
+.ct-table{border-radius:2px;overflow:hidden;border:1px solid var(--border);margin-bottom:20px}
+.ct-head{display:flex;justify-content:space-between;padding:13px 22px;background:var(--surface2);font-family:var(--sans);font-size:12px;font-weight:900;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)}
+.ct-row{display:flex;justify-content:space-between;padding:12px 22px;border-bottom:1px solid var(--cream3);font-size:15px;font-weight:300;background:var(--surface);color:var(--text)}
+.ct-row:last-child{border-bottom:none}
+.ct-total{display:flex;justify-content:space-between;padding:14px 22px;background:rgba(255,69,69,0.08);border-top:2px solid rgba(255,69,69,0.25);font-size:16px;font-weight:900}
+
+/* ── SCROLL MARQUEE ── */
+.marquee-wrap{overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:16px 0;background:#E8E5DF;margin:0}
+.marquee-track{display:flex;gap:48px;animation:marquee 24s linear infinite;width:max-content}
+.marquee-item{font-family:var(--display);font-size:13px;font-weight:900;color:var(--muted);white-space:nowrap;letter-spacing:0.08em;text-transform:uppercase}
+.marquee-item .dot{color:var(--or);margin-right:48px}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+
+/* ── MOBILE RESPONSIVE ── */
+#mob-toggle{display:none}
+@media(max-width:768px){
+  #mob-toggle{display:flex;align-items:center;justify-content:center;position:fixed;top:14px;left:14px;z-index:300;width:40px;height:40px;border-radius:8px;background:#FFFFFF;border:1px solid rgba(0,0,0,0.15);cursor:pointer;color:#0A0A0A;font-size:20px;line-height:1}
+  #sidebar{transform:translateX(-100%);transition:transform .28s cubic-bezier(.4,0,.2,1);z-index:200;width:280px;min-width:280px}
+  #sidebar.open{transform:translateX(0)}
+  #sb-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:150;backdrop-filter:blur(2px)}
+  #sb-overlay.open{display:block}
+  #main{margin-left:0!important}
+  .section-inner{padding:72px 20px!important}
+  .section.dark .section-inner{padding:72px 20px!important}
+  .h1,.h1-xl{font-size:clamp(2rem,10vw,3.5rem)!important}
+  .h2{font-size:clamp(1.6rem,8vw,2.8rem)!important}
+  .g2,.g3{grid-template-columns:1fr!important}
+  .breakout{width:100%!important;margin-left:0!important;margin-right:0!important}
+  .reel-grid{grid-template-columns:1fr 1fr!important}
+  .team-grid{grid-template-columns:1fr 1fr!important}
+  .plan-grid,.plan-grid-3{grid-template-columns:1fr!important}
+  .ai-grid{grid-template-columns:1fr!important}
+  .crm-tools-grid{grid-template-columns:1fr 1fr!important}
+  .sc-thumbs{display:none!important}
+  .sc-stage{aspect-ratio:4/3!important}
+}
+</style>
+</head>
+<body>
+
+<button id="mob-toggle" aria-label="Open menu" onclick="document.getElementById('sidebar').classList.toggle('open');document.getElementById('sb-overlay').classList.toggle('open')">&#9776;</button>
+<div id="sb-overlay" onclick="document.getElementById('sidebar').classList.remove('open');document.getElementById('sb-overlay').classList.remove('open')"></div>
+<nav id="sidebar">
+  <div class="sb-logo">
+    <img class="sb-logo-img" src="assets/mverse-logo-light.png" alt="Marketingverse">
+    <div class="sb-sub">For Real Estate Agents</div>
+  </div>
+  <div class="sb-nav">
+    <div class="sb-group">The Problem</div>
+    <a class="sb-link active" href="#s1">You're Invisible Online</a>
+    <a class="sb-link" href="#s2">What It's Costing You</a>
+    <div class="sb-group" style="margin-top:6px">The Journey</div>
+    <a class="sb-link" href="#s3">Meet Marketingverse</a>
+    <a class="sb-link" href="#s4">Your Brand, Every Day</a>
+    <a class="sb-link" href="#s5">The New You</a>
+    <div class="sb-group" style="margin-top:6px">The Decision</div>
+    <a class="sb-link" href="#s6">Our Work</a>
+    <a class="sb-link" href="#s6b">Paid Ads, Done Right</a>
+    <a class="sb-link" href="#s7">Your ROI</a>
+    <a class="sb-link" href="#s8">Plans & Pricing</a>
+    <a class="sb-link" href="#s9">Let's Go</a>
+  </div>
+  <div class="sb-footer">
+    <div class="sb-prog-bar"><div class="sb-prog-fill" id="prog-fill"></div></div>
+    <div class="sb-prog-text" id="prog-text">1 of 9</div>
+    <a class="sb-back" href="../index.html"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>All Decks</a>
+    <button class="sb-cta-btn" onclick="openPopup('https://api.leadconnectorhq.com/widget/bookings/marketingverse-demo')">Book Free Demo →</button>
+  </div>
+</nav>
+
+<main id="main">
+
+<!-- S1 -->
+<section class="section" id="s1">
+<div class="section-inner">
+  <div class="eyebrow reveal">★ Chapter One</div>
+  <div class="h1 reveal reveal-delay-1">You close deals.<br><em>Nobody online<br>knows it.</em></div>
+  <p class="lead muted reveal reveal-delay-2" style="margin-bottom:36px">You're one of the best agents in your market. You know every street, every school zone, every seller's pain point. But online? You don't exist. In 2026, if you're not visible — you're not an option.</p>
+
+  <div class="myth-grid">
+    <div class="myth-card reveal reveal-delay-1">
+      <div class="myth-num">Myth 01</div>
+      <div class="myth-claim">"I get enough referrals. I don't need social media."</div>
+      <div class="myth-bust">(Until one dry quarter hits. Then what?)</div>
+    </div>
+    <div class="myth-card reveal reveal-delay-2">
+      <div class="myth-num">Myth 02</div>
+      <div class="myth-claim">"I post sometimes. That's probably enough."</div>
+      <div class="myth-bust">(The algorithm disagrees. Strongly.)</div>
+    </div>
+    <div class="myth-card reveal reveal-delay-3">
+      <div class="myth-num">Myth 03</div>
+      <div class="myth-claim">"My clients don't really use Instagram."</div>
+      <div class="myth-bust">(They do. They're watching your competitor's reels right now.)</div>
+    </div>
+  </div>
+
+  <div class="before-frame reveal">
+    <div class="before-label">⬇ This is what a potential client sees when they Google you right now</div>
+    <div class="before-avatar-wrap">
+      <div class="before-avatar"><svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="14" r="8" fill="none" stroke="currentColor" stroke-width="2" opacity="0.4"/><path d="M4 38c0-8.837 7.163-16 16-16s16 7.163 16 16" fill="none" stroke="currentColor" stroke-width="2" opacity="0.4"/></svg></div>
+      <div style="font-size:17px;font-weight:700">Your Name Here</div>
+      <div style="font-size:14px;color:var(--muted);margin-top:4px">Licensed Realtor · South Florida</div>
+      <div style="font-size:13px;color:var(--muted);margin-top:3px">Last post: 47 days ago</div>
+    </div>
+    <div class="tag-row">
+      <span class="tag-bad">0 inbound leads this month</span>
+      <span class="tag-gray">Inactive profile</span>
+      <span class="tag-bad">0 new reviews</span>
+      <span class="tag-gray">Referrals going quiet</span>
+      <span class="tag-bad">Competitor posts daily</span>
+    </div>
+  </div>
+
+  <div class="g3 reveal">
+    <div class="card" onclick="togCard(this)"><div class="card-head"><span>No consistent presence</span><span class="chevron">⌄</span></div><div class="card-body"><div class="card-body-inner">You mean to post. You just never have time. Meanwhile, buyers and sellers are looking you up right now — and an inactive profile is worse than no profile. It signals: this person isn't fully in it.</div></div></div>
+    <div class="card" onclick="togCard(this)"><div class="card-head"><span>Out of sight, out of mind</span><span class="chevron">⌄</span></div><div class="card-body"><div class="card-body-inner">When your sphere decides to sell, they go with whoever they've been seeing most. Not the best agent — the most visible one. Right now that's not you. It can be.</div></div></div>
+    <div class="card" onclick="togCard(this)"><div class="card-head"><span>Referrals going cold</span><span class="chevron">⌄</span></div><div class="card-body"><div class="card-body-inner">Past clients loved working with you. But without consistent touchpoints, they forget to send people your way. Out of sight is out of mind — and referrals are going to the agent who stayed visible.</div></div></div>
+  </div>
+</div>
+</section>
+
+<!-- S2 -->
+<section class="section cream2" id="s2">
+<div class="section-inner">
+  <div class="eyebrow reveal">★ Chapter Two</div>
+  <div class="h2 reveal reveal-delay-1">Every quiet month<br>is a month of <em>lost listings.</em></div>
+  <p class="lead muted reveal reveal-delay-2" style="margin-bottom:40px">This isn't about vanity metrics. It's about real commission dollars leaving your pocket because someone else showed up more consistently than you.</p>
+
+  <div class="g3 reveal reveal-delay-1" style="margin-bottom:40px">
+    <div class="stat"><div class="big-n count-up" data-target="90" data-suffix="%">0%</div><div class="stat-label">of buyers research agents on social before ever reaching out</div></div>
+    <div class="stat"><div class="big-n">7–12x</div><div class="stat-label">touchpoints needed before a real estate lead actually converts</div></div>
+    <div class="stat"><div class="big-n count-up" data-target="1" data-suffix="–2x">0</div><div class="stat-label">how many times the average agent follows up. That gap is your opportunity.</div></div>
+  </div>
+
+  <div class="divider-stars reveal">★ ★ ★</div>
+
+  <div class="h3 reveal" style="margin-bottom:20px">Right now, while you're in this meeting...</div>
+  <div class="vs-grid reveal reveal-delay-1">
+    <div class="vs-col vs-before">
+      <div class="vs-head" style="color:var(--muted)">Your competitor today</div>
+      <div class="vs-item"><span class="vi">—</span><span>Posted a market update reel — 800+ views, 3 warm DMs</span></div>
+      <div class="vs-item"><span class="vi">—</span><span>System followed up with 12 leads overnight automatically</span></div>
+      <div class="vs-item"><span class="vi">—</span><span>Got their 3rd Google review this week, without asking</span></div>
+      <div class="vs-item"><span class="vi">—</span><span>Newsletter hit 400 past clients' inboxes</span></div>
+      <div class="vs-item"><span class="vi">—</span><span>Got 2 listing calls from people who "saw them everywhere"</span></div>
+    </div>
+    <div class="vs-col vs-after">
+      <div class="vs-head" style="color:var(--or)">You, without a system</div>
+      <div class="vs-item"><span class="vi">×</span><span>Last post was weeks ago. Followers wondering if you're still active.</span></div>
+      <div class="vs-item"><span class="vi">×</span><span>4 warm leads went cold while you were busy at showings</span></div>
+      <div class="vs-item"><span class="vi">×</span><span>0 reviews this month. People Googled you and kept scrolling.</span></div>
+      <div class="vs-item"><span class="vi">×</span><span>Contacts spread across Gmail, spreadsheets, and your memory</span></div>
+      <div class="vs-item"><span class="vi">×</span><span>Lost a listing to someone who was just "more visible"</span></div>
+    </div>
+  </div>
+  <div class="hbox reveal"><strong class="star">Put a number on it:</strong> One missed listing in South Florida is $8,000–$20,000 in commission. How many are slipping away every month just because people don't know who you are?</div>
+</div>
+</section>
+
+<!-- S3 -->
+<section class="section" id="s3">
+<div class="section-inner">
+  <div class="eyebrow reveal">★ Chapter Three — The Turning Point</div>
+  <div class="h2 reveal reveal-delay-1">You don't need to post more.<br>You need a <em>team that does it for you.</em></div>
+  <p class="lead muted reveal reveal-delay-2" style="margin-bottom:40px">Marketingverse is your done-for-you social media team — built specifically for Florida real estate agents. We handle the content, the strategy, the scheduling. You handle the closings.</p>
+
+  <div class="journey reveal reveal-delay-1">
+    <div class="j-item done"><div class="j-dot"></div><div class="j-title">Invisible online — where you started</div><div class="j-desc">No presence. No inbound. No system. Great agent, zero online footprint.</div></div>
+    <div class="j-item done"><div class="j-dot"></div><div class="j-title">You saw the real cost of being quiet</div><div class="j-desc">Thousands in missed commissions. Not from bad work — from zero visibility.</div></div>
+    <div class="j-item current"><div class="j-dot"></div><div class="j-title" style="color:var(--or)">You find Marketingverse — right here, right now</div><div class="j-desc">Done-for-you content, brand building, strategy. Built for agents like you.</div></div>
+    <div class="j-item"><div class="j-dot"></div><div class="j-title" style="color:var(--muted)">Your brand shows up every single day</div><div class="j-desc">Professional content, consistent voice, real engagement. Without lifting a finger.</div></div>
+    <div class="j-item"><div class="j-dot"></div><div class="j-title" style="color:var(--muted)">You become the agent everyone keeps hearing about</div><div class="j-desc">Inbound leads. Referrals from strangers. Recognition that compounds forever.</div></div>
+  </div>
+</div>
+</section>
+
+<!-- S4 -->
+<section class="section cream2" id="s4">
+<div class="section-inner">
+  <div class="eyebrow reveal">★ Chapter Four — What We Deliver</div>
+  <div class="h2 reveal reveal-delay-1">Your brand, growing,<br><em>every single day.</em></div>
+  <p class="lead muted reveal reveal-delay-2" style="margin-bottom:36px">While you're at showings, closings, or just living your life — your content is working. Your brand is building. Your name is showing up.</p>
+
+  <div id="meters" class="reveal reveal-delay-1" style="margin-bottom:36px">
+    <div class="meter-block"><div class="meter-top"><span>Brand Recognition in Your Market</span><span class="star" id="m1-val">0%</span></div><div class="meter-bar"><div class="meter-fill" id="m1" data-target="85"></div></div></div>
+    <div class="meter-block"><div class="meter-top"><span>Inbound Referral Rate (avg by month 6)</span><span class="star" id="m2-val">0%</span></div><div class="meter-bar"><div class="meter-fill" id="m2" data-target="68"></div></div></div>
+    <div class="meter-block"><div class="meter-top"><span>Content Consistency Score</span><span class="star" id="m3-val">0%</span></div><div class="meter-bar"><div class="meter-fill" id="m3" data-target="100"></div></div></div>
+  </div>
+
+  <div class="reveal reveal-delay-2">
+    <div class="card" onclick="togCard(this)"><div class="card-head"><span>Done-For-You Content — Written & Designed for You</span><span class="chevron">⌄</span></div><div class="card-body"><div class="card-body-inner">We write every caption, design every graphic, schedule every post. You approve with one tap. Market updates, listing spotlights, local neighborhood content, buyer and seller tips — all in your voice, all on brand.</div></div></div>
+    <div class="card" onclick="togCard(this)"><div class="card-head"><span>Your Brand, Not a Generic Template</span><span class="chevron">⌄</span></div><div class="card-body"><div class="card-body-inner">We build your visual identity from scratch. Colors, fonts, tone, personality. Every post looks like it came from a premium agency — because it did. People start recognizing your content before they read your name.</div></div></div>
+    <div class="card" onclick="togCard(this)"><div class="card-head"><span>Full Content Calendar — Your Whole Month Mapped</span><span class="chevron">⌄</span></div><div class="card-body"><div class="card-body-inner">Instagram, Facebook, LinkedIn — all planned and scheduled in one dashboard. Approve, swap, or adjust anything. No more last-minute scrambling for something to post.</div></div></div>
+    <div class="card" onclick="togCard(this)"><div class="card-head"><span>Monthly Strategy Call & Performance Review</span><span class="chevron">⌄</span></div><div class="card-body"><div class="card-body-inner">Every month we review what's resonating, what's growing, and what's next. You always know exactly what's happening with your brand.</div></div></div>
+  </div>
+  <div class="hbox reveal"><strong class="star">The compounding effect is real:</strong> Agents with consistent social presence generate 3–5x more inbound referrals by month 6. It starts slow — but it never stops growing once it starts.</div>
+</div>
+</section>
+
+<!-- S5: TRANSFORMATION -->
+<section class="section dark" id="s5">
+<div class="section-inner">
+  <div class="eyebrow reveal" style="color:rgba(0,0,0,0.45);border-color:rgba(255,255,255,0.12)">★ Chapter Five — The New You</div>
+  <div class="h2 h2-white reveal reveal-delay-1">Journey complete.<br><em>This is the other side.</em></div>
+  <p class="lead reveal reveal-delay-2" style="color:rgba(0,0,0,0.6);margin-bottom:44px">Every dot checked. System running. Brand growing. The real win isn't just more deals — it's what those deals give you back.</p>
+
+  <div class="journey reveal reveal-delay-1" style="margin-bottom:52px">
+    <div class="j-item done"><div class="j-dot"></div><div class="j-title" style="color:rgba(0,0,0,0.8)">Was invisible online</div><div class="j-desc" style="color:rgba(0,0,0,0.4)">No presence, no inbound, no system. Great agent, zero digital footprint.</div></div>
+    <div class="j-item done"><div class="j-dot"></div><div class="j-title" style="color:rgba(0,0,0,0.8)">Saw the real cost of being quiet</div><div class="j-desc" style="color:rgba(0,0,0,0.4)">Made the decision to stop losing deals to less talented but more visible agents.</div></div>
+    <div class="j-item done"><div class="j-dot"></div><div class="j-title" style="color:rgba(0,0,0,0.8)">Found Marketingverse</div><div class="j-desc" style="color:rgba(0,0,0,0.4)">Done-for-you content and strategy, built for real estate.</div></div>
+    <div class="j-item done"><div class="j-dot"></div><div class="j-title" style="color:rgba(0,0,0,0.8)">Brand showing up every day</div><div class="j-desc" style="color:rgba(0,0,0,0.4)">Professional content, consistent voice, zero effort from you.</div></div>
+    <div class="j-item done"><div class="j-dot" style="width:24px;height:24px;left:-38px;font-size:13px;box-shadow:0 0 0 6px rgba(255,98,64,0.2),0 0 0 12px rgba(255,98,64,0.08)"></div>
+      <div class="j-title" style="color:var(--or);font-size:19px;font-family:var(--sans);font-weight:800">You became the agent everyone keeps hearing about</div>
+      <div class="j-desc" style="color:rgba(0,0,0,0.55)">And here's what that actually looks like for your life.</div>
+    </div>
+  </div>
+
+  <div class="divider-stars divider-stars-white reveal">★ ★ ★</div>
+
+  <div class="win-grid">
+    <div class="win-card reveal reveal-delay-1">
+      <div class="win-icon">01</div>
+      <div class="win-title">You actually took that vacation</div>
+      <div class="win-body">Leads are being nurtured automatically. Your brand posts while you're on the beach. You came back to a warmer pipeline than when you left.</div>
+    </div>
+    <div class="win-card reveal reveal-delay-2">
+      <div class="win-icon">02</div>
+      <div class="win-title">You're home for dinner</div>
+      <div class="win-body">You're not chasing cold leads at 9pm anymore. Your content runs. You close when it matters and you're present when it counts.</div>
+    </div>
+    <div class="win-card reveal reveal-delay-3">
+      <div class="win-icon">03</div>
+      <div class="win-title">Peace of mind, not pipeline panic</div>
+      <div class="win-body">You wake up and your pipeline has leads in it. Not because you hustled harder — because the system ran overnight while you slept.</div>
+    </div>
+    <div class="win-card reveal reveal-delay-4">
+      <div class="win-icon">04</div>
+      <div class="win-title">Inbound forever. No more cold calling.</div>
+      <div class="win-body">People reach out already trusting you — because they've been watching your content for months. Closing is easier. Everything is easier.</div>
+    </div>
+  </div>
+  <div class="win-finale reveal reveal-delay-3">
+    <div class="win-finale-serif">This is the Super Agent life.</div>
+    <div class="win-finale-body">Not more hustle. A better system. One that works while you live the life you got into real estate to have.</div>
+  </div>
+</div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track" id="marquee">
+    <span class="marquee-item">Done-For-You Content <span class="dot">★</span></span>
+    <span class="marquee-item">Brand Moodboard <span class="dot">★</span></span>
+    <span class="marquee-item">IG/FB Posts <span class="dot">★</span></span>
+    <span class="marquee-item">Monthly Strategy <span class="dot">★</span></span>
+    <span class="marquee-item">Video Shoots <span class="dot">★</span></span>
+    <span class="marquee-item">LinkedIn Coverage <span class="dot">★</span></span>
+    <span class="marquee-item">IG Boosts <span class="dot">★</span></span>
+    <span class="marquee-item">Stories <span class="dot">★</span></span>
+    <span class="marquee-item">Real Humans Behind Your Account <span class="dot">★</span></span>
+    <span class="marquee-item">Done-For-You Content <span class="dot">★</span></span>
+    <span class="marquee-item">Brand Moodboard <span class="dot">★</span></span>
+    <span class="marquee-item">IG/FB Posts <span class="dot">★</span></span>
+    <span class="marquee-item">Monthly Strategy <span class="dot">★</span></span>
+    <span class="marquee-item">Video Shoots <span class="dot">★</span></span>
+    <span class="marquee-item">LinkedIn Coverage <span class="dot">★</span></span>
+    <span class="marquee-item">IG Boosts <span class="dot">★</span></span>
+    <span class="marquee-item">Stories <span class="dot">★</span></span>
+    <span class="marquee-item">Real Humans Behind Your Account <span class="dot">★</span></span>
+  </div>
+</div>
+
+<!-- S6: REELS -->
+<section class="section" id="s6">
+<div class="section-inner">
+  <div class="eyebrow reveal">★ Chapter Six — Our Work</div>
+  <div class="h2 reveal reveal-delay-1">Real content.<br><em>Real agents. Real results.</em></div>
+  <p class="lead muted reveal reveal-delay-2" style="margin-bottom:12px">No stock photos. No recycled Canva templates. Every piece is original, branded, and built for your specific market and voice.</p>
+  <div class="breakout"><div class="reels-grid reveal reveal-delay-1">
+    <div class="reel-card" data-vimeo-id="1201621063" onclick="openReel('https://player.vimeo.com/video/1201621063?autoplay=1')"><div class="reel-inner"><img class="reel-thumb" src="" alt=""><div class="reel-tag">Market Update</div><div class="reel-play">▶</div><div class="reel-lbl">Client Reel</div></div></div>
+    <div class="reel-card" data-vimeo-id="1201621102" onclick="openReel('https://player.vimeo.com/video/1201621102?autoplay=1')"><div class="reel-inner"><img class="reel-thumb" src="" alt=""><div class="reel-tag">Agent Brand</div><div class="reel-play">▶</div><div class="reel-lbl">Client Reel</div></div></div>
+    <div class="reel-card" data-vimeo-id="1201621066" onclick="openReel('https://player.vimeo.com/video/1201621066?autoplay=1')"><div class="reel-inner"><img class="reel-thumb" src="" alt=""><div class="reel-tag">Listing Reel</div><div class="reel-play">▶</div><div class="reel-lbl">Client Reel</div></div></div>
+    <div class="reel-card" data-vimeo-id="1201621064" onclick="openReel('https://player.vimeo.com/video/1201621064?autoplay=1')"><div class="reel-inner"><img class="reel-thumb" src="" alt=""><div class="reel-tag">Neighborhood</div><div class="reel-play">▶</div><div class="reel-lbl">Client Reel</div></div></div>
+    <div class="reel-card" data-vimeo-id="1201621121" onclick="openReel('https://player.vimeo.com/video/1201621121?autoplay=1')"><div class="reel-inner"><img class="reel-thumb" src="" alt=""><div class="reel-tag">Tips & Edu</div><div class="reel-play">▶</div><div class="reel-lbl">Client Reel</div></div></div>
+    <div class="reel-card" data-vimeo-id="1201621065" onclick="openReel('https://player.vimeo.com/video/1201621065?autoplay=1')"><div class="reel-inner"><img class="reel-thumb" src="" alt=""><div class="reel-tag">Testimonial</div><div class="reel-play">▶</div><div class="reel-lbl">Client Reel</div></div></div>
+  </div>
+</div>
+</section>
+
+<!-- S7: ROI -->
+<!-- S6b: ADS PLAYBOOK -->
+<section class="section cream2" id="s6b">
+<div class="section-inner">
+  <div class="eyebrow reveal">★ The Playbook — Paid Ads, Done Right</div>
+  <div class="h2 reveal reveal-delay-1">We don't just run ads.<br><em>We train the algorithm first.</em></div>
+  <p class="lead muted reveal reveal-delay-2" style="margin-bottom:40px">Most agents burn money boosting to strangers. We warm the algorithm up first — teach it exactly who your buyers and sellers are — then spend. Same budget, far better return.</p>
+  <div class="ads-flow reveal reveal-delay-1">
+    <div class="ads-step"><div class="ads-num">01</div><div class="ads-step-title">Warm It Up</div><div class="ads-step-body">We post consistently and engage your real audience, so the platform learns who actually responds to you — not a guess, a trained profile.</div></div>
+    <div class="ads-arrow">→</div>
+    <div class="ads-step"><div class="ads-num">02</div><div class="ads-step-title">Boost The Winners</div><div class="ads-step-body">We put small boosts behind the posts that already perform. Every dollar sharpens the algorithm's picture of your ideal client.</div></div>
+    <div class="ads-arrow">→</div>
+    <div class="ads-step"><div class="ads-num">03</div><div class="ads-step-title">Then Go Paid</div><div class="ads-step-body">Now we scale with paid ads. The platform already knows your audience — so your spend lands in front of the right buyers and sellers from day one.</div></div>
+  </div>
+  <div class="ads-result reveal reveal-delay-2">
+    <div class="ads-result-k">The Payoff</div>
+    <div class="ads-result-h">Cold ads guess. Trained ads convert.</div>
+    <p class="ads-result-b">By the time we scale your spend, the algorithm is already working for you — not against your budget. That's how the same ad dollars come back with a better return.</p>
+  </div>
+</div>
+</section>
+
+<section class="section cream2" id="s7">
+<div class="section-inner">
+  <div class="eyebrow reveal">★ Chapter Seven — Your ROI</div>
+  <div class="h2 reveal reveal-delay-1">Let's make this<br><em>about your numbers.</em></div>
+  <p class="lead muted reveal reveal-delay-2" style="margin-bottom:36px">Plug in your real commission and leads. See exactly what consistent content marketing adds to your annual income.</p>
+  <div class="g2 reveal reveal-delay-1" style="margin-bottom:16px">
+    <div><label class="inp-label">Your average commission ($)</label><input class="inp" type="number" id="comm" value="12000" oninput="calc()"></div>
+    <div><label class="inp-label">Leads per month</label><input class="inp" type="number" id="leads" value="15" oninput="calc()"></div>
+  </div>
+  <div class="reveal reveal-delay-2">
+    <label class="inp-label">Current close rate: <span id="rlbl" style="color:var(--or);font-weight:700">10%</span></label>
+    <input type="range" id="rate" min="5" max="40" value="10" step="1" oninput="document.getElementById('rlbl').textContent=this.value+'%';calc()">
+    <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-top:4px"><span>5%</span><span>40%</span></div>
+  </div>
+  <div class="roi-box reveal reveal-delay-2">
+    <div class="roi-row"><span>Deals you're closing now</span><span class="roi-val" id="r1">—</span></div>
+    <div class="roi-row"><span>With 35% more inbound from content</span><span class="roi-val green" id="r2">—</span></div>
+    <div class="roi-row"><span>Additional deals per month</span><span class="roi-val green" id="r3">—</span></div>
+    <div class="roi-row" style="padding-top:16px;border-top:2px solid rgba(255,98,64,0.15);margin-top:4px">
+      <span style="font-weight:700;font-size:17px">Additional annual revenue from content</span>
+      <span class="roi-val roi-total" id="r4">—</span>
+    </div>
+  </div>
+  <p class="reveal" style="font-size:14px;color:var(--muted);margin-top:12px;line-height:1.7;font-family:var(--serif);font-style:italic;font-size:17px">Content compounds. Month 1 is slow. Month 6 is when agents start saying "I don't know where all these calls are coming from."</p>
+</div>
+</section>
+
+<!-- S8: PRICING -->
+<section class="section" id="s8">
+<div class="section-inner">
+  <div class="eyebrow reveal">★ Chapter Eight — Plans & Pricing</div>
+  <div class="h2 reveal reveal-delay-1">Two plans.<br><em>Both built to make you the name.</em></div>
+  <p class="lead muted reveal reveal-delay-2" style="margin-bottom:36px">Pick the pace that fits your growth goals. Both include a real team, real strategy, real content — not software you figure out alone.</p>
+  <div class="breakout"><div class="plan-grid-2 reveal reveal-delay-1">
+    <div class="plan-card featured">
+      <div class="plan-badge">★ MOST POPULAR</div>
+      <div class="plan-inner">
+        <div class="plan-name">Social Media Growth</div>
+        <div class="plan-was">$640/mo</div>
+        <div class="plan-price"><sup>$</sup>550<sub>/mo</sub></div>
+        <div class="plan-setup">One-time $70 Setup Fee · Billed Monthly</div>
+        <div class="plan-btn-wrap"><a class="plan-btn" href="#" onclick="openPopup('https://billing.the-marketingverse.com/subscribe/012b590903e576e21bb2f16ffd298a88a7726ba08b65d6ccad482bf477cf719e/SocialMediaGrowth');return false;">Start Growing →</a></div>
+        <ul class="plan-features">
+          <li>Video Shoot</li>
+          <li>Brand Moodboard</li>
+          <li>8 IG/FB Posts per month</li>
+          <li>12 IG/FB Stories per month</li>
+          <li>Coaching & Strategy Sessions</li>
+        </ul>
+      </div>
+    </div>
+    <div class="plan-card">
+      <div class="plan-badge" style="background:transparent;color:transparent;pointer-events:none">​</div>
+      <div class="plan-inner">
+        <div class="plan-name">Social Media Dominance</div>
+        <div class="plan-was">$820/mo</div>
+        <div class="plan-price"><sup>$</sup>750<sub>/mo</sub></div>
+        <div class="plan-setup">One-time $70 Setup Fee · Billed Monthly</div>
+        <div class="plan-btn-wrap"><a class="plan-btn" href="#" onclick="openPopup('https://billing.the-marketingverse.com/subscribe/012b590903e576e21bb2f16ffd298a88a7726ba08b65d6ccad482bf477cf719e/SocualMediaDominance');return false;">Start Growing →</a></div>
+        <ul class="plan-features">
+          <li>2 Video Shoots per month</li>
+          <li>Brand Moodboard</li>
+          <li>12 IG/FB Posts per month</li>
+          <li>4 LinkedIn Posts per month</li>
+          <li>20 IG/FB Stories per month</li>
+          <li>Coaching & Strategy Sessions</li>
+          <li>4 IG Boosts per month</li>
+        </ul>
+      </div>
+    </div>
+  </div></div>
+  <div class="hbox reveal"><strong class="star">Not sure which plan?</strong> Most agents start with Growth and upgrade to Dominance within 3 months once they see the traction. Either way, we set everything up — no tech headaches.</div>
+</div>
+</section>
+
+<!-- S9: CLOSE -->
+<section class="section cream2" id="s9">
+<div class="section-inner">
+  <div class="eyebrow reveal">★ Chapter Nine — Your Move</div>
+  <div class="h2 reveal reveal-delay-1">The best agents in your market<br>are already <em>more visible than you.</em></div>
+  <p class="lead muted reveal reveal-delay-2" style="margin-bottom:36px">Every week you wait is another week your competitor compounds their audience while yours stays flat. Let's fix that — starting with one conversation.</p>
+
+  <div class="reveal reveal-delay-1" style="margin-bottom:36px">
+    <div class="card" onclick="togCard(this)"><div class="card-head"><span>What does "done-for-you" actually mean?</span><span class="chevron">⌄</span></div><div class="card-body"><div class="card-body-inner">Everything. We write the captions, design the graphics, choose the hashtags, schedule the posts, and monitor performance. You approve content with one click. That's it. Your only job is to be the agent.</div></div></div>
+    <div class="card" onclick="togCard(this)"><div class="card-head"><span>How long until I actually see results?</span><span class="chevron">⌄</span></div><div class="card-body"><div class="card-body-inner">Content compounds like interest. First 30 days: setup and foundation. Months 2–3: visibility starts building. By month 6, most clients are getting regular inbound from people who "keep seeing them everywhere." The agents who quit at month 2 never find out what month 6 feels like.</div></div></div>
+    <div class="card" onclick="togCard(this)"><div class="card-head"><span>Will it actually sound like me?</span><span class="chevron">⌄</span></div><div class="card-body"><div class="card-body-inner">Yes — that's the whole point. We start with a brand discovery session to understand your personality, your market, your voice. Every post we write sounds like you on a really good day.</div></div></div>
+    <div class="card" onclick="togCard(this)"><div class="card-head"><span>What if I don't love it?</span><span class="chevron">⌄</span></div><div class="card-body"><div class="card-body-inner">We'd rather earn your trust than lock you in. Let's have a real conversation first. No pressure, no 47-page contracts. If it's not the right fit, we'll tell you straight up.</div></div></div>
+  </div>
+
+  <div class="team-grid reveal reveal-delay-1" style="margin-bottom:40px">
+    <div class="tc"><div class="tav-photo" data-name="Ricky"><img src="assets/team/Ricky.png" alt="Ricky" style="width:100%;height:100%;object-fit:cover;object-position:top center;"></div><div class="tc-name">Ricky</div><div class="tc-role">Founder & CEO</div></div>
+    <div class="tc"><div class="tav-photo" data-name="Mari"><img src="assets/team/Mari.png" alt="Mari" style="width:100%;height:100%;object-fit:cover;object-position:top center;"></div><div class="tc-name">Mari</div><div class="tc-role">Creative Director</div></div>
+    <div class="tc"><div class="tav-photo" data-name="Nati"><img src="assets/team/Nati.png" alt="Nati" style="width:100%;height:100%;object-fit:cover;object-position:top center;"></div><div class="tc-name">Nati</div><div class="tc-role">Project Manager</div></div>
+    <div class="tc"><div class="tav-photo" data-name="Vale"><img src="assets/team/Vale.png" alt="Vale" style="width:100%;height:100%;object-fit:cover;object-position:top center;"></div><div class="tc-name">Vale</div><div class="tc-role">Content Creator</div></div>
+    <div class="tc"><div class="tav-photo" data-name="Leo"><img src="assets/team/Leo.png" alt="Leo" style="width:100%;height:100%;object-fit:cover;object-position:bottom center;transform:scale(1.3);transform-origin:top center;"></div><div class="tc-name">Leo</div><div class="tc-role">Content Creator</div></div>
+    <div class="tc"><div class="tav-photo" data-name="Adri"><img src="assets/team/Adri.png" alt="Adri" style="width:100%;height:100%;object-fit:cover;object-position:top center;"></div><div class="tc-name">Adri</div><div class="tc-role">Marketing Specialist</div></div>
+  </div>
+
+  <div class="cta-box reveal">
+    <div class="cta-serif">Stop being the best-kept secret in your zip code.</div>
+    <div class="cta-lead">No pressure. No jargon. Just a 30-minute conversation about your business and whether we're the right fit.</div>
+    <a class="cta-btn-main" href="#" onclick="openPopup('https://api.leadconnectorhq.com/widget/bookings/marketingverse-demo');return false;">Book Your Free Demo →</a>
+  </div>
+  <p style="font-size:13px;color:var(--muted);text-align:center;margin-top:36px">© 2026 Marketingverse · Florida Real Estate Marketing</p>
+</div>
+</section>
+
+
+<!-- IFRAME POPUP MODAL -->
+<div id="popup-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.82);z-index:10000;align-items:center;justify-content:center;" onclick="closePopup(event)">
+  <div style="position:relative;width:min(720px,95vw);height:min(600px,90vh);background:#fff;border-radius:8px;overflow:hidden;">
+    <button onclick="closePopup()" style="position:absolute;top:10px;right:14px;background:none;border:none;font-size:24px;cursor:pointer;color:#333;z-index:1;line-height:1;">✕</button>
+    <iframe id="popup-frame" src="" allow="payment" style="width:100%;height:100%;border:none;"></iframe>
+  </div>
+</div>
+
+</main>
+
+<!-- VIMEO MODAL -->
+<div id="reel-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:9999;align-items:center;justify-content:center;" onclick="closeReel(event)">
+  <div style="position:relative;width:min(380px,90vw);aspect-ratio:9/16;">
+    <iframe id="reel-frame" src="" allow="autoplay;fullscreen" allowfullscreen style="width:100%;height:100%;border:none;border-radius:8px;"></iframe>
+    <button onclick="closeReel()" style="position:absolute;top:-40px;right:0;background:none;border:none;color:#fff;font-size:28px;cursor:pointer;line-height:1;">✕</button>
+  </div>
+</div>
+
+<script>
+// ── SIDEBAR SCROLL TRACKER ──
+var sections=document.querySelectorAll('section[id]');
+var links=document.querySelectorAll('.sb-link');
+var mAnim=false;
+
+function updateSB(){
+  var sy=window.scrollY+180,cur=0;
+  sections.forEach(function(s,i){if(s.offsetTop<=sy)cur=i;});
+  links.forEach(function(l,i){l.classList.toggle('active',i===cur);});
+  document.getElementById('prog-fill').style.width=Math.round(((cur+1)/sections.length)*100)+'%';
+  document.getElementById('prog-text').textContent=(cur+1)+' of '+sections.length;
+  if(cur===3)animM();
+}
+window.addEventListener('scroll',updateSB,{passive:true});
+
+// ── SCROLL REVEAL (Intersection Observer) ──
+var revealEls=document.querySelectorAll('.reveal');
+var revealObs=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting){e.target.classList.add('visible');revealObs.unobserve(e.target);}
+  });
+},{threshold:0.12,rootMargin:'0px 0px -40px 0px'});
+revealEls.forEach(function(el){revealObs.observe(el);});
+
+// ── CARD ACCORDION ──
+function togCard(el){
+  var was=el.classList.contains('open');
+  el.closest('section').querySelectorAll('.card.open').forEach(function(c){c.classList.remove('open');});
+  if(!was)el.classList.add('open');
+}
+
+// ── BEFORE/AFTER TOGGLE ──
+function showTl(w,btn){
+  document.getElementById('tl-before').style.display=w==='before'?'block':'none';
+  document.getElementById('tl-after').style.display=w==='after'?'block':'none';
+  document.querySelectorAll('.tog').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+}
+
+// ── ROI CALCULATOR ──
+function calc(){
+  var c=parseFloat(document.getElementById('comm').value)||0;
+  var l=parseFloat(document.getElementById('leads').value)||0;
+  var r=parseFloat(document.getElementById('rate').value)/100;
+  var now=l*r,addD=(l*0.35)*r,addY=addD*c*12;
+  document.getElementById('r1').textContent=now.toFixed(1)+' deals/mo';
+  document.getElementById('r2').textContent=(now+addD).toFixed(1)+' deals/mo';
+  document.getElementById('r3').textContent='+'+addD.toFixed(1)+' deals/mo';
+  document.getElementById('r4').textContent='$'+Math.round(addY).toLocaleString()+'/yr';
+}
+
+// ── METER ANIMATION ──
+function animM(){
+  if(mAnim)return;mAnim=true;
+  [1,2,3].forEach(function(i){
+    var el=document.getElementById('m'+i),vl=document.getElementById('m'+i+'-val');
+    var tg=parseInt(el.getAttribute('data-target')),c=0;
+    var iv=setInterval(function(){c++;el.style.width=c+'%';vl.textContent=c+'%';if(c>=tg)clearInterval(iv);},14);
+  });
+}
+
+// ── COUNT-UP NUMBERS ──
+var countObs=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(!e.isIntersecting)return;
+    var el=e.target;
+    var target=parseInt(el.getAttribute('data-target'));
+    var suffix=el.getAttribute('data-suffix')||'';
+    var cur=0,step=Math.ceil(target/40);
+    var iv=setInterval(function(){
+      cur=Math.min(cur+step,target);
+      el.textContent=cur+suffix;
+      if(cur>=target)clearInterval(iv);
+    },30);
+    countObs.unobserve(el);
+  });
+},{threshold:0.5});
+document.querySelectorAll('.count-up').forEach(function(el){countObs.observe(el);});
+
+// ── REEL LIKE-HEARTS (Instagram-style hover) ──
+(function(){
+  var cards=document.querySelectorAll('.reel-card');
+  cards.forEach(function(card){
+    var timer=null;
+    function spawn(){
+      var h=document.createElement('span');
+      h.className='reel-heart';
+      h.textContent='♥';
+      h.style.fontSize=(12+Math.random()*12).toFixed(0)+'px';
+      h.style.left=(30+Math.random()*40)+'%';
+      h.style.setProperty('--dx',(Math.random()*60-30).toFixed(0)+'px');
+      h.style.setProperty('--r',(Math.random()*30-15).toFixed(0)+'deg');
+      h.style.setProperty('--dur',(1.7+Math.random()*0.9).toFixed(2)+'s');
+      card.appendChild(h);
+      setTimeout(function(){h.remove();},2800);
+    }
+    card.addEventListener('mouseenter',function(){ if(timer)return; spawn(); timer=setInterval(spawn,300); });
+    card.addEventListener('mouseleave',function(){ clearInterval(timer);timer=null; });
+  });
+})();
+
+
+// ── IFRAME POPUP ──
+function openPopup(url){
+  var m=document.getElementById('popup-modal');
+  document.getElementById('popup-frame').src=url;
+  m.style.display='flex';
+  document.body.style.overflow='hidden';
+}
+function closePopup(e){
+  if(e&&e.target!==document.getElementById('popup-modal')&&e.target.tagName!=='BUTTON')return;
+  document.getElementById('popup-modal').style.display='none';
+  document.getElementById('popup-frame').src='';
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closePopup({target:document.getElementById('popup-modal')});});
+
+// ── VIMEO MODAL ──
+function openReel(url){
+  var m=document.getElementById('reel-modal');
+  document.getElementById('reel-frame').src=url;
+  m.style.display='flex';
+  document.body.style.overflow='hidden';
+}
+function closeReel(e){
+  if(e&&e.target!==document.getElementById('reel-modal')&&e.target.tagName!=='BUTTON')return;
+  document.getElementById('reel-modal').style.display='none';
+  document.getElementById('reel-frame').src='';
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeReel({target:document.getElementById('reel-modal')});});
+
+// ── VIMEO THUMBNAILS ──
+document.querySelectorAll('.reel-card[data-vimeo-id]').forEach(function(card){
+  var id=card.getAttribute('data-vimeo-id');
+  fetch('https://vimeo.com/api/oembed.json?url=https://vimeo.com/'+id+'&width=640&height=1138')
+    .then(function(r){return r.json();})
+    .then(function(d){
+      if(d.thumbnail_url){
+        var img=card.querySelector('.reel-thumb');
+        if(img)img.src=d.thumbnail_url;
+      }
+    }).catch(function(){});
+});
+
+// ── INIT ──
+calc();
+updateSB();
+
+// Trigger reveal for elements already in viewport on load
+setTimeout(function(){
+  revealEls.forEach(function(el){
+    var rect=el.getBoundingClientRect();
+    if(rect.top<window.innerHeight*0.9)el.classList.add('visible');
+  });
+},100);
+</script>
+</body>
+</html>
